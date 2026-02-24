@@ -225,7 +225,7 @@
                     <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
                     <div
                         class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
-                        <span class="font-bold">史料：</span>台灣省專賣局臺北分局（今菸酒公署）
+                        <span class="font-bold">史料：</span>臺北放送局演奏所（今臺北二二八紀念館）
                     </div>
                 </div>
                 <!-- Slide 3 -->
@@ -681,14 +681,85 @@
                 const ctxProf = document.getElementById('professionChart').getContext('2d');
                 new Chart(ctxProf, {
                     type: 'bar',
-                    data: { labels: ['學生', '公務員', '民眾(無業/家管)', '商界', '工界', '自由業(醫/律)', '農漁'], datasets: [{ data: [20, 15, 25, 12, 10, 10, 8], backgroundColor: '#a63e3e', borderRadius: 4 }] },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                    data: {
+                        labels: ['學生', '公務員', '民眾(無業/家管)', '商界', '工界', '自由業(醫/律)', '農漁'],
+                        datasets: [{
+                            label: '佔比 (%)',
+                            data: [20, 15, 25, 12, 10, 10, 8],
+                            backgroundColor: [
+                                '#a63e3e', // alert-red
+                                '#d4af37', // highlight-gold
+                                '#595959', // ink-light
+                                '#8a5a44', // warm brown
+                                '#2c2c2c', // ink-black
+                                '#722f37', // wine red
+                                '#a8a8a8'  // muted gray
+                            ],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '受難比例 (%)',
+                                    font: { family: "'Noto Sans TC', sans-serif", weight: 'bold' }
+                                },
+                                ticks: {
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 });
                 const ctxType = document.getElementById('victimTypeChart').getContext('2d');
                 new Chart(ctxType, {
                     type: 'doughnut',
-                    data: { labels: ['死亡', '失蹤', '羈押/判刑', '受傷'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: ['#2c2c2c', '#595959', '#a63e3e', '#d4af37'], borderWidth: 0 }] },
-                    options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'right' } } }
+                    data: {
+                        labels: ['死亡', '失蹤', '羈押/判刑', '受傷/其他'],
+                        datasets: [{
+                            data: [45, 25, 20, 10],
+                            backgroundColor: [
+                                '#2c2c2c', // ink-black (死亡)
+                                '#595959', // ink-light (失蹤)
+                                '#a63e3e', // alert-red (羈押/判刑)
+                                '#d4af37'  // highlight-gold (受傷/其他)
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fdfbf7' // paper-bg stroke
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: {
+                            legend: { position: 'right' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return ' ' + context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 });
             }
         };
