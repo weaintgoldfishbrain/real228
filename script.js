@@ -358,7 +358,7 @@ function renderTimelineMobile() {
                     </button>
                     <div id="m-content-${index}" class="${index === 0 ? 'block' : 'hidden'} border-t border-gray-100 bg-white">
                         <div class="w-full h-56 image-placeholder relative bg-gray-200">
-                            <img src="${item.imageSrc}" alt="${item.imageAlt}" class="w-full h-full object-cover absolute top-0 left-0">
+                            <img src="${item.imageSrc}" alt="${item.imageAlt}" loading="lazy" class="w-full h-full object-cover absolute top-0 left-0">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <span class="absolute bottom-3 left-4 text-white text-xs font-medium z-10 drop-shadow-md pr-4">${item.caption}</span>
                         </div>
