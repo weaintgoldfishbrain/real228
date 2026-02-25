@@ -320,3 +320,35 @@
     visibility: hidden;
     pointer-events: none;
 }
+
+/* 手機版響應式調整 (Mobile Responsive Adjustments) */
+@media (max-width: 640px) {
+    .glitch-title {
+        font-size: 3.5rem;
+        letter-spacing: 0.5rem;
+        margin-right: -0.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.15rem;
+        max-width: 90%;
+        line-height: 1.6;
+        margin-top: 0.5rem;
+    }
+    
+    .year-marker {
+        font-size: 1.5rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .content-wrapper {
+        padding: 0 1.5rem;
+    }
+
+    #enter-site-btn {
+        margin-top: 2rem;
+        padding: 0.6rem 1.5rem;
+        font-size: 0.8rem;
+    }
+}
