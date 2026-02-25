@@ -22,385 +22,343 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    <!-- 樣式與字體 -->
+    <!-- 字體 -->
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
         rel="stylesheet">
+
+    <!-- 匯入外部涵蓋 Tailwind 與各圖表工具的 Script -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
-        /* Chosen Palette: Warm Neutral Archive */
-        :root {
-            --paper-bg: #fdfbf7;
-            --ink-black: #2c2c2c;
-            --ink-light: #595959;
-            --alert-red: #a63e3e;
-            --highlight-gold: #d4af37;
-            --muted-gray: #e5e5e5;
-        }
+    <!-- 載入新版 228 特效樣式與舊版樣式 -->
+    <link rel="stylesheet" href="style.css">
 
-        body {
-            background-color: var(--paper-bg);
-            color: var(--ink-black);
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-
-        h1,
-        h2,
-        h3,
-        .serif {
-            font-family: 'Noto Serif TC', serif;
-        }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-
-        .interactive-card {
-            transition: all 0.3s ease;
-        }
-
-        .interactive-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* 圖片佔位符與輪播樣式 */
-        .image-placeholder {
-            background-color: #e5e5e5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .image-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-        }
-
-        .carousel-slide {
-            transition: opacity 1.5s ease-in-out;
-        }
-    </style>
     <meta name="google-site-verification" content="ET08IXoE5-9HOeaMOfruOUchZRd7I8V46Zysst-9eX0" />
 </head>
 
 <body class="antialiased selection:bg-red-100 selection:text-red-900">
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-[#fdfbf7]/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-3">
-                    <span class="font-bold text-xl tracking-wider text-gray-900 serif">二二八史實查證報告</span>
-                </div>
-                <div class="hidden md:flex space-x-8" aria-label="主選單">
-                    <button onclick="scrollToSection('hero')"
-                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">首頁</button>
-                    <button onclick="scrollToSection('empathy')"
-                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">歷史見證</button>
-                    <button onclick="scrollToSection('timeline')"
-                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">時間軸與史料</button>
-                    <button onclick="scrollToSection('full-report')"
-                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">報告全文</button>
-                    <button onclick="scrollToSection('factcheck')"
-                        class="text-red-700 font-bold hover:text-red-900 transition-colors text-sm">謠言查核</button>
-                </div>
-                <button class="md:hidden text-gray-600 focus:outline-none" onclick="toggleMobileMenu()"
-                    aria-label="展開行動版選單">
-                    <span class="text-2xl" aria-hidden="true">≡</span>
+    <!-- ==========================================
+         [新版] 228 前導特效全螢幕覆蓋層 (Intro Screen) 
+         ========================================== -->
+    <div id="intro-screen">
+        <!-- 雜訊背景層 -->
+        <div class="noise-overlay"></div>
+
+        <!-- 粒子系統 Canvas -->
+        <canvas id="particleCanvas"></canvas>
+
+        <main class="hero-section text-center flex flex-col items-center justify-center relative z-10 w-full h-full">
+            <div class="content-wrapper">
+                <!-- 沉重的年份標示 -->
+                <div class="year-marker" data-text="1947">1947</div>
+
+                <!-- 採用 Glitch 特效的主標題 -->
+                <h1 class="glitch-title" data-text="二二八">二二八</h1>
+
+                <p class="subtitle fade-in">被抹滅的真相、消逝的聲音與凝結的血淚</p>
+
+                <!-- 進入舊版網站的按鈕 -->
+                <button id="enter-site-btn"
+                    class="mt-12 px-8 py-3 bg-red-900/40 text-red-50 hover:bg-red-800 transition-all duration-500 border border-red-900/50 rounded-sm tracking-widest text-sm hover:shadow-[0_0_20px_rgba(139,0,0,0.6)] animate-pulse">
+                    凝視歷史真相
                 </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 p-4 space-y-2" role="menu">
-            <button onclick="scrollToSection('hero'); toggleMobileMenu()"
-                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">首頁</button>
-            <button onclick="scrollToSection('empathy'); toggleMobileMenu()"
-                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">歷史見證</button>
-            <button onclick="scrollToSection('timeline'); toggleMobileMenu()"
-                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">時間軸與史料</button>
-            <button onclick="scrollToSection('full-report'); toggleMobileMenu()"
-                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">報告全文</button>
-            <button onclick="scrollToSection('factcheck'); toggleMobileMenu()"
-                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-red-700 font-bold">謠言查核</button>
-        </div>
-    </nav>
 
-    <!-- Hero Section with Rolling Image Carousel -->
-    <header id="hero" class="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 serif leading-tight">
-                    撥開歷史迷霧<br>
-                    <span class="text-red-800">還原二二八真相</span>
-                </h1>
-                <div class="w-16 h-1 bg-red-800 mb-6"></div>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    近期網路上充斥著「228是選舉操弄」、「只是暴民滋事」的言論。本報告不講政治口水，僅彙整國家檔案管理局資料、行政院調查報告與真實歷史影像，用最沉痛的史實，直球對決網路謠言。
-                </p>
-                <div class="flex gap-4 pt-4">
-                    <button onclick="scrollToSection('factcheck')"
-                        class="px-6 py-3 bg-red-800 text-white font-bold rounded shadow-lg hover:bg-red-900 transition">
-                        闢謠查核
-                    </button>
-                    <button onclick="scrollToSection('empathy')"
-                        class="px-6 py-3 bg-gray-900 text-white font-bold rounded shadow-lg hover:bg-black transition">
-                        歷史見證
-                    </button>
-                </div>
+                <div class="blood-stain"></div>
             </div>
+        </main>
+    </div>
 
-            <!-- Hero 圖片輪播版位 -->
-            <div id="hero-carousel"
-                class="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl bg-[#e5e5e5] group">
-                <!-- Slide 1 -->
-                <div class="carousel-slide absolute inset-0 opacity-100 z-10">
-                    <img src="images/228_Incident_h.jpg" alt="二二八事件抗議群眾" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
-                    <div
-                        class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
-                        <span class="font-bold">歷史現場：</span>專賣局前抗議群眾聚集
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="carousel-slide absolute inset-0 opacity-0 z-0">
-                    <img src="images/jpg_00_06_00_34_cca100031-hp-22_13_1-0001-w.jpg" alt="專賣局大樓"
-                        class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
-                    <div
-                        class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
-                        <span class="font-bold">史料：</span>臺北放送局演奏所（今臺北二二八紀念館）
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="carousel-slide absolute inset-0 opacity-0 z-0">
-                    <img src="images/二二八後，國防部長白崇禧（前右2）來台宣慰_(cropped).jpg" alt="白崇禧來台"
-                        class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
-                    <div
-                        class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
-                        <span class="font-bold">史料：</span>事件後國防部長白崇禧來台宣慰
+    <!-- ==========================================
+         [舊版] 網站主體區域 (初始化被覆蓋並設為透明度0)
+         ========================================== -->
+    <div id="main-content" style="opacity: 0; pointer-events: none; transition: opacity 1.5s ease; position: relative;">
+        <!-- Navigation -->
+        <nav class="sticky top-0 z-50 bg-[#f5f2e9]/90 backdrop-blur-md border-b border-gray-400 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <!-- 純 CSS Logo -->
+                    <a href="#" onclick="scrollToSection('hero'); return false;" class="flex items-center gap-3 group">
+                        <div
+                            class="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black rounded-sm shadow-sm text-sm tracking-tighter group-hover:bg-red-800 transition-colors relative overflow-hidden">
+                            <span class="relative z-10">228</span>
+                            <div
+                                class="absolute inset-0 bg-red-600 opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity mix-blend-multiply">
+                            </div>
+                        </div>
+                        <span
+                            class="font-bold text-lg md:text-xl tracking-widest text-gray-900 serif transition-colors group-hover:text-red-900">
+                            史實查證報告
+                        </span>
+                    </a>
+
+                    <div class="flex items-center gap-4 md:gap-6">
+                        <div class="hidden md:flex space-x-8" aria-label="主選單">
+                            <button onclick="scrollToSection('hero')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">首頁</button>
+                            <button onclick="scrollToSection('empathy')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">歷史見證</button>
+                            <button onclick="scrollToSection('timeline')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">時間軸與史料</button>
+                            <button onclick="scrollToSection('full-report')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">報告全文</button>
+                            <button onclick="scrollToSection('factcheck')"
+                                class="text-red-700 font-bold hover:text-red-900 transition-colors text-sm">謠言查核</button>
+                        </div>
+
+                        <!-- 贊助 / Donate 按鈕 -->
+                        <a href="https://buymeacoffee.com/andesign" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#faf8f5] border border-gray-400 rounded-sm text-xs font-bold text-gray-800 hover:bg-[#FFDD00] hover:text-gray-900 hover:border-[#FFDD00] transition-all shadow-sm">
+                            <span>☕</span> <span class="hidden sm:inline">請喝咖啡</span><span class="sm:hidden">贊助</span>
+                        </a>
+
+                        <button class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none transition-colors"
+                            onclick="toggleMobileMenu()" aria-label="展開行動版選單">
+                            <span class="text-2xl" aria-hidden="true">≡</span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-
-    <!-- Timeline Section with Images -->
-    <section id="timeline" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-12 text-center">
-            <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">歷史檔案與時間軸</h2>
-            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-                還原事實是導正視聽的第一步。透過真實的時間線與史料照，理解事件如何從一場查緝血案演變成全台的軍事鎮壓。
-            </p>
-        </div>
-
-        <!-- Desktop Timeline (Hidden on Mobile) -->
-        <div class="hidden lg:grid lg:grid-cols-12 gap-12">
-            <div class="lg:col-span-4 space-y-3" id="timeline-controls" role="tablist">
-                <!-- Generated by JS -->
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-[#faf8f5] border-b border-gray-400 p-4 space-y-2"
+                role="menu">
+                <button onclick="scrollToSection('hero'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">首頁</button>
+                <button onclick="scrollToSection('empathy'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">歷史見證</button>
+                <button onclick="scrollToSection('timeline'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">時間軸與史料</button>
+                <button onclick="scrollToSection('full-report'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">報告全文</button>
+                <button onclick="scrollToSection('factcheck'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-red-700 font-bold">謠言查核</button>
             </div>
+        </nav>
 
-            <div class="lg:col-span-8">
-                <article id="timeline-display"
-                    class="bg-white rounded-xl shadow-lg border border-gray-100 h-full overflow-hidden flex flex-col transition-all duration-300">
-                    <!-- Timeline 圖片版位 -->
-                    <div class="w-full h-64 sm:h-80 image-placeholder relative bg-gray-200">
-                        <img id="t-image" src="" alt="">
-                        <div class="image-overlay"></div>
-                        <span id="t-caption"
-                            class="absolute bottom-4 left-6 text-white text-sm font-medium z-10 drop-shadow-md"></span>
+        <!-- Hero Section with Rolling Image Carousel -->
+        <header id="hero" class="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 serif leading-tight">
+                        撥開歷史迷霧<br>
+                        <span class="text-red-800">還原二二八真相</span>
+                    </h1>
+                    <div class="w-16 h-1 bg-red-800 mb-6"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        近期網路上充斥著「228是選舉操弄」、「只是暴民滋事」的言論。本報告不講政治口水，僅彙整國家檔案管理局資料、行政院調查報告與真實歷史影像，用最沉痛的史實，直球對決網路謠言。
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <button onclick="scrollToSection('factcheck')"
+                            class="px-6 py-3 bg-red-800 text-white font-bold rounded shadow-lg hover:bg-red-900 transition">
+                            闢謠查核
+                        </button>
+                        <button onclick="scrollToSection('empathy')"
+                            class="px-6 py-3 bg-gray-900 text-white font-bold rounded shadow-lg hover:bg-black transition">
+                            歷史見證
+                        </button>
+                    </div>
+                </div>
 
-                        <!-- 圖片提示 -->
-                        <div class="z-20 p-2 border border-dashed border-gray-400 text-gray-600 text-xs rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm text-center"
-                            id="t-img-hint">
-                            圖片預留區
+                <!-- Hero 圖片輪播版位 -->
+                <div id="hero-carousel"
+                    class="relative w-full aspect-[4/3] rounded-sm overflow-hidden shadow-2xl bg-[#d1ccc0] group">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide absolute inset-0 opacity-100 z-10">
+                        <img src="images/228_Incident_h.jpg" alt="二二八事件抗議群眾" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                            <span class="font-bold">歷史現場：</span>專賣局前抗議群眾聚集
                         </div>
                     </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide absolute inset-0 opacity-0 z-0">
+                        <img src="images/jpg_00_06_00_34_cca100031-hp-22_13_1-0001-w.jpg" alt="專賣局大樓"
+                            class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                            <span class="font-bold">史料：</span>臺北放送局演奏所（今臺北二二八紀念館）
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide absolute inset-0 opacity-0 z-0">
+                        <img src="images/二二八後，國防部長白崇禧（前右2）來台宣慰_(cropped).jpg" alt="白崇禧來台"
+                            class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                            <span class="font-bold">史料：</span>事件後國防部長白崇禧來台宣慰
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-                    <div class="p-8 flex-grow flex flex-col justify-start overflow-y-auto">
-                        <span id="t-date" class="text-red-800 font-bold tracking-widest uppercase mb-2 block"></span>
-                        <h3 id="t-title" class="text-2xl lg:text-3xl font-bold text-gray-900 serif mb-4"></h3>
+        <!-- Timeline Section with Images -->
+        <section id="timeline" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">歷史檔案與時間軸
+                </h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                    還原事實是導正視聽的第一步。透過真實的時間線與史料照，理解事件如何從一場查緝血案演變成全台的軍事鎮壓。
+                </p>
+            </div>
 
-                        <!-- 核心敘述 -->
-                        <p id="t-desc"
-                            class="text-gray-900 text-lg leading-relaxed mb-4 font-medium border-l-4 border-gray-300 pl-4">
-                        </p>
+            <!-- Desktop Timeline (Hidden on Mobile) -->
+            <div class="hidden lg:grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-4 space-y-3" id="timeline-controls" role="tablist">
+                    <!-- Generated by JS -->
+                </div>
 
-                        <!-- 深度史料細節 -->
-                        <div id="t-details-container" class="text-gray-600 text-sm leading-relaxed mb-6 space-y-4">
-                            <p id="t-details" class="text-justify"></p>
-                            <div id="t-tags-container" class="flex flex-wrap gap-2 mt-2">
-                                <!-- 關鍵字 Tags -->
+                <div class="lg:col-span-8">
+                    <article id="timeline-display"
+                        class="bg-[#faf8f5] rounded-sm shadow-lg border border-gray-400 h-full overflow-hidden flex flex-col transition-all duration-300">
+                        <!-- Timeline 圖片版位 -->
+                        <div class="w-full h-64 sm:h-80 image-placeholder relative bg-gray-200">
+                            <img id="t-image" src="" alt="">
+                            <div class="image-overlay"></div>
+                            <span id="t-caption"
+                                class="absolute bottom-4 left-6 text-white text-sm font-medium z-10 drop-shadow-md"></span>
+
+                            <!-- 圖片提示 -->
+                            <div class="z-20 p-2 border border-dashed border-gray-400 text-gray-600 text-xs rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#faf8f5]/80 backdrop-blur-sm text-center"
+                                id="t-img-hint">
+                                圖片預留區
                             </div>
                         </div>
 
-                        <!-- 歷史引言/檔案原件 -->
-                        <blockquote id="t-quote-container"
-                            class="mb-6 px-4 py-3 bg-red-50/50 border-l-4 border-red-800 italic text-gray-800 text-sm hidden rounded-r">
-                            「<span id="t-quote"></span>」
-                            <footer class="text-xs text-gray-500 mt-2 font-bold">— <span id="t-quote-source"></span>
-                            </footer>
-                        </blockquote>
+                        <div class="p-8 flex-grow flex flex-col justify-start overflow-y-auto">
+                            <span id="t-date"
+                                class="text-red-800 font-bold tracking-widest uppercase mb-2 block"></span>
+                            <h3 id="t-title" class="text-2xl lg:text-3xl font-bold text-gray-900 serif mb-4"></h3>
 
-                        <div class="mt-auto p-5 bg-gray-50 border border-gray-200 rounded-lg shadow-inner">
-                            <span
-                                class="text-xs font-bold text-red-800 block mb-2 tracking-wider flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                史實查證與破除迷思
-                            </span>
-                            <p id="t-fact" class="text-sm text-gray-800 font-medium leading-relaxed mb-3"></p>
-                            <span id="t-archive"
-                                class="inline-block text-xs text-gray-600 bg-gray-200 px-2.5 py-1 rounded-md font-medium border border-gray-300"></span>
+                            <!-- 核心敘述 -->
+                            <p id="t-desc"
+                                class="text-gray-900 text-lg leading-relaxed mb-4 font-medium border-l-4 border-gray-400 pl-4">
+                            </p>
+
+                            <!-- 深度史料細節 -->
+                            <div id="t-details-container" class="text-gray-600 text-sm leading-relaxed mb-6 space-y-4">
+                                <p id="t-details" class="text-justify"></p>
+                                <div id="t-tags-container" class="flex flex-wrap gap-2 mt-2">
+                                    <!-- 關鍵字 Tags -->
+                                </div>
+                            </div>
+
+                            <!-- 歷史引言/檔案原件 -->
+                            <blockquote id="t-quote-container"
+                                class="mb-6 px-4 py-3 bg-red-50/50 border-l-4 border-red-800 italic text-gray-800 text-sm hidden rounded-r">
+                                「<span id="t-quote"></span>」
+                                <footer class="text-xs text-gray-500 mt-2 font-bold">— <span id="t-quote-source"></span>
+                                </footer>
+                            </blockquote>
+
+                            <div class="mt-auto p-5 bg-[#ebe8e1] border border-gray-400 rounded-sm shadow-inner">
+                                <span
+                                    class="text-xs font-bold text-red-800 block mb-2 tracking-wider flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    史實查證與破除迷思
+                                </span>
+                                <p id="t-fact" class="text-sm text-gray-800 font-medium leading-relaxed mb-3"></p>
+                                <span id="t-archive"
+                                    class="inline-block text-xs text-gray-600 bg-[#d1ccc0] text-gray-800 px-2.5 py-1 rounded-sm border line-through-none border-gray-500 font-medium border border-gray-400"></span>
+                            </div>
                         </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Mobile Timeline Accordion (Hidden on Desktop) -->
+            <div class="block lg:hidden space-y-4" id="timeline-mobile">
+                <!-- Generated by JS -->
+            </div>
+        </section>
+
+        <!-- Data & Fact Check Sections -->
+        <section id="data" class="py-16 bg-[#ebe8e1] border-y border-gray-400">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12 text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">
+                        受難者數據分析
+                    </h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                        當史實聚焦於個體，數據則展現了全局。統計顯示受難者包含大量民意代表、醫師、律師、學生等社會菁英。這是一場系統性的文化剝奪。</p>
+                </div>
+                <!-- 確保圖表區塊高度以利 Chart.js 渲染 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                    <div class="bg-[#faf8f5] p-6 rounded-sm shadow-sm border border-gray-400">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">受難者職業背景分佈</h3>
+                        <div class="chart-container" style="position:relative; height:300px; width:100%;"><canvas
+                                id="professionChart"></canvas></div>
                     </div>
-                </article>
-            </div>
-        </div>
-
-        <!-- Mobile Timeline Accordion (Hidden on Desktop) -->
-        <div class="block lg:hidden space-y-4" id="timeline-mobile">
-            <!-- Generated by JS -->
-        </div>
-    </section>
-
-    <!-- Data & Fact Check Sections -->
-    <section id="data" class="py-16 bg-gray-50 border-y border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12 text-center">
-                <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">受難者數據分析
-                </h2>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-                    當史實聚焦於個體，數據則展現了全局。統計顯示受難者包含大量民意代表、醫師、律師、學生等社會菁英。這是一場系統性的文化剝奪。</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">受難者職業背景分佈</h3>
-                    <div class="chart-container"><canvas id="professionChart"></canvas></div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">受難型態統計</h3>
-                    <div class="chart-container"><canvas id="victimTypeChart"></canvas></div>
+                    <div class="bg-[#faf8f5] p-6 rounded-sm shadow-sm border border-gray-400">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">受難型態統計</h3>
+                        <div class="chart-container" style="position:relative; height:300px; width:100%;"><canvas
+                                id="victimTypeChart"></canvas></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Interactive Empathy Section (Randomized) -->
-    <section id="empathy" class="py-20 bg-[#1a1a1a] text-gray-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="text-red-500 font-bold tracking-widest text-sm uppercase mb-2 block">Deep Reflection</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-white serif mb-4">歷史的抉擇：如果你在 1947</h2>
-            <p class="text-gray-400 mb-2 max-w-2xl mx-auto leading-relaxed">
-                在看過時間軸與菁英受難數據後，請試著走入那寒冷的春天。歷史不再是課本上的文字，而是無數次生命與良知的博弈。面對無情的國家機器，你會如何選擇？
-            </p>
-            <p class="text-yellow-600/60 text-xs mb-10 font-medium flex items-center justify-center gap-2">
-                <span class="animate-pulse">💡</span> 以下情境皆改編自二二八受難者的真實生命軌跡。
-            </p>
-
-            <div id="scenario-container"
-                class="bg-[#2a2a2a] p-8 md:p-12 rounded-xl border border-gray-700 text-left min-h-[380px] flex flex-col justify-center relative shadow-2xl">
-                <!-- Content generated by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Full Report Section -->
-    <section id="full-report" class="py-20 bg-[#fdfbf7] border-y border-gray-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12 text-center">
-                <span class="text-gray-500 font-bold tracking-widest text-sm uppercase mb-2 block">Full Report</span>
-                <h2 class="text-3xl lg:text-4xl font-black text-gray-900 serif inline-block pb-2 mb-4 drop-shadow-sm">
-                    台灣二二八事件歷史論述實證解析<br><span class="text-2xl lg:text-3xl font-bold text-red-800">與數位時代認知作戰研究報告</span>
-                </h2>
-                <div class="w-16 h-1 bg-gray-400 mx-auto mt-4 mb-4"></div>
-                <p class="mt-4 text-gray-600 max-w-3xl mx-auto leading-relaxed text-justify">
-                    在編製前述視覺化史料與圖表之餘，我們深知唯有透過嚴謹的學術論述與長篇實證考據，才能徹底抵禦斷章取義的政治操弄。以下為本次專案的核心研究報告全文。
+        <!-- Interactive Empathy Section (Randomized) -->
+        <section id="empathy" class="py-20 bg-[#1a1a1a] text-gray-200 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <span class="text-red-500 font-bold tracking-widest text-sm uppercase mb-2 block">Deep Reflection</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white serif mb-4">歷史的抉擇：如果你在 1947</h2>
+                <p class="text-gray-400 mb-2 max-w-2xl mx-auto leading-relaxed">
+                    在看過時間軸與菁英受難數據後，請試著走入那寒冷的春天。歷史不再是課本上的文字，而是無數次生命與良知的博弈。面對無情的國家機器，你會如何選擇？
                 </p>
-                <div class="mt-6 flex justify-center gap-3">
-                    <button onclick="expandAllReports()"
-                        class="text-sm font-medium text-gray-600 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition shadow-sm">全部展開</button>
-                    <button onclick="collapseAllReports()"
-                        class="text-sm font-medium text-gray-600 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition shadow-sm">全部收合</button>
+                <p class="text-yellow-600/60 text-xs mb-10 font-medium flex items-center justify-center gap-2">
+                    <span>💡 </span> 以下情境皆改編自二二八受難者的真實生命軌跡。
+                </p>
+
+                <div id="scenario-container"
+                    class="bg-[#2a2a2a] p-8 md:p-12 rounded-sm border border-gray-700 text-left min-h-[380px] flex flex-col justify-center relative shadow-2xl">
+                    <!-- Content generated by JS -->
                 </div>
             </div>
+        </section>
 
-            <!-- Report Accordion Container -->
-            <div class="space-y-4" id="report-accordion">
+        <!-- Full Report Section -->
+        <section id="full-report" class="py-20 bg-[#f5f2e9] border-y border-gray-400">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12 text-center">
+                    <span class="text-gray-500 font-bold tracking-widest text-sm uppercase mb-2 block">Full
+                        Report</span>
+                    <h2
+                        class="text-3xl lg:text-4xl font-black text-gray-900 serif inline-block pb-2 mb-4 drop-shadow-sm">
+                        台灣二二八事件歷史論述實證解析<br><span
+                            class="text-2xl lg:text-3xl font-bold text-red-800">與數位時代認知作戰研究報告</span>
+                    </h2>
+                    <div class="w-16 h-1 bg-gray-400 mx-auto mt-4 mb-4"></div>
+                    <p class="mt-4 text-gray-600 max-w-3xl mx-auto leading-relaxed text-justify">
+                        在編製前述視覺化史料與圖表之餘，我們深知唯有透過嚴謹的學術論述與長篇實證考據，才能徹底抵禦斷章取義的政治操弄。以下為本次專案的核心研究報告全文。
+                    </p>
+                    <div class="mt-6 flex justify-center gap-3">
+                        <button onclick="expandAllReports()"
+                            class="text-sm font-medium text-gray-600 border border-gray-400 px-4 py-2 rounded hover:bg-gray-100 transition shadow-sm">全部展開</button>
+                        <button onclick="collapseAllReports()"
+                            class="text-sm font-medium text-gray-600 border border-gray-400 px-4 py-2 rounded hover:bg-gray-100 transition shadow-sm">全部收合</button>
+                    </div>
+                </div>
+
+                <!-- Report Accordion Container -->
+                <div class="space-y-4" id="report-accordion">
                 <!-- Chapter 0: Introduction -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(0)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">導論：數位平台上的歷史記憶重構與資訊操弄挑戰</h3>
                         <span id="report-icon-0"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-0" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-0" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">
                                 在當代高速發展的數位資訊環境中，歷史事件早已超越了單純的學術考證範疇，轉而成為形塑政治合法性、動員群眾情緒以及進行跨國界認知作戰的核心場域。近期，各大社群平台與影音分享網站上頻繁出現特定網路帳號之協同性攻擊行為，這些帳號大量散布經過特定剪輯與論述包裝的短影音，其核心論述直指當前的執政黨（民主進步黨）刻意「操弄二二八事件」，並指控官方機構透過扭曲史實、放大特定族群之受害程度、掩蓋外省籍人士的死傷數據，藉此獲取政治利益並撕裂台灣社會。此類現象不僅凸顯了二二八事件在台灣社會中仍具備高度的敏感性與政治動員能量，更反映出歷史記憶在缺乏嚴謹脈絡的數位傳播下，極易被碎片化、武器化。
@@ -414,14 +372,14 @@
 
                 <!-- Chapter 1 -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(1)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">第一章：二二八事件的歷史脈絡、制度性失能與國家責任歸屬</h3>
                         <span id="report-icon-1"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-1" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-1" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">
                                 探討任何關於二二八事件的歷史論述，首要任務是確立事件爆發的結構性背景與國家機器的責任歸屬。過去在長達數十年的戒嚴與威權統治時期，官方論述掌握了絕對的詮釋權，多將事件單向定調為「共黨分子煽動」、「日本奴化教育遺毒」或單純的「暴民作亂」；然而，隨著台灣民主化進程的推進與大量國家機密檔案的解密，學界與官方的歷史共識已產生了根本性的移轉，將焦點轉向國家體制的失能與公權力的濫用。
@@ -453,14 +411,14 @@
 
                 <!-- Chapter 2 -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(2)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">第二章：傷亡人數之歷史爭辯、人口學推論與官方實證數據</h3>
                         <span id="report-icon-2"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-2" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-2" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">
                                 二二八事件中「究竟有多少人死亡或失蹤」，一直是半個多世紀以來歷史論述中最具爭議、也最容易被各方政治勢力與當代網路認知作戰挪用的議題。從數千人到十數萬人不等，不同政治立場的論述者往往選擇性地採用特定數據來支持其政治議程或抹黑對手。要徹底釐清傷亡數據的真相，必須嚴格區分「歷史文獻估計」、「人口統計學推估」以及「轉型正義補償實證審查」三個截然不同的測量維度與科學方法論。
@@ -472,48 +430,48 @@
                                 在事件發生當時及隨後的幾年間，各方人士基於不同的情報來源與政治目的，提出了差異極大的傷亡數據。為了清晰呈現這些歷史估算的複雜性，以下透過結構化資料展示各方宣稱的數字：</p>
 
                             <!-- Table Section -->
-                            <div class="overflow-x-auto mb-6 bg-gray-50 rounded border border-gray-200 p-2">
+                            <div class="overflow-x-auto mb-6 bg-[#ebe8e1] rounded border border-gray-400 p-2">
                                 <table class="w-full table-auto text-sm text-left align-middle">
                                     <thead class="bg-gray-200 text-gray-800">
                                         <tr>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-300">資料來源 / 提報者身份</th>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-300">提報年份</th>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-300">外省籍宣稱數據</th>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-300">本省籍及整體宣稱數據</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-400">資料來源 / 提報者身份</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-400">提報年份</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-400">外省籍宣稱數據</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-400">本省籍及整體宣稱數據</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">
-                                        <tr class="hover:bg-white text-gray-700">
+                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
                                             <td class="px-4 py-3 font-medium">時任國防部長 白崇禧</td>
                                             <td class="px-4 py-3">1947年</td>
                                             <td class="px-4 py-3 text-gray-500">-</td>
                                             <td class="px-4 py-3">軍警與台籍死傷共 1,860人</td>
                                         </tr>
-                                        <tr class="hover:bg-white text-gray-700">
+                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
                                             <td class="px-4 py-3 font-medium">台灣警備總司令部</td>
                                             <td class="px-4 py-3">1947年</td>
                                             <td class="px-4 py-3">死傷失蹤共 1,958人</td>
                                             <td class="px-4 py-3">死傷失蹤共 643人 (另有死3,200人紀錄)</td>
                                         </tr>
-                                        <tr class="hover:bg-white text-gray-700">
+                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
                                             <td class="px-4 py-3 font-medium">上海《大公報》/ 警政單位</td>
                                             <td class="px-4 py-3">1947年</td>
                                             <td class="px-4 py-3">死432, 傷2126, 蹤85 (共2,643人)</td>
                                             <td class="px-4 py-3 text-gray-500">未具體對比</td>
                                         </tr>
-                                        <tr class="hover:bg-white text-gray-700">
+                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
                                             <td class="px-4 py-3 font-medium">保安處</td>
                                             <td class="px-4 py-3">1947年</td>
                                             <td class="px-4 py-3 text-gray-500">-</td>
                                             <td class="px-4 py-3">死 6,300人</td>
                                         </tr>
-                                        <tr class="hover:bg-white text-gray-700">
+                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
                                             <td class="px-4 py-3 font-medium">蘇新 (台共人士)</td>
                                             <td class="px-4 py-3">1949年</td>
                                             <td class="px-4 py-3 text-gray-500">-</td>
                                             <td class="px-4 py-3">死不下 10,000人</td>
                                         </tr>
-                                        <tr class="hover:bg-white text-gray-700">
+                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
                                             <td class="px-4 py-3 font-medium">時任美國副領事 葛超智</td>
                                             <td class="px-4 py-3">1947年</td>
                                             <td class="px-4 py-3 text-gray-500">-</td>
@@ -564,14 +522,14 @@
 
                 <!-- Chapter 3 -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(3)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">第三章：轉型正義的法理邊界與個案爭議之深度檢視</h3>
                         <span id="report-icon-3"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-3" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-3" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">
                                 在當前的數位認知作戰中，除了宏觀數據的爭辯外，攻擊者亦經常透過放大檢視特定歷史個案，藉此質疑《二二八事件處理及賠償條例》的發放標準存在政治偏見與族群歧視。其中，專欄作家張若彤所提出的「劉青山案」與「何鑾旗案」之對比，便是近期網路上被廣泛引用，用以指控官方「淡化歷史」、「選擇性給予正義」的典型案例。要釐清此類指控，必須深入探討轉型正義的法理基礎與法律要件。
@@ -611,14 +569,14 @@
 
                 <!-- Chapter 4 -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(4)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">第四章：政治史觀的挪用與中國共產黨角色之歷史釐清</h3>
                         <span id="report-icon-4"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-4" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-4" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">
                                 在二二八事件的歷史詮釋權爭奪戰中，不僅台灣內部存在著不同政治光譜的爭辯，中國共產黨（中共）的強力介入與史觀建構，更為當代的數位認知作戰增添了極為複雜的跨國界層次。近年來，中共官方頻繁且高調地舉辦二二八事件紀念活動，其國台辦發言人甚至公開將二二八事件定調為「台灣同彰反抗專制統治、爭取基本權利的正義行動，亦是中國人民解放鬥爭的一部分」，企圖將台灣民間的自發性民主抗爭，強行收編為中共近代共產革命史觀的一環。
@@ -647,14 +605,14 @@
 
                 <!-- Chapter 5 -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(5)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">第五章：網路錯假訊息的解構與認知作戰之戰略目的</h3>
                         <span id="report-icon-5"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-5" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-5" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">
                                 回歸本報告之初所面臨的核心命題：「近期網路帳號不斷發送影片，攻擊民進黨在操弄二二八」，我們必須將這種現象置於當代數位資訊戰、演算法擴散與假訊息傳播的框架下進行嚴肅檢視。這類攻擊的典型特徵在於：巧妙地將部分真實的歷史細節或個人背景，與大量虛構的數據、扭曲的法理概念進行縫合，藉由煽動群眾的情緒與剝奪感，來徹底摧毀官方轉型正義機構的公信力。
@@ -690,14 +648,14 @@
 
                 <!-- Conclusion -->
                 <div
-                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
                     <button onclick="toggleReport(6)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
                         <h3 class="font-serif font-bold text-xl text-gray-900">結論：捍衛歷史真相與深化轉型正義之展望</h3>
                         <span id="report-icon-6"
                             class="text-gray-400 text-2xl transition-transform duration-300">+</span>
                     </button>
-                    <div id="report-content-6" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                    <div id="report-content-6" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
                         <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
                             <p class="indent-8 mb-4">綜合上述針對二二八事件歷史論述、傷亡數據實證、轉型正義法理基礎以及當代資訊戰運作機制的全面性探討，本報告得出以下具體結論：</p>
                             <p class="indent-8 mb-4">
@@ -716,529 +674,38 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>        </section>
 
-    <!-- Fact Check Module -->
-    <section id="factcheck" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-12 text-center">
-            <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">謠言直球對決</h2>
-            <p class="mt-6 text-gray-600 max-w-2xl mx-auto">點擊常見網路論述，查看官方檔案與歷史調查的真實結論。</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="fact-grid"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#1a1a1a] text-gray-400 py-12 text-sm">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="mb-2">資料來源：行政院《二二八事件研究報告》、二二八事件紀念基金會</p>
-            <div class="mt-6 pt-6 border-t border-gray-800 flex flex-col items-center gap-4">
-                <div class="text-xs text-gray-500 tracking-wide">
-                    Made by <strong class="text-gray-300">Andesign</strong> | Powered by ✨ <strong
-                        class="text-gray-300">Gemini</strong>
-                </div>
-                <a href="https://buymeacoffee.com/andesign" target="_blank" rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full text-xs font-bold text-gray-800 hover:bg-[#FFDD00] hover:text-gray-900 transition-all shadow-sm">
-                    ☕ 請 Andesign 喝咖啡
-                </a>
+        <!-- Fact Check Module -->
+        <section id="factcheck" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">謠言直球對決
+                </h2>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">點擊常見網路論述，查看官方檔案與歷史調查的真實結論。</p>
             </div>
-        </div>
-    </footer>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start" id="fact-grid"></div>
+        </section>
 
-    <!-- JavaScript Logic -->
-    <script>
-        // --- Hero Carousel Logic ---
-        function initHeroCarousel() {
-            const slides = document.querySelectorAll('.carousel-slide');
-            if (slides.length <= 1) return;
-            let currentSlide = 0;
-
-            setInterval(() => {
-                slides[currentSlide].classList.remove('opacity-100', 'z-10');
-                slides[currentSlide].classList.add('opacity-0', 'z-0');
-
-                currentSlide = (currentSlide + 1) % slides.length;
-
-                slides[currentSlide].classList.remove('opacity-0', 'z-0');
-                slides[currentSlide].classList.add('opacity-100', 'z-10');
-            }, 5000); // 5秒輪播一次
-        }
-
-        // --- Empathy Scenarios Data (Expanded for Randomization) ---
-        const scenariosData = {
-            "doctor": {
-                role: "你是一位在地方深受敬重的醫師",
-                context: "1947年3月初，市區爆發警民衝突，死傷慘重。地方仕紳與學生組成了「處理委員會」希望維持治安。市長親自拜託你，希望你利用聲望出面代表市民與軍方談判，要求軍隊停止開槍。",
-                choices: [
-                    { text: "A. 挺身而出：為了保護無辜市民與學生，同意前往水上機場與軍方談判。", nextId: "doctor_a" },
-                    { text: "B. 婉拒躲避：深感局勢危險，為了家中年幼的孩子，決定連夜躲回鄉下老家。", nextId: "doctor_b" }
-                ]
-            },
-            "doctor_a": { isResult: true, title: "史實見證：和平的代價", content: "在真實歷史中，許多如嘉義的潘木枝醫師、畫家陳澄波等人選擇了這條路。他們帶著和平的訴求前往軍營談判，卻立刻被扣押，綁上鐵絲，在未經任何法庭審判的情況下，被押至火車站前當眾槍決。<br><br><span class='text-red-400 font-bold'>「他們沒有暴動，他們是去求和的。」</span>這戳破了網路謠言稱死者皆為暴民的謊言。", prototype: "原型人物：潘木枝、陳澄波等和平談判代表" },
-            "doctor_b": { isResult: true, title: "史實見證：躲不過的清鄉", content: "即便選擇躲避，在3月中旬展開的「清鄉」運動中，軍警特務按名冊抓人。許多未參與衝突的知識份子、律師（如林連宗）、台大教授（如林茂生）半夜在家中被強行帶走，從此「失蹤」。<br><br><span class='text-red-400 font-bold'>國家暴力的肅清，針對的是台灣菁英階層，而非單純的治安維護。</span>", prototype: "原型人物：無數在清鄉中失蹤的知識份子" },
-
-            "reporter": {
-                role: "你是一家本土報社的主筆",
-                context: "二二八事件爆發後，長官公署試圖封鎖消息。你掌握了軍警在街頭無差別開槍的真實傷亡名單與照片。此時，報社外已經有特務在徘徊監視。",
-                choices: [
-                    { text: "A. 堅持報導：身為新聞人必須揭露真相，決定連夜排版將真實傷亡印製出刊。", nextId: "reporter_a" },
-                    { text: "B. 妥協自保：為了報社員工與家人的安全，決定配合官方說法，發布「暴民滋事」的報導。", nextId: "reporter_b" }
-                ]
-            },
-            "reporter_a": { isResult: true, title: "史實見證：被噤聲的第四權", content: "如《台灣新生報》總經理阮朝日、《人民導報》社長宋斐如等人，因堅持報導真相或批評時政，在清鄉期間遭特務以「叛亂」罪名帶走，從此下落不明，連屍骨都無處尋覓。<br><br><span class='text-red-400 font-bold'>國家暴力不僅抹殺了生命，也抹殺了真相的傳播。</span>", prototype: "原型人物：阮朝日、宋斐如、王添灯等報人" },
-            "reporter_b": { isResult: true, title: "史實見證：株連與文字獄", content: "在戒嚴與清鄉的肅殺氛圍下，妥協並不能保證絕對的安全。許多報社被迫停刊或改組，即便配合官方，只要過去曾發表過批評言論，仍可能在後續的「白色恐怖」中被羅織罪名入獄。<br><br><span class='text-red-400 font-bold'>極權統治下的審查是溯及既往且毫無標準的。</span>", prototype: "原型人物：當時被迫停刊或受審查的台灣新聞界" },
-
-            "student": {
-                role: "你是一名滿腔熱血的大學生",
-                context: "社會陷入混亂，警察大多逃避或躲藏。你與同學決定組織「學生治安服務隊」，在街頭指揮交通、保護外省籍教師與商人的安全，試圖讓社會恢復秩序。",
-                choices: [
-                    { text: "A. 堅守崗位：即使聽說軍隊即將登陸，仍相信自己是在「協助維持治安」，繼續穿著學生制服在街頭執勤。", nextId: "student_a" },
-                    { text: "B. 解散撤退：察覺政府態度有異，聽從長輩勸告，立刻解散服務隊，銷毀名冊並躲藏起來。", nextId: "student_b" }
-                ]
-            },
-            "student_a": { isResult: true, title: "史實見證：青春的鮮血", content: "3月8日軍隊登陸後，展開無差別掃射。許多穿著制服、在街頭維持治安的學生首當其衝，被軍隊視為「暴徒」直接射殺或逮捕。如基隆中學、台北市區的大學生皆有慘重傷亡。<br><br><span class='text-red-400 font-bold'>軍事鎮壓不分青紅皂白，連試圖恢復秩序的青年也成為槍下亡魂。</span>", prototype: "原型人物：參與治安維持而受難的各地青年學生" },
-            "student_b": { isResult: true, title: "史實見證：黑名單與逃亡", content: "雖然暫時保住性命，但在隨後的清鄉行動中，特務四處搜捕曾參與「處理委員會」或「治安隊」的青年。許多人被迫流亡海外，或在提心吊膽中度過餘生，甚至在後續的白色恐怖中仍被抓捕。<br><br><span class='text-red-400 font-bold'>「凡走過必留下痕跡」，在威權眼裡，組織起來的青年就是威脅。</span>", prototype: "原型人物：流亡海外或隱姓埋名的台灣青年" }
-        };
-
-        const scenarioRootKeys = ["doctor", "reporter", "student"];
-
-        function startRandomScenario() {
-            // 隨機選取一個情境原型
-            const randomKey = scenarioRootKeys[Math.floor(Math.random() * scenarioRootKeys.length)];
-            renderScenario(randomKey);
-        }
-
-        function renderScenario(scenarioId) {
-            const container = document.getElementById('scenario-container');
-            container.innerHTML = ''; // Clear
-            container.classList.remove('fade-in');
-            void container.offsetWidth; // trigger reflow
-
-            const data = scenariosData[scenarioId];
-
-            container.classList.add('fade-in');
-
-            if (!data.isResult) {
-                // Render Question
-                container.innerHTML = `
-                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-4 border-l-4 border-red-600 pl-4">${data.role}</h3>
-                    <p class="text-gray-300 text-lg md:text-xl mb-8 leading-relaxed">${data.context}</p>
-                    <div class="flex flex-col gap-4 w-full md:w-4/5 mx-auto">
-                        <button onclick="renderScenario('${data.choices[0].nextId}')" class="px-6 py-4 bg-transparent border border-gray-500 text-gray-200 rounded-lg hover:bg-gray-800 hover:border-gray-300 transition text-left text-sm md:text-base">${data.choices[0].text}</button>
-                        <button onclick="renderScenario('${data.choices[1].nextId}')" class="px-6 py-4 bg-transparent border border-gray-500 text-gray-200 rounded-lg hover:bg-gray-800 hover:border-gray-300 transition text-left text-sm md:text-base">${data.choices[1].text}</button>
+        <!-- Footer -->
+        <footer class="bg-[#1a1a1a] text-gray-400 py-12 text-sm">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="mb-2">資料來源：行政院《二二八事件研究報告》、二二八事件紀念基金會</p>
+                <div class="mt-6 pt-6 border-t border-gray-800 flex flex-col items-center gap-4">
+                    <div class="text-xs text-gray-500 tracking-wide">
+                        Made by <strong class="text-gray-300">Andesign</strong> | Powered by ✨ <strong
+                            class="text-gray-300">Gemini</strong>
                     </div>
-                `;
-            } else {
-                // Render Truth Result
-                container.innerHTML = `
-                    <div class="text-center">
-                        <span class="inline-block px-3 py-1 bg-red-900/50 text-red-400 border border-red-800 text-xs font-bold rounded mb-4">歷史的真相</span>
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-6">${data.title}</h3>
-                        <p class="text-gray-300 text-lg mb-8 leading-relaxed max-w-2xl mx-auto">${data.content}</p>
-                        <p class="text-sm text-gray-500 mb-8 italic">${data.prototype}</p>
-                        <button onclick="startRandomScenario()" class="px-6 py-3 border border-gray-600 text-gray-400 font-bold rounded-lg hover:text-white hover:border-white hover:bg-white/10 transition flex items-center justify-center gap-2 mx-auto">
-                            <span>↻ 重新見證 (隨機人物)</span>
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
-        // --- Timeline Data with Images (Enriched Knowledge) ---
-        const timelineData = [
-            {
-                date: '1947年 2月27日', title: '導火線：緝菸血案與誤殺',
-                desc: '專賣局查緝員在台北市天馬茶房前，暴力取締私菸販賣者林江邁，並以槍托擊破其頭部。群眾包圍查緝員理論時，查緝員開槍誤殺旁觀市民陳文溪。',
-                details: '事件發生在傍晚的延平北路，當時正值下班與民眾聚集時間。目擊警察與憲兵未能有效處置，民眾的怒火迅速蔓延。隔日陳文溪延醫不治，引發了全台北市的大罷工與遊行。這並不僅是一場衝突，而是長期以來民間對「專賣制度」貪腐與物價飛漲的怒火引爆點。',
-                keyFigures: ['林江邁 (私菸攤商)', '陳文溪 (無辜遇難市民)', '傅學通 (開槍查緝員)'],
-                quote: '查緝員不分青紅皂白，將小販的火柴、香菸、以及身上的錢全部沒收... 查緝員竟以槍柄擊中林婦頭部，頓時血流如注，昏迷倒地。',
-                quoteSource: '《台灣新生報》1947年現場報導',
-                fact: '📝 檔案顯示，查緝員的不當執法與驚慌開槍是引爆點。這完全是一起查緝過當引發的治安事件，戳破了「共產黨預謀武裝暴動」的謠言。',
-                archive: '出處：行政院《二二八事件研究報告》',
-                imageSrc: 'images/228_by_Li_Jun.jpg',
-                imageAlt: '恐怖的檢查 - 黃榮燦版畫',
-                caption: '《恐怖的檢查》：黃榮燦所繪，真實呈現查緝私菸爆發射殺平民的一刻'
-            },
-            {
-                date: '1947年 2月28日', title: '長官公署開槍與佔領放送局',
-                desc: '憤怒民眾遊行至長官公署（今行政院）請願要求懲兇，遭公署屋頂的衛兵用機關槍掃射。隨後群眾佔領臺北放送局，透過廣播將事件傳遍全台，各地爆發反抗行動。',
-                details: '群眾最初是前往專賣局抗議，找不到局長後才轉往長官公署。衛兵未經警告直接對和平請願的群眾開槍，這項致命錯誤徹底激怒了市民。隨後民眾佔領新公園內的「臺灣廣播電臺（原臺北放送局）」，向全臺灣廣播原委，悲憤的控訴透過電波迅速擴散，成為事件從單一城市衝突演變為全島性反抗的關鍵轉捩點。',
-                keyFigures: ['向全台廣播的無名學生與青年', '陳儀 (台灣省行政長官)'],
-                quote: '我們並沒有帶武器，只是要請願要求處理昨天的兇手，沒想到上面就開槍了... 現在我們已經佔領廣播局，請全台灣的同胞站出來！',
-                quoteSource: '事發當天臺北放送局放送的證言',
-                fact: '📝 佔領廣播電台是群眾運動擴散的標準模式。當時廣播的訴求是要求「政治改革」與「懲治貪污」，而非宣佈獨立或共產革命。史料證明這是一場自發性的反抗威權運動。',
-                archive: '出處：國史館二二八檔案、口述歷史研究',
-                imageSrc: 'images/PIC_0210a5d7de02c6f46866.jpg',
-                imageAlt: '原臺北放送局 (臺灣廣播電臺)',
-                caption: '史料：原臺北放送局（臺灣廣播電臺）。民眾在此向全台播音，引爆全島響應。'
-            },
-            {
-                date: '1947年 3月1日-5日', title: '處理委員會與政治改革訴求',
-                desc: '為了平息事態，各地仕紳、民意代表與學生組成「二二八事件處理委員會」，代替失能的政府維持治安，並提出《三十二條處理大綱》要求高度自治。',
-                details: '處理委員會在台北市中山堂成立，成員涵蓋了當時台灣社會最頂尖的菁英階層。他們不僅組織學生維持市區治安，也向政府提出了要求縣市長民選、廢除長官公署等政治改革訴求。然而，陳儀表面上假意答應談判、安撫民心，私下卻急電蔣介石指稱台灣發生「叛亂」，要求立刻派兵鎮壓。',
-                keyFigures: ['王添灯 (省參議員)', '林連宗 (制憲國代)', '蔣渭川'],
-                quote: '本省人要求改革政治，並非叛亂... 不要用武力鎮壓，這是我們切望的。',
-                quoteSource: '處理委員會透過廣播台的公開呼籲',
-                fact: '📝 史料與會議紀錄證明，處理委員會的目標始終是「和平解決」與「體制內改革」，從未主張台灣獨立或推翻政府。陳儀的「叛亂」指控純屬羅織罪名。',
-                archive: '出處：大溪檔案（蔣介石總統文物）、陳儀請兵電報',
-                imageSrc: 'images/images (9).jpg',
-                imageAlt: '基隆要塞司令部前的廣場或市區群眾',
-                caption: '歷史事件發生期間的市區群眾聚集（圖為當時歷史影像一隅）'
-            },
-            {
-                date: '1947年 3月8日', title: '軍隊登陸基隆與無差別鎮壓',
-                desc: '收到陳儀請兵電報後，國民政府整編第二十一師等部隊抵達基隆與高雄。部隊一登陸即展開無差別掃射，市區陷入血腥的軍事鎮壓。',
-                details: '在基隆港，軍隊登陸前即向岸上擁擠的民眾開槍。在南部，高雄要塞司令彭孟緝更是下令軍隊無差別掃射高雄火車站地下道、市政府及高雄中學。軍隊以「掃蕩暴徒」為名，對平民、甚至正在街頭指揮交通的學生服務隊進行屠殺，並伴隨大規模的洗劫與搜刮。',
-                keyFigures: ['劉雨卿 (21師師長)', '彭孟緝 (高雄要塞司令)'],
-                quote: '軍隊一上岸就隨便開槍... 街上到處都是屍體，連淡水河裡也佈滿了浮屍，河水都被染紅了。',
-                quoteSource: '美國駐台副領事葛超智 (George H. Kerr) 報告',
-                fact: '📝 國內外檔案（含美方機密報告）皆明確記載了軍隊無差別攻擊平民的慘況。這是一場國家軍隊對本國未武裝人民的血腥鎮壓，並非正當的「平亂」。',
-                archive: '出處：國家發展委員會檔案管理局、美國國家檔案館',
-                imageSrc: 'images/228_Incident_k_(cropped).jpg',
-                imageAlt: '事件中受難的遺體',
-                caption: '軍事鎮壓展開後，街頭隨處可見無差別開槍下的受難者'
-            },
-            {
-                date: '1947年 3月中旬以後', title: '全島清鄉與濫捕知識菁英',
-                desc: '軍隊控制局勢後，政府宣佈戒嚴並展開「清鄉」。以逮捕「暴徒」為名，未經審判大肆暗殺與處決台籍知識份子與社會菁英。',
-                details: '警備總部實質上是依照事先草擬的「黑名單」，針對曾參與處理委員會、報社記者、律師、醫師與大學教授進行政治清算。許多菁英在半夜被特務帶走後即下落不明，連屍骨都無處尋覓。這場針對性的捕殺，造成台灣社會領導階層嚴重的斷層，也開啟了後續近四十年的白色恐怖時期。',
-                keyFigures: ['陳澄波 (畫家)', '潘木枝 (醫師)', '林茂生 (台大教授)', '阮朝日 (新生報總經理)'],
-                quote: '我死了，你們要堅強，不要忘記我是為了台灣人而死的。好好讀書，為台灣貢獻。',
-                quoteSource: '多位受難者臨終前留給家屬的遺言概念',
-                fact: '📝 清鄉階段的逮捕與處決幾乎皆無合法審判紀錄。這不僅是為了「解除武裝」，更是國家機器為了消滅台灣本土異議聲音的系統性剷除。',
-                archive: '出處：國防部保密局台灣站檔案、受難者家屬口述',
-                imageSrc: 'images/WI01-001.jpg',
-                imageAlt: '受難者遺書',
-                caption: '受難菁英的最後告別：在未經審判的清鄉中，無數菁英留下絕筆'
-            }
-        ];
-
-        let currentTimelineIndex = 0;
-
-        function renderTimelineMobile() {
-            const container = document.getElementById('timeline-mobile');
-            container.innerHTML = timelineData.map((item, index) => {
-                const tagsRaw = item.keyFigures && item.keyFigures.length > 0
-                    ? item.keyFigures.map(f => `<span class="px-2 py-1 bg-gray-200 text-gray-700 text-xs font-bold rounded-md">👤 ${f}</span>`).join('')
-                    : '';
-                const quoteRaw = item.quote ? `<blockquote class="mb-4 px-4 py-3 bg-red-50/50 border-l-4 border-red-800 italic text-gray-800 text-sm rounded-r">「${item.quote}」<footer class="text-xs text-gray-500 mt-2 font-bold">— ${item.quoteSource}</footer></blockquote>` : '';
-
-                return `
-                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm scroll-mt-24" id="m-card-${index}">
-                    <button onclick="toggleTimelineMobile(${index})" class="w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                        <div>
-                            <span class="block text-xs font-bold uppercase tracking-wider mb-1 text-red-800">${item.date}</span>
-                            <span class="block font-serif font-bold text-gray-900 pr-4">${item.title}</span>
-                        </div>
-                        <span id="m-icon-${index}" class="text-2xl text-gray-400 transition-transform duration-300 ${index === 0 ? 'rotate-180' : ''} shrink-0">↓</span>
-                    </button>
-                    <div id="m-content-${index}" class="${index === 0 ? 'block' : 'hidden'} border-t border-gray-100 bg-white">
-                        <div class="w-full h-56 image-placeholder relative bg-gray-200">
-                            <img src="${item.imageSrc}" alt="${item.imageAlt}" class="w-full h-full object-cover absolute top-0 left-0">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                            <span class="absolute bottom-3 left-4 text-white text-xs font-medium z-10 drop-shadow-md pr-4">${item.caption}</span>
-                        </div>
-                        <div class="p-5">
-                            <p class="text-gray-900 text-base leading-relaxed mb-4 font-medium border-l-4 border-gray-300 pl-3">${item.desc}</p>
-                            <div class="text-gray-600 text-sm leading-relaxed mb-4 space-y-3">
-                                <p class="text-justify">${item.details}</p>
-                                <div class="flex flex-wrap gap-2 mt-2">${tagsRaw}</div>
-                            </div>
-                            ${quoteRaw}
-                            <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-inner mt-4">
-                                <span class="text-xs font-bold text-red-800 block mb-2 tracking-wider flex items-center gap-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    史實查證與破除迷思
-                                </span>
-                                <p class="text-sm text-gray-800 font-medium leading-relaxed mb-2">${item.fact}</p>
-                                <span class="inline-block text-[11px] text-gray-600 bg-gray-200 px-2.5 py-1 rounded font-medium border border-gray-300">${item.archive}</span>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="https://buymeacoffee.com/andesign" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-5 py-2 bg-[#faf8f5] border border-gray-400 rounded-sm text-xs font-bold text-gray-800 hover:bg-[#FFDD00] hover:text-gray-900 transition-all shadow-sm">
+                        ☕ 請 Andesign 喝咖啡
+                    </a>
                 </div>
-                `;
-            }).join('');
-        }
+            </div>
+        </footer>
+    </div>
 
-        function toggleTimelineMobile(index) {
-            const content = document.getElementById(`m-content-${index}`);
-            const icon = document.getElementById(`m-icon-${index}`);
-            const card = document.getElementById(`m-card-${index}`);
-
-            // 摺疊其他選項
-            document.querySelectorAll('[id^="m-content-"]').forEach((el, i) => {
-                if (i !== index) {
-                    el.classList.add('hidden');
-                    document.getElementById(`m-icon-${i}`).classList.remove('rotate-180');
-                }
-            });
-
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.classList.add('rotate-180');
-                // 平滑捲動至該卡片，加上延遲以確保 DOM 更新後正確對齊
-                setTimeout(() => {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            } else {
-                content.classList.add('hidden');
-                icon.classList.remove('rotate-180');
-            }
-        }
-
-        function renderTimelineControls() {
-            const container = document.getElementById('timeline-controls');
-            container.innerHTML = timelineData.map((item, index) => `
-                <button onclick="updateTimelineDisplay(${index})" 
-                        class="w-full text-left p-4 rounded-lg transition-all duration-200 border hover:bg-white hover:shadow-md flex items-center group ${index === 0 ? 'bg-white shadow-md border-gray-200 text-gray-900' : 'bg-transparent border-transparent text-gray-500'}"
-                        id="t-btn-${index}">
-                    <div class="w-3 h-3 rounded-full bg-red-800 mr-4 group-hover:scale-125 transition-transform ${index === currentTimelineIndex ? 'scale-125 opacity-100' : 'opacity-50'}"></div>
-                    <div>
-                        <span class="block text-xs font-bold uppercase tracking-wider mb-1">${item.date}</span>
-                        <span class="block font-serif font-medium md:text-lg">${item.title}</span>
-                    </div>
-                </button>
-            `).join('');
-        }
-
-        function updateTimelineDisplay(index) {
-            currentTimelineIndex = index;
-            const data = timelineData[index];
-
-            timelineData.forEach((_, i) => {
-                const btn = document.getElementById(`t-btn-${i}`);
-                if (i === index) {
-                    btn.classList.add('bg-white', 'shadow-md', 'border-gray-200', 'text-gray-900');
-                    btn.classList.remove('bg-transparent', 'border-transparent', 'text-gray-500');
-                    btn.querySelector('div').classList.add('scale-125', 'opacity-100');
-                    btn.querySelector('div').classList.remove('opacity-50');
-                } else {
-                    btn.classList.remove('bg-white', 'shadow-md', 'border-gray-200', 'text-gray-900');
-                    btn.classList.add('bg-transparent', 'border-transparent', 'text-gray-500');
-                    btn.querySelector('div').classList.remove('scale-125', 'opacity-100');
-                    btn.querySelector('div').classList.add('opacity-50');
-                }
-            });
-
-            const display = document.getElementById('timeline-display');
-            display.classList.remove('fade-in');
-            void display.offsetWidth;
-            display.classList.add('fade-in');
-
-            document.getElementById('t-date').textContent = data.date;
-            document.getElementById('t-title').textContent = data.title;
-            document.getElementById('t-desc').textContent = data.desc;
-
-            // New Detail & Metadata handling
-            document.getElementById('t-details').textContent = data.details;
-
-            // Render Tags (Key Figures)
-            const tagsContainer = document.getElementById('t-tags-container');
-            if (data.keyFigures && data.keyFigures.length > 0) {
-                tagsContainer.innerHTML = data.keyFigures.map(figure => `<span class="px-2 py-1 bg-gray-200 text-gray-700 text-xs font-bold rounded-md">👤 ${figure}</span>`).join('');
-            } else {
-                tagsContainer.innerHTML = '';
-            }
-
-            // Render Quote
-            const quoteContainer = document.getElementById('t-quote-container');
-            if (data.quote) {
-                quoteContainer.classList.remove('hidden');
-                document.getElementById('t-quote').textContent = data.quote;
-                document.getElementById('t-quote-source').textContent = data.quoteSource;
-            } else {
-                quoteContainer.classList.add('hidden');
-            }
-
-            document.getElementById('t-fact').innerHTML = data.fact; // using innerHTML to allow emojis if needed
-            document.getElementById('t-archive').textContent = data.archive;
-
-            // Image handling
-            document.getElementById('t-image').alt = data.imageAlt;
-            document.getElementById('t-image').src = data.imageSrc;
-            document.getElementById('t-caption').textContent = data.caption;
-            document.getElementById('t-img-hint').classList.add('hidden');
-
-        }
-
-        // --- Fact Check Data ---
-        const factChecks = [
-            { claim: "「228只是民進黨為了選舉製造仇恨的工具，根本沒那麼嚴重。」", reality: "228平反運動始於1987年，由民間發起。首位代表政府道歉的是國民黨籍總統李登輝（1995年）。補償條例與基金會的成立皆跨越黨派。這是國家級的人權議題，非單一政黨專利。" },
-            { claim: "「死那麼多人都是假的，其實只有幾百人意外死亡。」", reality: "根據行政院《二二八事件研究報告》，估計死亡人數約在18,000至28,000人之間。雖然確切數字因當時戶籍混亂難以精確，但「僅數百人」的說法嚴重違背史實與檔案紀錄。" },
-            { claim: "「這些人都是共產黨，政府是為了剿匪。」", reality: "雖然當時有少數左翼份子，但絕大多數受難者是期待政治改革的仕紳、學生與一般市民。將所有反抗者貼上「共產黨」標籤，是威權政府為合理化鎮壓與清鄉的藉口。" },
-            { claim: "「外省人也被殺，為什麼都不提？」", reality: "史實並未否認初期衝突中有本省人對外省人的暴力行為，這在官方報告中皆有明確記載。但後續國家機器的軍事鎮壓與長期白色恐怖，其無差別攻擊的規模、組織性與延續性，與初期的警民衝突完全不成比例。" }
-        ];
-
-        function renderFactCards() {
-            const container = document.getElementById('fact-grid');
-            container.innerHTML = factChecks.map((item, index) => `
-                <div class="interactive-card bg-white rounded-xl overflow-hidden border border-gray-200 cursor-pointer group" onclick="toggleFact(${index})">
-                    <div class="p-6 bg-red-50 border-b border-red-100 flex justify-between items-center">
-                        <h4 class="text-lg font-bold text-gray-800 leading-snug pr-4">${item.claim}</h4>
-                        <span class="text-red-800 text-xl font-black group-hover:scale-125 transition-transform">+</span>
-                    </div>
-                    <div id="fact-content-${index}" class="hidden p-6 bg-white border-t-4 border-gray-800">
-                        <span class="text-xs font-bold text-white bg-gray-800 px-2 py-1 rounded mb-3 inline-block">史實查證</span>
-                        <p class="text-gray-700 leading-relaxed">${item.reality}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleFact(index) {
-            const content = document.getElementById(`fact-content-${index}`);
-            document.querySelectorAll('[id^="fact-content-"]').forEach((el, i) => {
-                if (i !== index) el.classList.add('hidden');
-            });
-            content.classList.toggle('hidden');
-            if (!content.classList.contains('hidden')) content.classList.add('fade-in');
-        }
-
-        // --- Report Accordion Logic ---
-        function toggleReport(index) {
-            const content = document.getElementById(`report-content-${index}`);
-            const icon = document.getElementById(`report-icon-${index}`);
-            const isOpen = !content.classList.contains('hidden');
-
-            if (isOpen) {
-                content.classList.add('hidden');
-                icon.textContent = '+';
-                icon.classList.remove('rotate-45');
-            } else {
-                content.classList.remove('hidden');
-                content.classList.add('fade-in');
-                icon.textContent = '×';
-                icon.classList.add('rotate-45');
-            }
-        }
-
-        function expandAllReports() {
-            for (let i = 0; i <= 6; i++) {
-                const content = document.getElementById(`report-content-${i}`);
-                const icon = document.getElementById(`report-icon-${i}`);
-                if (content) {
-                    content.classList.remove('hidden');
-                    icon.textContent = '×';
-                    icon.classList.add('rotate-45');
-                }
-            }
-        }
-
-        function collapseAllReports() {
-            for (let i = 0; i <= 6; i++) {
-                const content = document.getElementById(`report-content-${i}`);
-                const icon = document.getElementById(`report-icon-${i}`);
-                if (content) {
-                    content.classList.add('hidden');
-                    icon.textContent = '+';
-                    icon.classList.remove('rotate-45');
-                }
-            }
-        }
-
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        // --- Init ---
-        window.onload = () => {
-            initHeroCarousel();
-            startRandomScenario(); // 初始化隨機載入情境
-            renderTimelineControls();
-            updateTimelineDisplay(0);
-            renderTimelineMobile();
-            renderFactCards();
-
-            // Charts
-            if (typeof Chart !== 'undefined') {
-                const ctxProf = document.getElementById('professionChart').getContext('2d');
-                new Chart(ctxProf, {
-                    type: 'bar',
-                    data: {
-                        labels: ['學生', '公務員', '民眾(無業/家管)', '商界', '工界', '自由業(醫/律)', '農漁'],
-                        datasets: [{
-                            label: '佔比 (%)',
-                            data: [20, 15, 25, 12, 10, 10, 8],
-                            backgroundColor: [
-                                '#a63e3e', // alert-red
-                                '#d4af37', // highlight-gold
-                                '#595959', // ink-light
-                                '#8a5a44', // warm brown
-                                '#2c2c2c', // ink-black
-                                '#722f37', // wine red
-                                '#a8a8a8'  // muted gray
-                            ],
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return context.parsed.y + '%';
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: '受難比例 (%)',
-                                    font: { family: "'Noto Sans TC', sans-serif", weight: 'bold' }
-                                },
-                                ticks: {
-                                    callback: function (value) {
-                                        return value + '%';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-                const ctxType = document.getElementById('victimTypeChart').getContext('2d');
-                new Chart(ctxType, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['死亡', '失蹤', '羈押/判刑', '受傷/其他'],
-                        datasets: [{
-                            data: [45, 25, 20, 10],
-                            backgroundColor: [
-                                '#2c2c2c', // ink-black (死亡)
-                                '#595959', // ink-light (失蹤)
-                                '#a63e3e', // alert-red (羈押/判刑)
-                                '#d4af37'  // highlight-gold (受傷/其他)
-                            ],
-                            borderWidth: 2,
-                            borderColor: '#fdfbf7' // paper-bg stroke
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '60%',
-                        plugins: {
-                            legend: { position: 'right' },
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return ' ' + context.label + ': ' + context.parsed + '%';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        };
-    </script>
+    <!-- 匯入 JavaScript 互動邏輯 -->
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 基本 SEO -->
+    <title>二二八事件史實查證與分析報告</title>
+    <meta name="description" content="針對近期網路上流傳「民進黨操弄228」及淡化事件嚴重性的論述，本報告彙整行政院調查報告、口述歷史與學術研究，以客觀數據與史料還原歷史真相。">
+    <meta name="author" content="獨立史實查證專案">
+
+    <!-- SMO 社群媒體最佳化 -->
+    <meta property="og:title" content="撥開歷史迷霧：二二八事件史實查證報告">
+    <meta property="og:description" content="面對網路謠言與「政治操作」的指控，我們用權威史料與真實數據說話。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://weaintgoldfishbrain.github.io/real228/og-image.jpg">
+
+    <!-- 效能優化 (PageSpeed) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- 樣式與字體 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Chosen Palette: Warm Neutral Archive */
+        :root {
+            --paper-bg: #fdfbf7;
+            --ink-black: #2c2c2c;
+            --ink-light: #595959;
+            --alert-red: #a63e3e;
+            --highlight-gold: #d4af37;
+            --muted-gray: #e5e5e5;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            color: var(--ink-black);
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .interactive-card {
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 圖片佔位符與輪播樣式 */
+        .image-placeholder {
+            background-color: #e5e5e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+        }
+
+        .carousel-slide {
+            transition: opacity 1.5s ease-in-out;
+        }
+    </style>
+    <meta name="google-site-verification" content="ET08IXoE5-9HOeaMOfruOUchZRd7I8V46Zysst-9eX0" />
+</head>
+
+<body class="antialiased selection:bg-red-100 selection:text-red-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#fdfbf7]/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <span class="font-bold text-xl tracking-wider text-gray-900 serif">二二八史實查證報告</span>
+                </div>
+                <div class="hidden md:flex space-x-8" aria-label="主選單">
+                    <button onclick="scrollToSection('hero')"
+                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">首頁</button>
+                    <button onclick="scrollToSection('empathy')"
+                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">歷史見證</button>
+                    <button onclick="scrollToSection('timeline')"
+                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">時間軸與史料</button>
+                    <button onclick="scrollToSection('full-report')"
+                        class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">報告全文</button>
+                    <button onclick="scrollToSection('factcheck')"
+                        class="text-red-700 font-bold hover:text-red-900 transition-colors text-sm">謠言查核</button>
+                </div>
+                <button class="md:hidden text-gray-600 focus:outline-none" onclick="toggleMobileMenu()"
+                    aria-label="展開行動版選單">
+                    <span class="text-2xl" aria-hidden="true">≡</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 p-4 space-y-2" role="menu">
+            <button onclick="scrollToSection('hero'); toggleMobileMenu()"
+                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">首頁</button>
+            <button onclick="scrollToSection('empathy'); toggleMobileMenu()"
+                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">歷史見證</button>
+            <button onclick="scrollToSection('timeline'); toggleMobileMenu()"
+                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">時間軸與史料</button>
+            <button onclick="scrollToSection('full-report'); toggleMobileMenu()"
+                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-gray-800 font-medium">報告全文</button>
+            <button onclick="scrollToSection('factcheck'); toggleMobileMenu()"
+                class="block w-full text-left py-2 px-4 hover:bg-gray-50 text-red-700 font-bold">謠言查核</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Rolling Image Carousel -->
+    <header id="hero" class="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 serif leading-tight">
+                    撥開歷史迷霧<br>
+                    <span class="text-red-800">還原二二八真相</span>
+                </h1>
+                <div class="w-16 h-1 bg-red-800 mb-6"></div>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    近期網路上充斥著「228是選舉操弄」、「只是暴民滋事」的言論。本報告不講政治口水，僅彙整國家檔案管理局資料、行政院調查報告與真實歷史影像，用最沉痛的史實，直球對決網路謠言。
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <button onclick="scrollToSection('factcheck')"
+                        class="px-6 py-3 bg-red-800 text-white font-bold rounded shadow-lg hover:bg-red-900 transition">
+                        闢謠查核
+                    </button>
+                    <button onclick="scrollToSection('empathy')"
+                        class="px-6 py-3 bg-gray-900 text-white font-bold rounded shadow-lg hover:bg-black transition">
+                        歷史見證
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero 圖片輪播版位 -->
+            <div id="hero-carousel"
+                class="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl bg-[#e5e5e5] group">
+                <!-- Slide 1 -->
+                <div class="carousel-slide absolute inset-0 opacity-100 z-10">
+                    <img src="images/228_Incident_h.jpg" alt="二二八事件抗議群眾" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                    <div
+                        class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                        <span class="font-bold">歷史現場：</span>專賣局前抗議群眾聚集
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-slide absolute inset-0 opacity-0 z-0">
+                    <img src="images/jpg_00_06_00_34_cca100031-hp-22_13_1-0001-w.jpg" alt="專賣局大樓"
+                        class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                    <div
+                        class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                        <span class="font-bold">史料：</span>臺北放送局演奏所（今臺北二二八紀念館）
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-slide absolute inset-0 opacity-0 z-0">
+                    <img src="images/二二八後，國防部長白崇禧（前右2）來台宣慰_(cropped).jpg" alt="白崇禧來台"
+                        class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                    <div
+                        class="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                        <span class="font-bold">史料：</span>事件後國防部長白崇禧來台宣慰
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Timeline Section with Images -->
+    <section id="timeline" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">歷史檔案與時間軸</h2>
+            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                還原事實是導正視聽的第一步。透過真實的時間線與史料照，理解事件如何從一場查緝血案演變成全台的軍事鎮壓。
+            </p>
+        </div>
+
+        <!-- Desktop Timeline (Hidden on Mobile) -->
+        <div class="hidden lg:grid lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-4 space-y-3" id="timeline-controls" role="tablist">
+                <!-- Generated by JS -->
+            </div>
+
+            <div class="lg:col-span-8">
+                <article id="timeline-display"
+                    class="bg-white rounded-xl shadow-lg border border-gray-100 h-full overflow-hidden flex flex-col transition-all duration-300">
+                    <!-- Timeline 圖片版位 -->
+                    <div class="w-full h-64 sm:h-80 image-placeholder relative bg-gray-200">
+                        <img id="t-image" src="" alt="">
+                        <div class="image-overlay"></div>
+                        <span id="t-caption"
+                            class="absolute bottom-4 left-6 text-white text-sm font-medium z-10 drop-shadow-md"></span>
+
+                        <!-- 圖片提示 -->
+                        <div class="z-20 p-2 border border-dashed border-gray-400 text-gray-600 text-xs rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm text-center"
+                            id="t-img-hint">
+                            圖片預留區
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex-grow flex flex-col justify-start overflow-y-auto">
+                        <span id="t-date" class="text-red-800 font-bold tracking-widest uppercase mb-2 block"></span>
+                        <h3 id="t-title" class="text-2xl lg:text-3xl font-bold text-gray-900 serif mb-4"></h3>
+
+                        <!-- 核心敘述 -->
+                        <p id="t-desc"
+                            class="text-gray-900 text-lg leading-relaxed mb-4 font-medium border-l-4 border-gray-300 pl-4">
+                        </p>
+
+                        <!-- 深度史料細節 -->
+                        <div id="t-details-container" class="text-gray-600 text-sm leading-relaxed mb-6 space-y-4">
+                            <p id="t-details" class="text-justify"></p>
+                            <div id="t-tags-container" class="flex flex-wrap gap-2 mt-2">
+                                <!-- 關鍵字 Tags -->
+                            </div>
+                        </div>
+
+                        <!-- 歷史引言/檔案原件 -->
+                        <blockquote id="t-quote-container"
+                            class="mb-6 px-4 py-3 bg-red-50/50 border-l-4 border-red-800 italic text-gray-800 text-sm hidden rounded-r">
+                            「<span id="t-quote"></span>」
+                            <footer class="text-xs text-gray-500 mt-2 font-bold">— <span id="t-quote-source"></span>
+                            </footer>
+                        </blockquote>
+
+                        <div class="mt-auto p-5 bg-gray-50 border border-gray-200 rounded-lg shadow-inner">
+                            <span
+                                class="text-xs font-bold text-red-800 block mb-2 tracking-wider flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                史實查證與破除迷思
+                            </span>
+                            <p id="t-fact" class="text-sm text-gray-800 font-medium leading-relaxed mb-3"></p>
+                            <span id="t-archive"
+                                class="inline-block text-xs text-gray-600 bg-gray-200 px-2.5 py-1 rounded-md font-medium border border-gray-300"></span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Mobile Timeline Accordion (Hidden on Desktop) -->
+        <div class="block lg:hidden space-y-4" id="timeline-mobile">
+            <!-- Generated by JS -->
+        </div>
+    </section>
+
+    <!-- Data & Fact Check Sections -->
+    <section id="data" class="py-16 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">受難者數據分析
+                </h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                    當史實聚焦於個體，數據則展現了全局。統計顯示受難者包含大量民意代表、醫師、律師、學生等社會菁英。這是一場系統性的文化剝奪。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">受難者職業背景分佈</h3>
+                    <div class="chart-container"><canvas id="professionChart"></canvas></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">受難型態統計</h3>
+                    <div class="chart-container"><canvas id="victimTypeChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Empathy Section (Randomized) -->
+    <section id="empathy" class="py-20 bg-[#1a1a1a] text-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-red-500 font-bold tracking-widest text-sm uppercase mb-2 block">Deep Reflection</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white serif mb-4">歷史的抉擇：如果你在 1947</h2>
+            <p class="text-gray-400 mb-2 max-w-2xl mx-auto leading-relaxed">
+                在看過時間軸與菁英受難數據後，請試著走入那寒冷的春天。歷史不再是課本上的文字，而是無數次生命與良知的博弈。面對無情的國家機器，你會如何選擇？
+            </p>
+            <p class="text-yellow-600/60 text-xs mb-10 font-medium flex items-center justify-center gap-2">
+                <span class="animate-pulse">💡</span> 以下情境皆改編自二二八受難者的真實生命軌跡。
+            </p>
+
+            <div id="scenario-container"
+                class="bg-[#2a2a2a] p-8 md:p-12 rounded-xl border border-gray-700 text-left min-h-[380px] flex flex-col justify-center relative shadow-2xl">
+                <!-- Content generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Report Section -->
+    <section id="full-report" class="py-20 bg-[#fdfbf7] border-y border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <span class="text-gray-500 font-bold tracking-widest text-sm uppercase mb-2 block">Full Report</span>
+                <h2 class="text-3xl lg:text-4xl font-black text-gray-900 serif inline-block pb-2 mb-4 drop-shadow-sm">
+                    台灣二二八事件歷史論述實證解析<br><span class="text-2xl lg:text-3xl font-bold text-red-800">與數位時代認知作戰研究報告</span>
+                </h2>
+                <div class="w-16 h-1 bg-gray-400 mx-auto mt-4 mb-4"></div>
+                <p class="mt-4 text-gray-600 max-w-3xl mx-auto leading-relaxed text-justify">
+                    在編製前述視覺化史料與圖表之餘，我們深知唯有透過嚴謹的學術論述與長篇實證考據，才能徹底抵禦斷章取義的政治操弄。以下為本次專案的核心研究報告全文。
+                </p>
+                <div class="mt-6 flex justify-center gap-3">
+                    <button onclick="expandAllReports()"
+                        class="text-sm font-medium text-gray-600 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition shadow-sm">全部展開</button>
+                    <button onclick="collapseAllReports()"
+                        class="text-sm font-medium text-gray-600 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition shadow-sm">全部收合</button>
+                </div>
+            </div>
+
+            <!-- Report Accordion Container -->
+            <div class="space-y-4" id="report-accordion">
+                <!-- Chapter 0: Introduction -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(0)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">導論：數位平台上的歷史記憶重構與資訊操弄挑戰</h3>
+                        <span id="report-icon-0"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-0" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">
+                                在當代高速發展的數位資訊環境中，歷史事件早已超越了單純的學術考證範疇，轉而成為形塑政治合法性、動員群眾情緒以及進行跨國界認知作戰的核心場域。近期，各大社群平台與影音分享網站上頻繁出現特定網路帳號之協同性攻擊行為，這些帳號大量散布經過特定剪輯與論述包裝的短影音，其核心論述直指當前的執政黨（民主進步黨）刻意「操弄二二八事件」，並指控官方機構透過扭曲史實、放大特定族群之受害程度、掩蓋外省籍人士的死傷數據，藉此獲取政治利益並撕裂台灣社會。此類現象不僅凸顯了二二八事件在台灣社會中仍具備高度的敏感性與政治動員能量，更反映出歷史記憶在缺乏嚴謹脈絡的數位傳播下，極易被碎片化、武器化。
+                            </p>
+                            <p class="indent-8">
+                                要客觀檢視「操弄歷史」的嚴重指控，並拆解隱藏於短影音背後的政治修辭，必須回歸最嚴謹的史料考證、法理學分析以及人口統計學實證。二二八事件作為二十世紀台灣最為重大的歷史悲劇，其牽涉層面廣泛，涵蓋戰後初期的國家體制暴力、族群利益衝突、制度性統治失能，以及後續長達數十年的威權禁錮與白色恐怖。本報告奠基於官方解密檔案、中央研究院等學術機構之研究、人口學與流行病學統計，以及財團法人二二八事件紀念基金會發布之歷次權威報告，針對事件的政治責任歸屬、本省與外省族群之真實傷亡數據論辯、轉型正義的法律界定標準與個案爭議、中國共產黨在事件中的真實歷史角色，以及當代網路錯假訊息的具體運作機制進行極度深度的剖析。透過爬梳多方史料與實證數據，本報告旨在釐清歷史真相與政治操弄之間的明確界線，提供具備深度、廣度與法理基礎之專業洞見，以回應當代社會對於歷史真相與資訊識讀的迫切需求。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 1 -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(1)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">第一章：二二八事件的歷史脈絡、制度性失能與國家責任歸屬</h3>
+                        <span id="report-icon-1"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-1" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">
+                                探討任何關於二二八事件的歷史論述，首要任務是確立事件爆發的結構性背景與國家機器的責任歸屬。過去在長達數十年的戒嚴與威權統治時期，官方論述掌握了絕對的詮釋權，多將事件單向定調為「共黨分子煽動」、「日本奴化教育遺毒」或單純的「暴民作亂」；然而，隨著台灣民主化進程的推進與大量國家機密檔案的解密，學界與官方的歷史共識已產生了根本性的移轉，將焦點轉向國家體制的失能與公權力的濫用。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                行政長官公署體制的權力壟斷與社會矛盾激化</h4>
+                            <p class="indent-8 mb-4">
+                                1947年爆發的二二八事件，其表面上的導火線雖為2月27日台北市大稻埕發生的查緝私菸流血衝突，但促發全島性抗爭的深層結構性原因，實則源於戰後初期台灣特殊的政治與經濟統治架構。依據二二八事件紀念基金會委託多位歷史學者（包含黃秀政、薛化元、陳儀深、張炎憲、李筱峰、陳翠蓮等）共同撰寫，並於2006年出版之《二二八事件責任歸屬研究報告》，當時國民政府在台灣設立的「行政長官公署」制度，是一個高度集權的特殊體制。該體制將行政、立法、司法、人事與軍事大權集於行政長官陳儀一身，形成了一種在民主憲政體制外運作的專制統治架構。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                在經濟資源分配層面，政府實施了極為嚴格的物資管制與專賣制度，將菸、酒、火柴等民生必需品納入政府獨佔，加上戰後初期百廢待舉、物資短缺，以及政府將大量台灣米糧運往中國大陸支援國共內戰，導致台灣本地爆發嚴重的通貨膨脹與大規模失業，民生凋敝至極。在政治權力分配層面，外省籍官員幾乎壟斷了所有政府高層與公營事業的決策職位，且官場貪污腐化現象頻傳；與此同時，來台駐守的軍隊軍紀敗壞，屢屢發生欺壓百姓的事件。這種由上而下、全面性的制度性剝奪與文化隔閡，導致台灣社會從知識份子、地方仕紳到普羅大眾，對陳儀政府累積了極度的不滿與絕望。因此，當查緝私菸的偶發暴力事件發生後，長期受到壓抑的民怨瞬間爆發。民間菁英在事件初期迅速組成「二二八事件處理委員會」，其核心訴求並非官方當時宣稱的武裝叛亂或尋求台灣獨立，而是強烈「要求政治改革」、「反對政治壟斷」與「對抗腐敗貪污」。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                南京決策高層的誤判與國家機器的毀滅性鎮壓</h4>
+                            <p class="indent-8 mb-4">
+                                在探討責任歸屬的嚴肅課題上，歷史研究報告明確指出，當時的國民政府主席蔣中正是事件中必須承擔最大與最終責任的最高決策者。儘管在事件爆發初期，部分台灣民間菁英團體以及某些情報管道曾試圖向南京中央傳達台灣社會的真實訴求與官逼民反的真相，蔣中正最終仍選擇採信台灣省行政長官陳儀、國民黨台灣省黨部主委李翼中等地方軍政首長的偏頗匯報。這些報告刻意將民間的改革訴求扭曲為「奸匪煽動」、「暴民叛亂」以及「日本奴化教育餘毒」的展現。基於這些資訊，蔣中正做出了派遣大軍赴台進行軍事鎮壓的致命決定。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                軍隊於1947年3月8日陸續自基隆與高雄登陸後，隨即在全台各地展開被稱為「綏靖」與「清鄉」的血腥行動。在此過程中，台灣省行政長官兼警備總司令陳儀負有不可推卸的軍政首長責任，而其下屬如警備總部參謀長柯遠芬、高雄要塞司令彭孟緝、基隆要塞司令史宏熹、整編第二十一師師長劉雨卿等人，在執行鎮壓任務時，採取了極度不成比例的武力。軍隊不僅在市區進行無差別的機槍掃射，更配合情治單位展開大規模的濫捕、未經合法審判的密裁與私人處決。
+                            </p>
+                            <p class="indent-8">
+                                這種國家機器的殘酷運作，不僅造成無數無辜平民的傷亡，更針對性地消滅了整整一代的台灣地方菁英。據統計，當時高達八成的各縣市參議員、醫師、律師、作家與媒體人在此次鎮壓中遇害或失蹤，對台灣的司法界、新聞界及校園（教育界）造成了無法彌補的毀滅性衝擊。更甚者，蔣中正在事件後非但沒有懲處濫殺無辜的軍政首長，反而將陳儀升任浙江省主席、將彭孟緝擢升為台灣省警備總司令。此種未經正當法律程序、由國家最高權力核心發動並背書的群體性暴力，確立了二二八事件在現代史學、政治學與法學上作為「國家不法侵害」與「威權國家恐怖主義」的核心定調。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 2 -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(2)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">第二章：傷亡人數之歷史爭辯、人口學推論與官方實證數據</h3>
+                        <span id="report-icon-2"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-2" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">
+                                二二八事件中「究竟有多少人死亡或失蹤」，一直是半個多世紀以來歷史論述中最具爭議、也最容易被各方政治勢力與當代網路認知作戰挪用的議題。從數千人到十數萬人不等，不同政治立場的論述者往往選擇性地採用特定數據來支持其政治議程或抹黑對手。要徹底釐清傷亡數據的真相，必須嚴格區分「歷史文獻估計」、「人口統計學推估」以及「轉型正義補償實證審查」三個截然不同的測量維度與科學方法論。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                歷史文獻與官方檔案中的數據分歧</h4>
+                            <p class="mb-4">
+                                在事件發生當時及隨後的幾年間，各方人士基於不同的情報來源與政治目的，提出了差異極大的傷亡數據。為了清晰呈現這些歷史估算的複雜性，以下透過結構化資料展示各方宣稱的數字：</p>
+
+                            <!-- Table Section -->
+                            <div class="overflow-x-auto mb-6 bg-gray-50 rounded border border-gray-200 p-2">
+                                <table class="w-full table-auto text-sm text-left align-middle">
+                                    <thead class="bg-gray-200 text-gray-800">
+                                        <tr>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-300">資料來源 / 提報者身份</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-300">提報年份</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-300">外省籍宣稱數據</th>
+                                            <th class="px-4 py-3 font-bold border-b border-gray-300">本省籍及整體宣稱數據</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-white text-gray-700">
+                                            <td class="px-4 py-3 font-medium">時任國防部長 白崇禧</td>
+                                            <td class="px-4 py-3">1947年</td>
+                                            <td class="px-4 py-3 text-gray-500">-</td>
+                                            <td class="px-4 py-3">軍警與台籍死傷共 1,860人</td>
+                                        </tr>
+                                        <tr class="hover:bg-white text-gray-700">
+                                            <td class="px-4 py-3 font-medium">台灣警備總司令部</td>
+                                            <td class="px-4 py-3">1947年</td>
+                                            <td class="px-4 py-3">死傷失蹤共 1,958人</td>
+                                            <td class="px-4 py-3">死傷失蹤共 643人 (另有死3,200人紀錄)</td>
+                                        </tr>
+                                        <tr class="hover:bg-white text-gray-700">
+                                            <td class="px-4 py-3 font-medium">上海《大公報》/ 警政單位</td>
+                                            <td class="px-4 py-3">1947年</td>
+                                            <td class="px-4 py-3">死432, 傷2126, 蹤85 (共2,643人)</td>
+                                            <td class="px-4 py-3 text-gray-500">未具體對比</td>
+                                        </tr>
+                                        <tr class="hover:bg-white text-gray-700">
+                                            <td class="px-4 py-3 font-medium">保安處</td>
+                                            <td class="px-4 py-3">1947年</td>
+                                            <td class="px-4 py-3 text-gray-500">-</td>
+                                            <td class="px-4 py-3">死 6,300人</td>
+                                        </tr>
+                                        <tr class="hover:bg-white text-gray-700">
+                                            <td class="px-4 py-3 font-medium">蘇新 (台共人士)</td>
+                                            <td class="px-4 py-3">1949年</td>
+                                            <td class="px-4 py-3 text-gray-500">-</td>
+                                            <td class="px-4 py-3">死不下 10,000人</td>
+                                        </tr>
+                                        <tr class="hover:bg-white text-gray-700">
+                                            <td class="px-4 py-3 font-medium">時任美國副領事 葛超智</td>
+                                            <td class="px-4 py-3">1947年</td>
+                                            <td class="px-4 py-3 text-gray-500">-</td>
+                                            <td class="px-4 py-3">死 20,000人</td>
+                                        </tr>
+                                        <tr class="hover:bg-green-50 text-gray-800 bg-green-50/50">
+                                            <td class="px-4 py-3 font-bold text-green-800">二二八紀念基金會 (實證)</td>
+                                            <td class="px-4 py-3 font-bold text-green-800">2006年後</td>
+                                            <td class="px-4 py-3 font-medium text-green-900">死/失蹤 89人, 傷 1,389人</td>
+                                            <td class="px-4 py-3 font-medium text-green-900">總受領賠償 10,280人</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p class="indent-8 mb-4">
+                                從上述表格可以清晰看出，當時的官方報告（如白崇禧的1,860人）與外國觀察家、民間人士的估算（如葛超智的兩萬人）存在著巨大的鴻溝。國史館學者侯坤宏曾分析，官方報告極度低估數字，是因為其刻意忽略了大量未經正式審判即遭軍隊秘密處決、或直接被拋入海中與掩埋的非正常途徑死亡人數；而民間或海外報告的高估，則可能混雜了當時社會極度恐慌下的道聽塗說與刻意渲染。此外，《二二八事件研究報告》總主筆賴澤涵亦指出，國民黨部隊於3月8日登陸後，單是子彈就消耗了14萬發，造成的死傷絕對遠超官方承認的數千人；但若說死亡人數高達數萬人，在當時的時空背景下，屍體的處理與掩埋在短短數週內亦難以完全不留痕跡，因此雙方極端的數字皆有討論空間。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                人口統計學推估的極限與流行病學的反證</h4>
+                            <p class="indent-8 mb-4">
+                                為了在缺乏完整屍骨與名單的情況下尋求科學解答，1992年由李登輝總統任內推動、行政院出版的《二二八事件研究報告》中，學者陳寬政採用了「人口學推計」模型進行估算。其研究方法的核心假設在於：由於1946年台灣並無精確的年度死亡統計，故比較1947年與1948年的總死亡人數。數據顯示，1947年（事件發生年）全台總死亡人數為114,192人，而1948年為95,340人；1947年比1948年多出了18,856名死者。陳寬政進一步將1947年15歲至64歲男性死亡人數高於1948年的異常增量，全數歸因於二二八事件的政治鎮壓，進而推估出事件死亡人數約落在18,352人至27,923人之間。另一位學者李喬亦利用線性迴歸模型，推估出18,446人至19,646人的相近數據。這些數字隨後被廣泛引用，甚至寫入部分高中教材中。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                然而，此種純粹依賴人口死亡總數波動的推演方法，在學術界與實務界受到了極為嚴厲的挑戰與批評。前立法委員蔡正元與部分公共衛生專家透過客觀的流行病學證據指出，1947年恰逢戰後台灣公共衛生體系崩潰、島內傳染病（如天花、霍亂、瘧疾等）大規模橫行的時期，年度整體死亡人數必然較其他相對平穩的年度偏高。將因傳染病或其他社會動盪導致的「超額死亡人數」全數算入二二八事件的鎮壓死難者，在科學方法論上犯了嚴重的「過度推論」與「歸因謬誤」。此外，中央研究院院士胡佛作為當年研究報告的審議委員之一，亦曾公開指出，從戰後初期的台灣整體人口波動來換算單一政治事件的死亡人數，存在巨大的盲點。當時台灣社會經歷了劇烈的人口流動，包括大量滯留中國大陸未歸的台灣兵、前往大陸參與國共內戰的老兵，以及事件發生後因恐懼而逃回大陸的外省人士。在戶籍系統紊亂且人口頻繁跨境移動的背景下，單憑戶籍死亡登記數量的差額來斷定數萬人死於屠殺，被認為是缺乏周詳考量的誇大之詞。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                外省族群傷亡統計：拆解「外省人死傷更多」的資訊戰迷思</h4>
+                            <p class="indent-8 mb-4">
+                                當代網路帳號在攻擊「民進黨操弄二二八」時，最常使用的一項核心論述便是宣稱「外省人死傷數字比本省人還多」，並指控政府與二二八基金會刻意掩蓋外省籍受難者的史實，試圖將二二八事件從「國家對人民的鎮壓」扭曲為單純的「本省人對外省人的族群屠殺」。此一論述的主要依據，多來自當時上海《大公報》駐地記者唐賢龍所著之《台灣事變內幕記》，其引述當時警察單位公布的數字稱：外省人死亡432人、失蹤85人、受傷2,126人，受難總數高達2,643人。攻擊者據此對比二二八基金會早期認定的本省受難人數（約二千餘人），得出外省人受害更深的結論。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                然而，這種刻意擷取單一早期官方文獻的論述，完全禁不起現代歷史檔案學的嚴格檢驗。二二八事件紀念基金會深知此議題的重要性，在其後續擴充出版的《二二八事件真相與轉型正義研究報告》中，特別委託學者新增了〈試論二二八事件中的外省人傷亡〉與〈官方紀錄中二二八事件死難人數探析〉等專文，針對外省人傷亡數據進行了極度細緻的檔案比對與考證。經過嚴謹的實證研究發現，當時政府高層與軍政系統為了向南京中央證明派遣大軍鎮壓的「正當性」與「急迫性」，刻意在公文中使用了極度模糊的「死傷」一詞，將大量的「輕微擦傷」、「財物損失」與「死亡」混為一談，藉此誇大外省人的實際死亡規模。更有甚者，部分官方報告甚至將死於軍隊無差別掃射的本省人數據，或是本省籍公務員的死傷，移花接木並計入外省公務員的死傷數中。
+                            </p>
+                            <p class="indent-8 p-4 bg-red-50/50 border-l-4 border-red-800 rounded">
+                                根據基金會窮盡現有檔案考證後的最終結論：在二二八事件中，外省人的確在初期因群眾失控而遭到波及，但其真實的死亡與失蹤合計總數為
+                                89人；其中因族群衝突被民間群眾毆打致死的外省公務員有 38人，一般外省民眾有 8人。其餘的外省受難者多為受傷（共1,389人）。</p>
+                            <p class="indent-8 mt-4">
+                                這一基於官方檔案比對的鐵證，直接且徹底地反駁了「外省人死亡人數大於本省人」的網路虛假論述。外省族群在事件初期的確面臨了部分台灣民間群眾的暴力相向，這反映了當時社會因語言不通、文化摩擦與對貪腐政權憤怒所導致的群眾失控；然而，將這種長達數天的「群眾盲目暴力（Horizontal
+                                Violence）」，與隨後長達數月的「國家機器體制性軍事鎮壓（Vertical State
+                                Violence）」（使用達姆彈、重機槍掃射、未經審判處決數千菁英與平民）等量齊觀，甚至在數字上進行造假對比，在歷史學、法理學與政治道德上，皆犯了最嚴重的範疇錯誤與邏輯滑坡。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 3 -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(3)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">第三章：轉型正義的法理邊界與個案爭議之深度檢視</h3>
+                        <span id="report-icon-3"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-3" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">
+                                在當前的數位認知作戰中，除了宏觀數據的爭辯外，攻擊者亦經常透過放大檢視特定歷史個案，藉此質疑《二二八事件處理及賠償條例》的發放標準存在政治偏見與族群歧視。其中，專欄作家張若彤所提出的「劉青山案」與「何鑾旗案」之對比，便是近期網路上被廣泛引用，用以指控官方「淡化歷史」、「選擇性給予正義」的典型案例。要釐清此類指控，必須深入探討轉型正義的法理基礎與法律要件。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                劉青山命案與何鑾旗冤死案之歷史與法理對照</h4>
+                            <p class="indent-8 mb-2"><strong>劉青山案的歷史還原：</strong>
+                                劉青山為二二八事件期間任職於專賣局台中分局的一名28歲外省籍公務員。1947年3月2日，當憤怒的台中群眾包圍前台中縣長劉存忠官邸進行抗議時，劉青山自屋內衝出並向群眾開槍，導致數名抗議民眾受傷。此舉引發群眾極度憤慨，隨即將其包圍並嚴重毆打。根據部分官方檔案（如專賣局的二二八專刊）及見證者記錄，劉青山被送醫急救後，甚至有暴民在3月3日夜間衝入醫院病房，將其割去耳鼻、挖出雙眼，最終殘忍虐殺致死。然而，近期的部分研究報告與官方紀錄（如保密局檔案）中，僅記載其死因為「因頭部受鈍器重擊導致腦出血」，未詳述醫院內的殘酷虐殺過程。評論者因此強烈抨擊，認為當前的轉型正義論述刻意「淡化」了外省公務員遭暴民殘殺的史實，且劉青山之家屬未能獲得二二八基金會的任何賠償與名譽回復，是極端的不公不義。
+                            </p>
+                            <p class="indent-8 mb-4"><strong>何鑾旗案的曲折歷程：</strong>
+                                形成強烈對比的是本省籍人士何鑾旗。在事件當時，憲兵第四團曾指控何鑾旗「帶領群眾毆打外省人」，甚至具體指控他「親手殺害專賣局官員莊青山（即劉青山之誤植）」。然而，該案經過當時的台灣高等法院審理後，於1948年因「證據不足」判決何鑾旗涉犯內亂罪嫌疑部分無罪。不幸的是，何鑾旗在隔年（1949年）因捲入其他債務糾紛，被警備總部羅織「恐嚇、詐欺、擾亂金融、煽動流氓、圖謀不軌」等罪名，由中部戒嚴司令部判處死刑並於同年8月執行槍決。儘管何鑾旗的死刑執行時間為1949年，且表面罪名與二二八抗爭無直接關聯，但二二八事件紀念基金會於1997年的第21次董事會中，經過嚴密調查，認定其後續遭到羅織罪名與剝奪生命，實為二二八事件後續威權政府秋後算帳與「公權力侵害」的延伸，因此決議認定其為二二八事件受難者並給予賠償；2023年，法務部更進一步公告平復其所受之司法與行政不法。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                國家暴力與群眾暴力：轉型正義不可逾越的法理界線</h4>
+                            <p class="indent-8 mb-4">
+                                上述兩個極端案例的強烈對比，在缺乏法學素養的網路論壇中，極易被操弄為「民進黨政府只賠償本省暴民，卻不顧外省被害公務員」的政治煽動素材。然而，若我們回歸《二二八事件處理及賠償條例》的立法精神與法理基礎進行深度剖析，便會發現這種待遇的差異並非出自所謂的族群偏見，而是源於對「權力結構」與「不法主體」的嚴格法律定義。
+                            </p>
+                            <p class="indent-8 mb-4">轉型正義（Transitional
+                                Justice）在國際法與政治學上的核心要旨，在於處理「國家機器濫用公權力」所造成的系統性、大規模人權侵害。國家在現代憲政體制下，合法壟斷了暴力的使用權（包括警察、軍隊、情治單位與司法審判權）。當一個威權國家將這些強大的權力武器化，用以非法逮捕、屠殺、刑求其統治下的人民時，人民在體制內是絕對弱勢且缺乏任何救濟管道的。因此，當國家步入民主化後，後繼的民主政府必須承擔起調查真相、賠償受害者與平反名譽的歷史與法律責任。依據《條例》第七條與第八條之明文規定，受難者得受賠償之範圍雖然廣泛，但其最核心的法理前提在於：受害者的損害必須是「遭受公務員及公權力侵害」所致。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                將此標準套用於劉青山案：劉青山身為執行公務的專賣局官員，其在衝突中遭到民眾毆打甚至殘忍殺害，在法律性質上屬於一般刑法中的「殺人罪」與「群眾暴動罪」。在當時的時空背景下，國民政府作為實質控制台灣的統治實體，依然握有強大的司法調查與武力懲凶的權力。換言之，劉青山雖然是悲劇的受害者，但他面對的是「平民的非法暴力（Horizontal
+                                Violence）」，其受害者身分與家屬權益在當時的國家法律體系下是受到絕對保護與追訴的。</p>
+                            <p class="indent-8 mb-4">
+                                相對地，檢視何鑾旗案：即便何鑾旗在事件初期曾面臨參與暴動的指控，且後來經法院判決無罪，但他最終面臨的是擁有絕對生殺大權、不受制衡的「國家軍事體系與情治機關」。警備總部在缺乏正當法律程序保障的情況下，以莫須有的政治與經濟罪名將其槍決，這正是標準的「由上而下的體制性暴力（Vertical
+                                State Violence）」。何鑾旗在威權時期無處伸冤，其生命權遭國家機器非法剝奪，這正是民主化後的轉型正義機制必須介入、調查並予以賠償的絕對標的。</p>
+                            <p class="indent-8 mb-4">
+                                因此，將「平民對公務員的犯罪行為」與「國家機器對平民的非法屠殺」混為一談，要求轉型正義機構對兩者進行同等賠償，是當代網路資訊戰中最常見、也最具迷惑性的法理滑坡。這並非是對劉青山生命消逝的冷漠，而是法律管轄權限與歷史責任追究主體的根本性差異。忽略此一法理基礎，將紀念基金會的補償名單視為「政黨操弄族群對立」或「大小眼」的證據，實則嚴重偏離了現代法治國家的基本原則。截至2022年1月申請期限屆滿，基金會共核定受理並發放賠償金予
+                                10,280
+                                位受難者，每一件申請案背後皆經過獨立超然的董事會與專家學者依據檔案進行嚴格的交叉比對與認證。這套機制的建立與運作，正是台灣社會以法治手段撫平歷史創傷的具體實踐，絕非特定政黨操弄歷史的工具。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 4 -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(4)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">第四章：政治史觀的挪用與中國共產黨角色之歷史釐清</h3>
+                        <span id="report-icon-4"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-4" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">
+                                在二二八事件的歷史詮釋權爭奪戰中，不僅台灣內部存在著不同政治光譜的爭辯，中國共產黨（中共）的強力介入與史觀建構，更為當代的數位認知作戰增添了極為複雜的跨國界層次。近年來，中共官方頻繁且高調地舉辦二二八事件紀念活動，其國台辦發言人甚至公開將二二八事件定調為「台灣同彰反抗專制統治、爭取基本權利的正義行動，亦是中國人民解放鬥爭的一部分」，企圖將台灣民間的自發性民主抗爭，強行收編為中共近代共產革命史觀的一環。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                謝雪紅與「二七部隊」的神話建構與史實還原</h4>
+                            <p class="indent-8 mb-4">
+                                在中共高調紀念二二八事件的政治宣傳中，經常被抬上檯面的指標性歷史人物是早期台灣共產黨領導人「謝雪紅」。在中共的論述體系中，謝雪紅甚至曾登上天安門城樓與毛澤東並肩，被塑造成二二八事件的絕對領導核心。史料顯示，謝雪紅早年曾赴中國上海與蘇俄學習左翼思想，於1928年參與成立台灣共產黨，並在戰後於台中組織左翼團體。當二二八事件蔓延至中部時，她確實參與了台中武裝民兵「二七部隊」的運作。然而，權威的歷史學界研究對於中共刻意誇大謝雪紅與共產黨在二二八事件中影響力的行為，提出了極為有力的實證反駁。中央研究院近代史副研究員陳儀深指出，謝雪紅作為台共人士且與中共地下黨有聯繫，其在史料研究上固然具有重要性；但在1947年的歷史時空背景下，台灣共產黨員的人數極為稀少，根本不具備在全台性的大規模抗爭中發揮「領導作用」的組織量能。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                針對被中共奉為武裝革命圭臬的「二七部隊」，前二七部隊部隊長鍾逸人曾以親歷者的身分公開澄清：外界認為是謝雪紅「組織或號召」了二七部隊的說法，是完全錯誤的歷史想像。真實的歷史脈絡是，1947年3月初，台中地區的民眾因不滿政府鎮壓，自發性地包圍公署與警局並接收武器，隨後成立了這支武裝民兵。其首要目的是在「政府體制完全失能的情況下，由民間力量自主維護社會治安與秩序」，並在國軍第21師逼近台中時，承擔起撤退至埔里進行抵抗的防禦任務。謝雪紅之所以加入並參與領導二七部隊，很大程度上是因為她在當時面臨政敵或情治人員的暗殺威脅，必須尋求這支強大民間武裝力量的保護，而非由她單方面創建並指揮該部隊進行共產革命。二二八事件紀念基金會董事長薛化元亦強調，當時地下共產黨的人數極少，對二二八整起事件的影響極其有限，絕未扮演關鍵的轉折角色。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                國共兩黨在威權史觀上的弔詭匯流與當代認知作戰</h4>
+                            <p class="indent-8 mb-4">
+                                深入探討這段歷史詮釋的演變，可以發現一個極具諷刺意味的政治現象。誠如《二二八事件真相與轉型正義研究報告》第一篇所探討的「應對路線」分析，當時台灣民間在「處理委員會的體制內改革」與「武裝抵抗」之間掙扎，其核心動能始終是基於對貪腐政治的絕望與對民主自治的渴望。然而，在1947年事件當下，威權體制下的國民黨軍政高層（如陳儀等人），為了合理化其調動中央大軍來台進行無差別屠殺的正當性，刻意向蔣中正極力誇大「中共奸匪在台煽動叛亂」的虛假威脅；而到了數十年後的今日，中國共產黨為了統戰台灣的政治需求、形塑「兩岸革命同源、共同反抗國民黨」的歷史論述，竟然同樣選擇極力膨脹共產黨在二二八事件中的影響力。
+                            </p>
+                            <p class="indent-8">
+                                這種「昔日的威權國民黨」與「當代的中國共產黨」在歷史論述上的弔詭匯流，至今仍是網路認知作戰中極具破壞力的一環。藉由將二二八事件與「共產黨武裝叛亂」強行掛鉤，攻擊者不僅能夠在內部稀釋國家機關當年動用軍隊屠殺平民的不正當性（將其合理化為剿共戰爭），亦能作為當代政治鬥爭的武器，指責推動轉型正義的民進黨政府「實則是在為共產黨匪諜平反」。為此，權威研究報告明確剖析了民間自發性的民主抗爭，與隨後在白色恐怖時期真正涉入中共地下黨活動者之間，存在著嚴格的時間斷裂與動機差異，絕不應被粗暴地化約為單一共產叛亂事件。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 5 -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(5)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">第五章：網路錯假訊息的解構與認知作戰之戰略目的</h3>
+                        <span id="report-icon-5"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-5" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">
+                                回歸本報告之初所面臨的核心命題：「近期網路帳號不斷發送影片，攻擊民進黨在操弄二二八」，我們必須將這種現象置於當代數位資訊戰、演算法擴散與假訊息傳播的框架下進行嚴肅檢視。這類攻擊的典型特徵在於：巧妙地將部分真實的歷史細節或個人背景，與大量虛構的數據、扭曲的法理概念進行縫合，藉由煽動群眾的情緒與剝奪感，來徹底摧毀官方轉型正義機構的公信力。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                台灣事實查核中心的實證查核案例：楊振隆案</h4>
+                            <p class="indent-8 mb-4">
+                                「台灣事實查核中心」近期針對網路流傳甚廣的一則典型二二八相關假訊息發布了詳細的查核報告。該網路傳言將矛頭指向二二八國家紀念館前館長楊振隆，指稱：「楊振隆曾因殺人案服刑，後由蔡英文、蘇貞昌共同提名擔任館長，坐領月薪30萬元，並享有政務官退休18%的優惠存款福利」。經過查核中心向相關單位調閱資料並進行實地查證，發現這則訊息運用了資訊戰中最經典的「七分真、三分假」與「張冠李戴」操弄手法。傳言中關於楊振隆過去在年輕時期曾犯下案件並入獄服刑的背景，確實「符合事實」；然而，傳言後半段所有用以激起民眾相對剝奪感與仇恨情緒的財務與制度指控，包括「由總統府或行政院直接提名制度（實則由基金會董事會聘任）」、「月薪高達30萬」、「享有政務官18%優存福利」等內容，皆被證實為完全「不符合事實」的惡意捏造。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                此外，部分媒體或網路帳號亦會利用基金會內部對於統計數據的精進過程進行見縫插針。例如，首任館長廖繼斌曾對官方死難人數統計提出不同見解與挑戰，這本屬於學術與機構內部正常的討論範疇，基金會亦公開回應將持續進行校正與通盤整理。然而，這類正常的學術辯證，在有心人士的剪輯與渲染下，往往被扭曲為「官方承認數據造假」、「民進黨長期欺騙人民」的聳動標題，在社群網路上瘋狂轉載。
+                            </p>
+
+                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                數位資訊戰的深層運作邏輯與政治目標</h4>
+                            <p class="mb-2">
+                                這類將深刻的歷史悲劇轉化為「當代政治提款機」與「仇恨動員工具」的數位手段，其根本目的從來就不是為了追求或還原歷史真相，而是為了達成三個高度戰略性的政治效應：</p>
+                            <ol class="list-decimal pl-10 space-y-3 mb-4">
+                                <li><strong>去合法化 (Delegitimization) 與道德剝奪：</strong>
+                                    透過捏造極端誇張的薪資結構、特權福利（如30萬月薪、18%優存）或是刻意羅織受難者的犯罪背景，將推動與執行轉型正義的機構、學者與家屬，塑造成一群「掠奪國家資源的貪腐利益集團」。一旦社會大眾接受了這種設定，二二八紀念基金會所發布的任何嚴謹歷史真相與報告，便會自動喪失其道德制高點與公信力。
+                                </li>
+                                <li><strong>戰略性轉移焦點 (Whataboutism)：</strong>
+                                    面對國家暴力鐵證如山、無法辯駁的歷史事實，攻擊者往往採取「你也一樣」的防禦性反擊。透過無限放大個別外省籍受難者（如劉青山）在群眾衝突中的悲慘遭遇，或是指控本省受難者「其實都是共產黨同路人」，將一場由國家機器發動的體制性大屠殺，降格為單純的「族群互鬥」、「暴民作亂」或是「國共內戰的延伸」。這種策略成功地轉移了追究國家與獨裁者責任的焦點。
+                                </li>
+                                <li><strong>極化社會結構 (Polarization)：</strong>
+                                    透過在TikTok、YouTube、Line群組等平台上，散播情緒化、高度簡化、去脈絡化且帶有強烈對立色彩的短影音，刻意激化台灣社會中不同省籍、不同世代或不同政黨支持者之間的深層仇恨與猜忌。演算法的推波助瀾使得同溫層日益厚實，徹底阻斷了社會大眾進行理性歷史對話、甚至閱讀數百頁嚴謹歷史報告的空間。
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion -->
+                <div
+                    class="report-card border border-gray-200 rounded-lg bg-white overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                    <button onclick="toggleReport(6)"
+                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-white hover:bg-gray-50 transition">
+                        <h3 class="font-serif font-bold text-xl text-gray-900">結論：捍衛歷史真相與深化轉型正義之展望</h3>
+                        <span id="report-icon-6"
+                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div id="report-content-6" class="hidden px-6 pb-6 pt-2 border-t border-gray-100 bg-white">
+                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                            <p class="indent-8 mb-4">綜合上述針對二二八事件歷史論述、傷亡數據實證、轉型正義法理基礎以及當代資訊戰運作機制的全面性探討，本報告得出以下具體結論：</p>
+                            <p class="indent-8 mb-4">
+                                關於網路上頻繁指控「特定政黨或團體刻意操弄二二八事件、捏造數據」的論述，絕大多數是建立在對歷史事實的斷章取義、對法學概念的張冠李戴，乃至於蓄意的數位認知作戰之上。在最受爭議的傷亡數據方面，儘管歷史學界與人口學界對於「宏觀人口推估」的理論模型（如一萬八千人至兩萬八千人之說）確實存在基於流行病學與人口流動變數的學術探討空間；但財團法人二二八事件紀念基金會實際運作的核心，始終是奠基於最嚴格的檔案證據審理。其所核發的
+                                10,280
+                                位受難者賠償名單，是台灣社會法治精神的展現。反觀網路論述刻意引用早期誇大的警政報表，宣稱「外省人死傷遠高於本省人」，已被基金會嚴謹的檔案考據徹底證偽（實證確認外省籍死亡與失蹤人數為89人）。
+                            </p>
+                            <p class="indent-8 mb-4">
+                                在法理層面上，轉型正義機制的核心使命是處理「不對等的國家體制暴力」，而非調解「民間群眾的橫向暴力衝突」。將在執行公務過程中不幸命喪群眾盲目暴力的官員案件，與成千上萬未經任何合法審判、即遭國家武裝部隊以重武器屠殺或情治機關秘密處決的平民相提並論，甚至據此指責國家轉型正義工程「偏袒本省人」，是極度缺乏現代法治國家觀念的混淆視聽。在政治史觀層面，中國共產黨在1947年二二八事件中的實際影響力與參與度極為邊緣與微弱。抗爭的主體力量，始終是尋求政治改革、反抗貪腐威權的台灣本土知識菁英與一般平民。國共兩黨基於各自在不同歷史階段的政治利益，不約而同地誇大了共產黨在事件中的角色，這類被扭曲的威權史觀，至今仍被有心人士用作抹黑二二八受難者、合理化當年鎮壓暴行的素材。
+                            </p>
+                            <p class="indent-8">
+                                歷史的真相從不畏懼任何嚴格的科學與法理檢驗，但必須建立在完整的檔案證據、客觀的學術方法與清晰的法理邏輯之上。面對數位時代下層出不窮、手法日益精緻的歷史錯假訊息與認知作戰，社會大眾亟需提升資訊識讀能力，辨識「學術考證」與「政治宣傳」之間的巨大鴻溝。唯有持續正視過去國家暴力的歷史責任，堅定支持基於檔案實證的轉型正義工程，並在法治的基礎上還原歷史全貌，台灣社會方能真正超越歷史遺留的族群與黨派撕裂，抵禦外部與內部的認知操弄，達成實質意義上的歷史和解與民主鞏固。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fact Check Module -->
+    <section id="factcheck" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">謠言直球對決</h2>
+            <p class="mt-6 text-gray-600 max-w-2xl mx-auto">點擊常見網路論述，查看官方檔案與歷史調查的真實結論。</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="fact-grid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1a1a1a] text-gray-400 py-12 text-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="mb-2">資料來源：行政院《二二八事件研究報告》、二二八事件紀念基金會</p>
+            <div class="mt-6 pt-6 border-t border-gray-800 flex flex-col items-center gap-4">
+                <div class="text-xs text-gray-500 tracking-wide">
+                    Made by <strong class="text-gray-300">Andesign</strong> | Powered by ✨ <strong
+                        class="text-gray-300">Gemini</strong>
+                </div>
+                <a href="https://buymeacoffee.com/andesign" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full text-xs font-bold text-gray-800 hover:bg-[#FFDD00] hover:text-gray-900 transition-all shadow-sm">
+                    ☕ 請 Andesign 喝咖啡
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Hero Carousel Logic ---
+        function initHeroCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            if (slides.length <= 1) return;
+            let currentSlide = 0;
+
+            setInterval(() => {
+                slides[currentSlide].classList.remove('opacity-100', 'z-10');
+                slides[currentSlide].classList.add('opacity-0', 'z-0');
+
+                currentSlide = (currentSlide + 1) % slides.length;
+
+                slides[currentSlide].classList.remove('opacity-0', 'z-0');
+                slides[currentSlide].classList.add('opacity-100', 'z-10');
+            }, 5000); // 5秒輪播一次
+        }
+
+        // --- Empathy Scenarios Data (Expanded for Randomization) ---
+        const scenariosData = {
+            "doctor": {
+                role: "你是一位在地方深受敬重的醫師",
+                context: "1947年3月初，市區爆發警民衝突，死傷慘重。地方仕紳與學生組成了「處理委員會」希望維持治安。市長親自拜託你，希望你利用聲望出面代表市民與軍方談判，要求軍隊停止開槍。",
+                choices: [
+                    { text: "A. 挺身而出：為了保護無辜市民與學生，同意前往水上機場與軍方談判。", nextId: "doctor_a" },
+                    { text: "B. 婉拒躲避：深感局勢危險，為了家中年幼的孩子，決定連夜躲回鄉下老家。", nextId: "doctor_b" }
+                ]
+            },
+            "doctor_a": { isResult: true, title: "史實見證：和平的代價", content: "在真實歷史中，許多如嘉義的潘木枝醫師、畫家陳澄波等人選擇了這條路。他們帶著和平的訴求前往軍營談判，卻立刻被扣押，綁上鐵絲，在未經任何法庭審判的情況下，被押至火車站前當眾槍決。<br><br><span class='text-red-400 font-bold'>「他們沒有暴動，他們是去求和的。」</span>這戳破了網路謠言稱死者皆為暴民的謊言。", prototype: "原型人物：潘木枝、陳澄波等和平談判代表" },
+            "doctor_b": { isResult: true, title: "史實見證：躲不過的清鄉", content: "即便選擇躲避，在3月中旬展開的「清鄉」運動中，軍警特務按名冊抓人。許多未參與衝突的知識份子、律師（如林連宗）、台大教授（如林茂生）半夜在家中被強行帶走，從此「失蹤」。<br><br><span class='text-red-400 font-bold'>國家暴力的肅清，針對的是台灣菁英階層，而非單純的治安維護。</span>", prototype: "原型人物：無數在清鄉中失蹤的知識份子" },
+
+            "reporter": {
+                role: "你是一家本土報社的主筆",
+                context: "二二八事件爆發後，長官公署試圖封鎖消息。你掌握了軍警在街頭無差別開槍的真實傷亡名單與照片。此時，報社外已經有特務在徘徊監視。",
+                choices: [
+                    { text: "A. 堅持報導：身為新聞人必須揭露真相，決定連夜排版將真實傷亡印製出刊。", nextId: "reporter_a" },
+                    { text: "B. 妥協自保：為了報社員工與家人的安全，決定配合官方說法，發布「暴民滋事」的報導。", nextId: "reporter_b" }
+                ]
+            },
+            "reporter_a": { isResult: true, title: "史實見證：被噤聲的第四權", content: "如《台灣新生報》總經理阮朝日、《人民導報》社長宋斐如等人，因堅持報導真相或批評時政，在清鄉期間遭特務以「叛亂」罪名帶走，從此下落不明，連屍骨都無處尋覓。<br><br><span class='text-red-400 font-bold'>國家暴力不僅抹殺了生命，也抹殺了真相的傳播。</span>", prototype: "原型人物：阮朝日、宋斐如、王添灯等報人" },
+            "reporter_b": { isResult: true, title: "史實見證：株連與文字獄", content: "在戒嚴與清鄉的肅殺氛圍下，妥協並不能保證絕對的安全。許多報社被迫停刊或改組，即便配合官方，只要過去曾發表過批評言論，仍可能在後續的「白色恐怖」中被羅織罪名入獄。<br><br><span class='text-red-400 font-bold'>極權統治下的審查是溯及既往且毫無標準的。</span>", prototype: "原型人物：當時被迫停刊或受審查的台灣新聞界" },
+
+            "student": {
+                role: "你是一名滿腔熱血的大學生",
+                context: "社會陷入混亂，警察大多逃避或躲藏。你與同學決定組織「學生治安服務隊」，在街頭指揮交通、保護外省籍教師與商人的安全，試圖讓社會恢復秩序。",
+                choices: [
+                    { text: "A. 堅守崗位：即使聽說軍隊即將登陸，仍相信自己是在「協助維持治安」，繼續穿著學生制服在街頭執勤。", nextId: "student_a" },
+                    { text: "B. 解散撤退：察覺政府態度有異，聽從長輩勸告，立刻解散服務隊，銷毀名冊並躲藏起來。", nextId: "student_b" }
+                ]
+            },
+            "student_a": { isResult: true, title: "史實見證：青春的鮮血", content: "3月8日軍隊登陸後，展開無差別掃射。許多穿著制服、在街頭維持治安的學生首當其衝，被軍隊視為「暴徒」直接射殺或逮捕。如基隆中學、台北市區的大學生皆有慘重傷亡。<br><br><span class='text-red-400 font-bold'>軍事鎮壓不分青紅皂白，連試圖恢復秩序的青年也成為槍下亡魂。</span>", prototype: "原型人物：參與治安維持而受難的各地青年學生" },
+            "student_b": { isResult: true, title: "史實見證：黑名單與逃亡", content: "雖然暫時保住性命，但在隨後的清鄉行動中，特務四處搜捕曾參與「處理委員會」或「治安隊」的青年。許多人被迫流亡海外，或在提心吊膽中度過餘生，甚至在後續的白色恐怖中仍被抓捕。<br><br><span class='text-red-400 font-bold'>「凡走過必留下痕跡」，在威權眼裡，組織起來的青年就是威脅。</span>", prototype: "原型人物：流亡海外或隱姓埋名的台灣青年" }
+        };
+
+        const scenarioRootKeys = ["doctor", "reporter", "student"];
+
+        function startRandomScenario() {
+            // 隨機選取一個情境原型
+            const randomKey = scenarioRootKeys[Math.floor(Math.random() * scenarioRootKeys.length)];
+            renderScenario(randomKey);
+        }
+
+        function renderScenario(scenarioId) {
+            const container = document.getElementById('scenario-container');
+            container.innerHTML = ''; // Clear
+            container.classList.remove('fade-in');
+            void container.offsetWidth; // trigger reflow
+
+            const data = scenariosData[scenarioId];
+
+            container.classList.add('fade-in');
+
+            if (!data.isResult) {
+                // Render Question
+                container.innerHTML = `
+                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-4 border-l-4 border-red-600 pl-4">${data.role}</h3>
+                    <p class="text-gray-300 text-lg md:text-xl mb-8 leading-relaxed">${data.context}</p>
+                    <div class="flex flex-col gap-4 w-full md:w-4/5 mx-auto">
+                        <button onclick="renderScenario('${data.choices[0].nextId}')" class="px-6 py-4 bg-transparent border border-gray-500 text-gray-200 rounded-lg hover:bg-gray-800 hover:border-gray-300 transition text-left text-sm md:text-base">${data.choices[0].text}</button>
+                        <button onclick="renderScenario('${data.choices[1].nextId}')" class="px-6 py-4 bg-transparent border border-gray-500 text-gray-200 rounded-lg hover:bg-gray-800 hover:border-gray-300 transition text-left text-sm md:text-base">${data.choices[1].text}</button>
+                    </div>
+                `;
+            } else {
+                // Render Truth Result
+                container.innerHTML = `
+                    <div class="text-center">
+                        <span class="inline-block px-3 py-1 bg-red-900/50 text-red-400 border border-red-800 text-xs font-bold rounded mb-4">歷史的真相</span>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-6">${data.title}</h3>
+                        <p class="text-gray-300 text-lg mb-8 leading-relaxed max-w-2xl mx-auto">${data.content}</p>
+                        <p class="text-sm text-gray-500 mb-8 italic">${data.prototype}</p>
+                        <button onclick="startRandomScenario()" class="px-6 py-3 border border-gray-600 text-gray-400 font-bold rounded-lg hover:text-white hover:border-white hover:bg-white/10 transition flex items-center justify-center gap-2 mx-auto">
+                            <span>↻ 重新見證 (隨機人物)</span>
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // --- Timeline Data with Images (Enriched Knowledge) ---
+        const timelineData = [
+            {
+                date: '1947年 2月27日', title: '導火線：緝菸血案與誤殺',
+                desc: '專賣局查緝員在台北市天馬茶房前，暴力取締私菸販賣者林江邁，並以槍托擊破其頭部。群眾包圍查緝員理論時，查緝員開槍誤殺旁觀市民陳文溪。',
+                details: '事件發生在傍晚的延平北路，當時正值下班與民眾聚集時間。目擊警察與憲兵未能有效處置，民眾的怒火迅速蔓延。隔日陳文溪延醫不治，引發了全台北市的大罷工與遊行。這並不僅是一場衝突，而是長期以來民間對「專賣制度」貪腐與物價飛漲的怒火引爆點。',
+                keyFigures: ['林江邁 (私菸攤商)', '陳文溪 (無辜遇難市民)', '傅學通 (開槍查緝員)'],
+                quote: '查緝員不分青紅皂白，將小販的火柴、香菸、以及身上的錢全部沒收... 查緝員竟以槍柄擊中林婦頭部，頓時血流如注，昏迷倒地。',
+                quoteSource: '《台灣新生報》1947年現場報導',
+                fact: '📝 檔案顯示，查緝員的不當執法與驚慌開槍是引爆點。這完全是一起查緝過當引發的治安事件，戳破了「共產黨預謀武裝暴動」的謠言。',
+                archive: '出處：行政院《二二八事件研究報告》',
+                imageSrc: 'images/228_by_Li_Jun.jpg',
+                imageAlt: '恐怖的檢查 - 黃榮燦版畫',
+                caption: '《恐怖的檢查》：黃榮燦所繪，真實呈現查緝私菸爆發射殺平民的一刻'
+            },
+            {
+                date: '1947年 2月28日', title: '長官公署開槍與佔領放送局',
+                desc: '憤怒民眾遊行至長官公署（今行政院）請願要求懲兇，遭公署屋頂的衛兵用機關槍掃射。隨後群眾佔領臺北放送局，透過廣播將事件傳遍全台，各地爆發反抗行動。',
+                details: '群眾最初是前往專賣局抗議，找不到局長後才轉往長官公署。衛兵未經警告直接對和平請願的群眾開槍，這項致命錯誤徹底激怒了市民。隨後民眾佔領新公園內的「臺灣廣播電臺（原臺北放送局）」，向全臺灣廣播原委，悲憤的控訴透過電波迅速擴散，成為事件從單一城市衝突演變為全島性反抗的關鍵轉捩點。',
+                keyFigures: ['向全台廣播的無名學生與青年', '陳儀 (台灣省行政長官)'],
+                quote: '我們並沒有帶武器，只是要請願要求處理昨天的兇手，沒想到上面就開槍了... 現在我們已經佔領廣播局，請全台灣的同胞站出來！',
+                quoteSource: '事發當天臺北放送局放送的證言',
+                fact: '📝 佔領廣播電台是群眾運動擴散的標準模式。當時廣播的訴求是要求「政治改革」與「懲治貪污」，而非宣佈獨立或共產革命。史料證明這是一場自發性的反抗威權運動。',
+                archive: '出處：國史館二二八檔案、口述歷史研究',
+                imageSrc: 'images/PIC_0210a5d7de02c6f46866.jpg',
+                imageAlt: '原臺北放送局 (臺灣廣播電臺)',
+                caption: '史料：原臺北放送局（臺灣廣播電臺）。民眾在此向全台播音，引爆全島響應。'
+            },
+            {
+                date: '1947年 3月1日-5日', title: '處理委員會與政治改革訴求',
+                desc: '為了平息事態，各地仕紳、民意代表與學生組成「二二八事件處理委員會」，代替失能的政府維持治安，並提出《三十二條處理大綱》要求高度自治。',
+                details: '處理委員會在台北市中山堂成立，成員涵蓋了當時台灣社會最頂尖的菁英階層。他們不僅組織學生維持市區治安，也向政府提出了要求縣市長民選、廢除長官公署等政治改革訴求。然而，陳儀表面上假意答應談判、安撫民心，私下卻急電蔣介石指稱台灣發生「叛亂」，要求立刻派兵鎮壓。',
+                keyFigures: ['王添灯 (省參議員)', '林連宗 (制憲國代)', '蔣渭川'],
+                quote: '本省人要求改革政治，並非叛亂... 不要用武力鎮壓，這是我們切望的。',
+                quoteSource: '處理委員會透過廣播台的公開呼籲',
+                fact: '📝 史料與會議紀錄證明，處理委員會的目標始終是「和平解決」與「體制內改革」，從未主張台灣獨立或推翻政府。陳儀的「叛亂」指控純屬羅織罪名。',
+                archive: '出處：大溪檔案（蔣介石總統文物）、陳儀請兵電報',
+                imageSrc: 'images/images (9).jpg',
+                imageAlt: '基隆要塞司令部前的廣場或市區群眾',
+                caption: '歷史事件發生期間的市區群眾聚集（圖為當時歷史影像一隅）'
+            },
+            {
+                date: '1947年 3月8日', title: '軍隊登陸基隆與無差別鎮壓',
+                desc: '收到陳儀請兵電報後，國民政府整編第二十一師等部隊抵達基隆與高雄。部隊一登陸即展開無差別掃射，市區陷入血腥的軍事鎮壓。',
+                details: '在基隆港，軍隊登陸前即向岸上擁擠的民眾開槍。在南部，高雄要塞司令彭孟緝更是下令軍隊無差別掃射高雄火車站地下道、市政府及高雄中學。軍隊以「掃蕩暴徒」為名，對平民、甚至正在街頭指揮交通的學生服務隊進行屠殺，並伴隨大規模的洗劫與搜刮。',
+                keyFigures: ['劉雨卿 (21師師長)', '彭孟緝 (高雄要塞司令)'],
+                quote: '軍隊一上岸就隨便開槍... 街上到處都是屍體，連淡水河裡也佈滿了浮屍，河水都被染紅了。',
+                quoteSource: '美國駐台副領事葛超智 (George H. Kerr) 報告',
+                fact: '📝 國內外檔案（含美方機密報告）皆明確記載了軍隊無差別攻擊平民的慘況。這是一場國家軍隊對本國未武裝人民的血腥鎮壓，並非正當的「平亂」。',
+                archive: '出處：國家發展委員會檔案管理局、美國國家檔案館',
+                imageSrc: 'images/228_Incident_k_(cropped).jpg',
+                imageAlt: '事件中受難的遺體',
+                caption: '軍事鎮壓展開後，街頭隨處可見無差別開槍下的受難者'
+            },
+            {
+                date: '1947年 3月中旬以後', title: '全島清鄉與濫捕知識菁英',
+                desc: '軍隊控制局勢後，政府宣佈戒嚴並展開「清鄉」。以逮捕「暴徒」為名，未經審判大肆暗殺與處決台籍知識份子與社會菁英。',
+                details: '警備總部實質上是依照事先草擬的「黑名單」，針對曾參與處理委員會、報社記者、律師、醫師與大學教授進行政治清算。許多菁英在半夜被特務帶走後即下落不明，連屍骨都無處尋覓。這場針對性的捕殺，造成台灣社會領導階層嚴重的斷層，也開啟了後續近四十年的白色恐怖時期。',
+                keyFigures: ['陳澄波 (畫家)', '潘木枝 (醫師)', '林茂生 (台大教授)', '阮朝日 (新生報總經理)'],
+                quote: '我死了，你們要堅強，不要忘記我是為了台灣人而死的。好好讀書，為台灣貢獻。',
+                quoteSource: '多位受難者臨終前留給家屬的遺言概念',
+                fact: '📝 清鄉階段的逮捕與處決幾乎皆無合法審判紀錄。這不僅是為了「解除武裝」，更是國家機器為了消滅台灣本土異議聲音的系統性剷除。',
+                archive: '出處：國防部保密局台灣站檔案、受難者家屬口述',
+                imageSrc: 'images/WI01-001.jpg',
+                imageAlt: '受難者遺書',
+                caption: '受難菁英的最後告別：在未經審判的清鄉中，無數菁英留下絕筆'
+            }
+        ];
+
+        let currentTimelineIndex = 0;
+
+        function renderTimelineMobile() {
+            const container = document.getElementById('timeline-mobile');
+            container.innerHTML = timelineData.map((item, index) => {
+                const tagsRaw = item.keyFigures && item.keyFigures.length > 0
+                    ? item.keyFigures.map(f => `<span class="px-2 py-1 bg-gray-200 text-gray-700 text-xs font-bold rounded-md">👤 ${f}</span>`).join('')
+                    : '';
+                const quoteRaw = item.quote ? `<blockquote class="mb-4 px-4 py-3 bg-red-50/50 border-l-4 border-red-800 italic text-gray-800 text-sm rounded-r">「${item.quote}」<footer class="text-xs text-gray-500 mt-2 font-bold">— ${item.quoteSource}</footer></blockquote>` : '';
+
+                return `
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm scroll-mt-24" id="m-card-${index}">
+                    <button onclick="toggleTimelineMobile(${index})" class="w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <div>
+                            <span class="block text-xs font-bold uppercase tracking-wider mb-1 text-red-800">${item.date}</span>
+                            <span class="block font-serif font-bold text-gray-900 pr-4">${item.title}</span>
+                        </div>
+                        <span id="m-icon-${index}" class="text-2xl text-gray-400 transition-transform duration-300 ${index === 0 ? 'rotate-180' : ''} shrink-0">↓</span>
+                    </button>
+                    <div id="m-content-${index}" class="${index === 0 ? 'block' : 'hidden'} border-t border-gray-100 bg-white">
+                        <div class="w-full h-56 image-placeholder relative bg-gray-200">
+                            <img src="${item.imageSrc}" alt="${item.imageAlt}" class="w-full h-full object-cover absolute top-0 left-0">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-white text-xs font-medium z-10 drop-shadow-md pr-4">${item.caption}</span>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-gray-900 text-base leading-relaxed mb-4 font-medium border-l-4 border-gray-300 pl-3">${item.desc}</p>
+                            <div class="text-gray-600 text-sm leading-relaxed mb-4 space-y-3">
+                                <p class="text-justify">${item.details}</p>
+                                <div class="flex flex-wrap gap-2 mt-2">${tagsRaw}</div>
+                            </div>
+                            ${quoteRaw}
+                            <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-inner mt-4">
+                                <span class="text-xs font-bold text-red-800 block mb-2 tracking-wider flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    史實查證與破除迷思
+                                </span>
+                                <p class="text-sm text-gray-800 font-medium leading-relaxed mb-2">${item.fact}</p>
+                                <span class="inline-block text-[11px] text-gray-600 bg-gray-200 px-2.5 py-1 rounded font-medium border border-gray-300">${item.archive}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function toggleTimelineMobile(index) {
+            const content = document.getElementById(`m-content-${index}`);
+            const icon = document.getElementById(`m-icon-${index}`);
+            const card = document.getElementById(`m-card-${index}`);
+
+            // 摺疊其他選項
+            document.querySelectorAll('[id^="m-content-"]').forEach((el, i) => {
+                if (i !== index) {
+                    el.classList.add('hidden');
+                    document.getElementById(`m-icon-${i}`).classList.remove('rotate-180');
+                }
+            });
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+                // 平滑捲動至該卡片，加上延遲以確保 DOM 更新後正確對齊
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        function renderTimelineControls() {
+            const container = document.getElementById('timeline-controls');
+            container.innerHTML = timelineData.map((item, index) => `
+                <button onclick="updateTimelineDisplay(${index})" 
+                        class="w-full text-left p-4 rounded-lg transition-all duration-200 border hover:bg-white hover:shadow-md flex items-center group ${index === 0 ? 'bg-white shadow-md border-gray-200 text-gray-900' : 'bg-transparent border-transparent text-gray-500'}"
+                        id="t-btn-${index}">
+                    <div class="w-3 h-3 rounded-full bg-red-800 mr-4 group-hover:scale-125 transition-transform ${index === currentTimelineIndex ? 'scale-125 opacity-100' : 'opacity-50'}"></div>
+                    <div>
+                        <span class="block text-xs font-bold uppercase tracking-wider mb-1">${item.date}</span>
+                        <span class="block font-serif font-medium md:text-lg">${item.title}</span>
+                    </div>
+                </button>
+            `).join('');
+        }
+
+        function updateTimelineDisplay(index) {
+            currentTimelineIndex = index;
+            const data = timelineData[index];
+
+            timelineData.forEach((_, i) => {
+                const btn = document.getElementById(`t-btn-${i}`);
+                if (i === index) {
+                    btn.classList.add('bg-white', 'shadow-md', 'border-gray-200', 'text-gray-900');
+                    btn.classList.remove('bg-transparent', 'border-transparent', 'text-gray-500');
+                    btn.querySelector('div').classList.add('scale-125', 'opacity-100');
+                    btn.querySelector('div').classList.remove('opacity-50');
+                } else {
+                    btn.classList.remove('bg-white', 'shadow-md', 'border-gray-200', 'text-gray-900');
+                    btn.classList.add('bg-transparent', 'border-transparent', 'text-gray-500');
+                    btn.querySelector('div').classList.remove('scale-125', 'opacity-100');
+                    btn.querySelector('div').classList.add('opacity-50');
+                }
+            });
+
+            const display = document.getElementById('timeline-display');
+            display.classList.remove('fade-in');
+            void display.offsetWidth;
+            display.classList.add('fade-in');
+
+            document.getElementById('t-date').textContent = data.date;
+            document.getElementById('t-title').textContent = data.title;
+            document.getElementById('t-desc').textContent = data.desc;
+
+            // New Detail & Metadata handling
+            document.getElementById('t-details').textContent = data.details;
+
+            // Render Tags (Key Figures)
+            const tagsContainer = document.getElementById('t-tags-container');
+            if (data.keyFigures && data.keyFigures.length > 0) {
+                tagsContainer.innerHTML = data.keyFigures.map(figure => `<span class="px-2 py-1 bg-gray-200 text-gray-700 text-xs font-bold rounded-md">👤 ${figure}</span>`).join('');
+            } else {
+                tagsContainer.innerHTML = '';
+            }
+
+            // Render Quote
+            const quoteContainer = document.getElementById('t-quote-container');
+            if (data.quote) {
+                quoteContainer.classList.remove('hidden');
+                document.getElementById('t-quote').textContent = data.quote;
+                document.getElementById('t-quote-source').textContent = data.quoteSource;
+            } else {
+                quoteContainer.classList.add('hidden');
+            }
+
+            document.getElementById('t-fact').innerHTML = data.fact; // using innerHTML to allow emojis if needed
+            document.getElementById('t-archive').textContent = data.archive;
+
+            // Image handling
+            document.getElementById('t-image').alt = data.imageAlt;
+            document.getElementById('t-image').src = data.imageSrc;
+            document.getElementById('t-caption').textContent = data.caption;
+            document.getElementById('t-img-hint').classList.add('hidden');
+
+        }
+
+        // --- Fact Check Data ---
+        const factChecks = [
+            { claim: "「228只是民進黨為了選舉製造仇恨的工具，根本沒那麼嚴重。」", reality: "228平反運動始於1987年，由民間發起。首位代表政府道歉的是國民黨籍總統李登輝（1995年）。補償條例與基金會的成立皆跨越黨派。這是國家級的人權議題，非單一政黨專利。" },
+            { claim: "「死那麼多人都是假的，其實只有幾百人意外死亡。」", reality: "根據行政院《二二八事件研究報告》，估計死亡人數約在18,000至28,000人之間。雖然確切數字因當時戶籍混亂難以精確，但「僅數百人」的說法嚴重違背史實與檔案紀錄。" },
+            { claim: "「這些人都是共產黨，政府是為了剿匪。」", reality: "雖然當時有少數左翼份子，但絕大多數受難者是期待政治改革的仕紳、學生與一般市民。將所有反抗者貼上「共產黨」標籤，是威權政府為合理化鎮壓與清鄉的藉口。" },
+            { claim: "「外省人也被殺，為什麼都不提？」", reality: "史實並未否認初期衝突中有本省人對外省人的暴力行為，這在官方報告中皆有明確記載。但後續國家機器的軍事鎮壓與長期白色恐怖，其無差別攻擊的規模、組織性與延續性，與初期的警民衝突完全不成比例。" }
+        ];
+
+        function renderFactCards() {
+            const container = document.getElementById('fact-grid');
+            container.innerHTML = factChecks.map((item, index) => `
+                <div class="interactive-card bg-white rounded-xl overflow-hidden border border-gray-200 cursor-pointer group" onclick="toggleFact(${index})">
+                    <div class="p-6 bg-red-50 border-b border-red-100 flex justify-between items-center">
+                        <h4 class="text-lg font-bold text-gray-800 leading-snug pr-4">${item.claim}</h4>
+                        <span class="text-red-800 text-xl font-black group-hover:scale-125 transition-transform">+</span>
+                    </div>
+                    <div id="fact-content-${index}" class="hidden p-6 bg-white border-t-4 border-gray-800">
+                        <span class="text-xs font-bold text-white bg-gray-800 px-2 py-1 rounded mb-3 inline-block">史實查證</span>
+                        <p class="text-gray-700 leading-relaxed">${item.reality}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFact(index) {
+            const content = document.getElementById(`fact-content-${index}`);
+            document.querySelectorAll('[id^="fact-content-"]').forEach((el, i) => {
+                if (i !== index) el.classList.add('hidden');
+            });
+            content.classList.toggle('hidden');
+            if (!content.classList.contains('hidden')) content.classList.add('fade-in');
+        }
+
+        // --- Report Accordion Logic ---
+        function toggleReport(index) {
+            const content = document.getElementById(`report-content-${index}`);
+            const icon = document.getElementById(`report-icon-${index}`);
+            const isOpen = !content.classList.contains('hidden');
+
+            if (isOpen) {
+                content.classList.add('hidden');
+                icon.textContent = '+';
+                icon.classList.remove('rotate-45');
+            } else {
+                content.classList.remove('hidden');
+                content.classList.add('fade-in');
+                icon.textContent = '×';
+                icon.classList.add('rotate-45');
+            }
+        }
+
+        function expandAllReports() {
+            for (let i = 0; i <= 6; i++) {
+                const content = document.getElementById(`report-content-${i}`);
+                const icon = document.getElementById(`report-icon-${i}`);
+                if (content) {
+                    content.classList.remove('hidden');
+                    icon.textContent = '×';
+                    icon.classList.add('rotate-45');
+                }
+            }
+        }
+
+        function collapseAllReports() {
+            for (let i = 0; i <= 6; i++) {
+                const content = document.getElementById(`report-content-${i}`);
+                const icon = document.getElementById(`report-icon-${i}`);
+                if (content) {
+                    content.classList.add('hidden');
+                    icon.textContent = '+';
+                    icon.classList.remove('rotate-45');
+                }
+            }
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // --- Init ---
+        window.onload = () => {
+            initHeroCarousel();
+            startRandomScenario(); // 初始化隨機載入情境
+            renderTimelineControls();
+            updateTimelineDisplay(0);
+            renderTimelineMobile();
+            renderFactCards();
+
+            // Charts
+            if (typeof Chart !== 'undefined') {
+                const ctxProf = document.getElementById('professionChart').getContext('2d');
+                new Chart(ctxProf, {
+                    type: 'bar',
+                    data: {
+                        labels: ['學生', '公務員', '民眾(無業/家管)', '商界', '工界', '自由業(醫/律)', '農漁'],
+                        datasets: [{
+                            label: '佔比 (%)',
+                            data: [20, 15, 25, 12, 10, 10, 8],
+                            backgroundColor: [
+                                '#a63e3e', // alert-red
+                                '#d4af37', // highlight-gold
+                                '#595959', // ink-light
+                                '#8a5a44', // warm brown
+                                '#2c2c2c', // ink-black
+                                '#722f37', // wine red
+                                '#a8a8a8'  // muted gray
+                            ],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '受難比例 (%)',
+                                    font: { family: "'Noto Sans TC', sans-serif", weight: 'bold' }
+                                },
+                                ticks: {
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                const ctxType = document.getElementById('victimTypeChart').getContext('2d');
+                new Chart(ctxType, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['死亡', '失蹤', '羈押/判刑', '受傷/其他'],
+                        datasets: [{
+                            data: [45, 25, 20, 10],
+                            backgroundColor: [
+                                '#2c2c2c', // ink-black (死亡)
+                                '#595959', // ink-light (失蹤)
+                                '#a63e3e', // alert-red (羈押/判刑)
+                                '#d4af37'  // highlight-gold (受傷/其他)
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fdfbf7' // paper-bg stroke
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: {
+                            legend: { position: 'right' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return ' ' + context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+
+</html>
