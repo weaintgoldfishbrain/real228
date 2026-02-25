@@ -187,6 +187,7 @@
         </div>
     </nav>
 
+<<<<<<< HEAD
     <!-- Hero Section with Rolling Image Carousel -->
     <header id="hero" class="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -198,6 +199,150 @@
                 <div class="w-16 h-1 bg-red-800 mb-6"></div>
                 <p class="text-lg text-gray-600 leading-relaxed">
                     近期網路上充斥著「228是選舉操弄」、「只是暴民滋事」的言論。本報告不講政治口水，僅彙整國家檔案管理局資料、行政院調查報告與真實歷史影像，用最沉痛的史實，直球對決網路謠言。
+=======
+    <!-- ==========================================
+         [舊版] 網站主體區域 (初始化被覆蓋並設為透明度0)
+         ========================================== -->
+    <div id="main-content" style="opacity: 0; pointer-events: none; transition: opacity 1.5s ease; position: relative;">
+        <!-- Navigation -->
+        <nav class="sticky top-0 z-50 bg-[#f5f2e9]/90 backdrop-blur-md border-b border-gray-400 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <!-- 純 CSS Logo -->
+                    <a href="#" onclick="scrollToSection('hero'); return false;" class="flex items-center gap-3 group">
+                        <div
+                            class="w-8 h-8 bg-gray-900 text-white flex items-center justify-center font-black rounded-sm shadow-sm text-sm tracking-tighter group-hover:bg-red-800 transition-colors relative overflow-hidden">
+                            <span class="relative z-10">228</span>
+                            <div
+                                class="absolute inset-0 bg-red-600 opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity mix-blend-multiply">
+                            </div>
+                        </div>
+                        <span
+                            class="font-bold text-lg md:text-xl tracking-widest text-gray-900 serif transition-colors group-hover:text-red-900">
+                            史實查證報告
+                        </span>
+                    </a>
+
+                    <div class="flex items-center gap-4 md:gap-6">
+                        <div class="hidden md:flex space-x-8" aria-label="主選單">
+                            <button onclick="scrollToSection('hero')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">首頁</button>
+                            <button onclick="scrollToSection('empathy')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">歷史見證</button>
+                            <button onclick="scrollToSection('timeline')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">時間軸與史料</button>
+                            <button onclick="scrollToSection('full-report')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">報告全文</button>
+                            <button onclick="scrollToSection('factcheck')"
+                                class="text-red-700 font-bold hover:text-red-900 transition-colors text-sm">謠言查核</button>
+                        </div>
+
+
+                        <!-- 語系切換器 Language Switcher (桌機版) -->
+                        <a href="index_en.html"
+                            class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-400 text-xs font-bold font-sans text-gray-600 hover:bg-gray-900 hover:text-white transition-colors"
+                            title="Switch to English">
+                            EN
+                        </a>
+
+                        <button class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none transition-colors"
+                            onclick="toggleMobileMenu()" aria-label="展開行動版選單">
+                            <span class="text-2xl" aria-hidden="true">≡</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-[#faf8f5] border-b border-gray-400 p-4 space-y-2"
+                role="menu">
+                <button onclick="scrollToSection('hero'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">首頁</button>
+                <button onclick="scrollToSection('empathy'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">歷史見證</button>
+                <button onclick="scrollToSection('timeline'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">時間軸與史料</button>
+                <button onclick="scrollToSection('full-report'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">報告全文</button>
+                <button onclick="scrollToSection('factcheck'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-red-700 font-bold">謠言查核</button>
+
+                <!-- 語系切換器 Language Switcher (手機版) -->
+                <a href="index_en.html"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-600 font-bold border-t border-gray-200 mt-2 pt-3">
+                    🌐 English
+                </a>
+
+            </div>
+        </nav>
+
+        <!-- Hero Section with Rolling Image Carousel -->
+        <header id="hero" class="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 serif leading-tight">
+                        撥開歷史迷霧<br>
+                        <span class="text-red-800">還原二二八真相</span>
+                    </h1>
+                    <div class="w-16 h-1 bg-red-800 mb-6"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        近期網路上充斥著「228是選舉操弄」、「只是暴民滋事」的言論。本報告不講政治口水，僅彙整國家檔案管理局資料、行政院調查報告與真實歷史影像，用最沉痛的史實，直球對決網路謠言。
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <button onclick="scrollToSection('factcheck')"
+                            class="px-6 py-3 bg-red-800 text-white font-bold rounded shadow-lg hover:bg-red-900 transition">
+                            闢謠查核
+                        </button>
+                        <button onclick="scrollToSection('empathy')"
+                            class="px-6 py-3 bg-gray-900 text-white font-bold rounded shadow-lg hover:bg-black transition">
+                            歷史見證
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero 圖片輪播版位 -->
+                <div id="hero-carousel"
+                    class="relative w-full aspect-[4/3] rounded-sm overflow-hidden shadow-2xl bg-[#d1ccc0] group">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide absolute inset-0 opacity-100 z-10">
+                        <img src="images/228_Incident_h.jpg" alt="二二八事件抗議群眾" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                            <span class="font-bold">歷史現場：</span>專賣局前抗議群眾聚集
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide absolute inset-0 opacity-0 z-0">
+                        <img src="images/jpg_00_06_00_34_cca100031-hp-22_13_1-0001-w.jpg" alt="專賣局大樓"
+                            class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                            <span class="font-bold">史料：</span>臺北放送局演奏所（今臺北二二八紀念館）
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide absolute inset-0 opacity-0 z-0">
+                        <img src="images/二二八後，國防部長白崇禧（前右2）來台宣慰_(cropped).jpg" alt="白崇禧來台"
+                            class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
+                            <span class="font-bold">史料：</span>事件後國防部長白崇禧來台宣慰
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Timeline Section with Images -->
+        <section id="timeline" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 serif inline-block border-b-4 border-red-800 pb-2">歷史檔案與時間軸
+                </h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                    還原事實是導正視聽的第一步。透過真實的時間線與史料照，理解事件如何從一場查緝血案演變成全台的軍事鎮壓。
+>>>>>>> 0f543b6 (style: remove donate buttons from header menus)
                 </p>
                 <div class="flex gap-4 pt-4">
                     <button onclick="scrollToSection('factcheck')"
