@@ -502,7 +502,7 @@ function renderFactCards() {
                 <div class="interactive-card bg-white rounded-xl overflow-hidden border border-gray-200 cursor-pointer group" onclick="toggleFact(${index})">
                     <div class="p-6 bg-red-50 border-b border-red-100 flex justify-between items-center">
                         <h4 class="text-lg font-bold text-gray-800 leading-snug pr-4">${item.claim}</h4>
-                        <span class="text-red-800 text-xl font-black group-hover:scale-125 transition-transform">+</span>
+                        <span id="fact-icon-${index}" class="text-red-800 text-xl font-black group-hover:scale-125 transition-transform duration-300 inline-block">+</span>
                     </div>
                     <div id="fact-content-${index}" class="hidden p-6 bg-white border-t-4 border-gray-800">
                         <span class="text-xs font-bold text-white bg-gray-800 px-2 py-1 rounded mb-3 inline-block">史實查證</span>
@@ -514,11 +514,28 @@ function renderFactCards() {
 
 function toggleFact(index) {
     const content = document.getElementById(`fact-content-${index}`);
+    const icon = document.getElementById(`fact-icon-${index}`);
+
     document.querySelectorAll('[id^="fact-content-"]').forEach((el, i) => {
-        if (i !== index) el.classList.add('hidden');
+        if (i !== index) {
+            el.classList.add('hidden');
+            const otherIcon = document.getElementById(`fact-icon-${i}`);
+            if (otherIcon) {
+                otherIcon.textContent = '+';
+                otherIcon.classList.remove('rotate-180');
+            }
+        }
     });
+
     content.classList.toggle('hidden');
-    if (!content.classList.contains('hidden')) content.classList.add('fade-in');
+    if (!content.classList.contains('hidden')) {
+        content.classList.add('fade-in');
+        icon.textContent = '−';
+        icon.classList.add('rotate-180');
+    } else {
+        icon.textContent = '+';
+        icon.classList.remove('rotate-180');
+    }
 }
 
 // --- Report Accordion Logic ---
@@ -530,12 +547,14 @@ function toggleReport(index) {
     if (isOpen) {
         content.classList.add('hidden');
         icon.textContent = '+';
+        icon.classList.remove('rotate-180');
         icon.classList.remove('rotate-45');
     } else {
         content.classList.remove('hidden');
         content.classList.add('fade-in');
-        icon.textContent = '×';
-        icon.classList.add('rotate-45');
+        icon.textContent = '−';
+        icon.classList.add('rotate-180');
+        icon.classList.remove('rotate-45');
     }
 }
 
@@ -545,8 +564,10 @@ function expandAllReports() {
         const icon = document.getElementById(`report-icon-${i}`);
         if (content) {
             content.classList.remove('hidden');
-            icon.textContent = '×';
-            icon.classList.add('rotate-45');
+            content.classList.add('fade-in');
+            icon.textContent = '−';
+            icon.classList.add('rotate-180');
+            icon.classList.remove('rotate-45');
         }
     }
 }
@@ -558,6 +579,7 @@ function collapseAllReports() {
         if (content) {
             content.classList.add('hidden');
             icon.textContent = '+';
+            icon.classList.remove('rotate-180');
             icon.classList.remove('rotate-45');
         }
     }
