@@ -55,7 +55,7 @@
                 <div class="year-marker" data-text="1947">1947</div>
 
                 <!-- 採用 Glitch 特效的主標題 -->
-                <h1 class="glitch-title" data-text="二二八">二二八</h1>
+                <h1 class="glitch-title whitespace-nowrap" data-text="二二八">二二八</h1>
 
                 <p class="subtitle fade-in">被抹滅的真相、消逝的聲音與凝結的血淚</p>
 
@@ -107,10 +107,10 @@
                                 class="text-red-700 font-bold hover:text-red-900 transition-colors text-sm">謠言查核</button>
                         </div>
 
-                        <!-- 贊助 / Donate 按鈕 -->
+                        <!-- 贊助 / Donate 按鈕 (僅桌機版顯示) -->
                         <a href="https://buymeacoffee.com/andesign" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#faf8f5] border border-gray-400 rounded-sm text-xs font-bold text-gray-800 hover:bg-[#FFDD00] hover:text-gray-900 hover:border-[#FFDD00] transition-all shadow-sm">
-                            <span>☕</span> <span class="hidden sm:inline">請喝咖啡</span><span class="sm:hidden">贊助</span>
+                            class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 bg-[#faf8f5] border border-gray-400 rounded-sm text-xs font-bold text-gray-800 hover:bg-[#FFDD00] hover:text-gray-900 hover:border-[#FFDD00] transition-all shadow-sm">
+                            <span>☕</span> <span>請喝咖啡</span>
                         </a>
 
                         <button class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none transition-colors"
@@ -133,6 +133,14 @@
                     class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">報告全文</button>
                 <button onclick="scrollToSection('factcheck'); toggleMobileMenu()"
                     class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-red-700 font-bold">謠言查核</button>
+
+                <!-- 手機版贊助按鈕 -->
+                <div class="px-4 py-3 border-t border-gray-300 mt-2">
+                    <a href="https://buymeacoffee.com/andesign" target="_blank" rel="noopener noreferrer"
+                        class="flex justify-center flex-1 w-full items-center gap-2 px-4 py-2.5 bg-white border border-gray-400 rounded-sm text-sm font-bold text-gray-900 hover:bg-[#FFDD00] hover:border-[#FFDD00] transition-all shadow-sm">
+                        <span>☕</span> <span>請喝咖啡 (贊助)</span>
+                    </a>
+                </div>
             </div>
         </nav>
 
@@ -349,332 +357,343 @@
 
                 <!-- Report Accordion Container -->
                 <div class="space-y-4" id="report-accordion">
-                <!-- Chapter 0: Introduction -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(0)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">導論：數位平台上的歷史記憶重構與資訊操弄挑戰</h3>
-                        <span id="report-icon-0"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-0" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">
-                                在當代高速發展的數位資訊環境中，歷史事件早已超越了單純的學術考證範疇，轉而成為形塑政治合法性、動員群眾情緒以及進行跨國界認知作戰的核心場域。近期，各大社群平台與影音分享網站上頻繁出現特定網路帳號之協同性攻擊行為，這些帳號大量散布經過特定剪輯與論述包裝的短影音，其核心論述直指當前的執政黨（民主進步黨）刻意「操弄二二八事件」，並指控官方機構透過扭曲史實、放大特定族群之受害程度、掩蓋外省籍人士的死傷數據，藉此獲取政治利益並撕裂台灣社會。此類現象不僅凸顯了二二八事件在台灣社會中仍具備高度的敏感性與政治動員能量，更反映出歷史記憶在缺乏嚴謹脈絡的數位傳播下，極易被碎片化、武器化。
-                            </p>
-                            <p class="indent-8">
-                                要客觀檢視「操弄歷史」的嚴重指控，並拆解隱藏於短影音背後的政治修辭，必須回歸最嚴謹的史料考證、法理學分析以及人口統計學實證。二二八事件作為二十世紀台灣最為重大的歷史悲劇，其牽涉層面廣泛，涵蓋戰後初期的國家體制暴力、族群利益衝突、制度性統治失能，以及後續長達數十年的威權禁錮與白色恐怖。本報告奠基於官方解密檔案、中央研究院等學術機構之研究、人口學與流行病學統計，以及財團法人二二八事件紀念基金會發布之歷次權威報告，針對事件的政治責任歸屬、本省與外省族群之真實傷亡數據論辯、轉型正義的法律界定標準與個案爭議、中國共產黨在事件中的真實歷史角色，以及當代網路錯假訊息的具體運作機制進行極度深度的剖析。透過爬梳多方史料與實證數據，本報告旨在釐清歷史真相與政治操弄之間的明確界線，提供具備深度、廣度與法理基礎之專業洞見，以回應當代社會對於歷史真相與資訊識讀的迫切需求。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chapter 1 -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(1)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">第一章：二二八事件的歷史脈絡、制度性失能與國家責任歸屬</h3>
-                        <span id="report-icon-1"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-1" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">
-                                探討任何關於二二八事件的歷史論述，首要任務是確立事件爆發的結構性背景與國家機器的責任歸屬。過去在長達數十年的戒嚴與威權統治時期，官方論述掌握了絕對的詮釋權，多將事件單向定調為「共黨分子煽動」、「日本奴化教育遺毒」或單純的「暴民作亂」；然而，隨著台灣民主化進程的推進與大量國家機密檔案的解密，學界與官方的歷史共識已產生了根本性的移轉，將焦點轉向國家體制的失能與公權力的濫用。
-                            </p>
-
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                行政長官公署體制的權力壟斷與社會矛盾激化</h4>
-                            <p class="indent-8 mb-4">
-                                1947年爆發的二二八事件，其表面上的導火線雖為2月27日台北市大稻埕發生的查緝私菸流血衝突，但促發全島性抗爭的深層結構性原因，實則源於戰後初期台灣特殊的政治與經濟統治架構。依據二二八事件紀念基金會委託多位歷史學者（包含黃秀政、薛化元、陳儀深、張炎憲、李筱峰、陳翠蓮等）共同撰寫，並於2006年出版之《二二八事件責任歸屬研究報告》，當時國民政府在台灣設立的「行政長官公署」制度，是一個高度集權的特殊體制。該體制將行政、立法、司法、人事與軍事大權集於行政長官陳儀一身，形成了一種在民主憲政體制外運作的專制統治架構。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                在經濟資源分配層面，政府實施了極為嚴格的物資管制與專賣制度，將菸、酒、火柴等民生必需品納入政府獨佔，加上戰後初期百廢待舉、物資短缺，以及政府將大量台灣米糧運往中國大陸支援國共內戰，導致台灣本地爆發嚴重的通貨膨脹與大規模失業，民生凋敝至極。在政治權力分配層面，外省籍官員幾乎壟斷了所有政府高層與公營事業的決策職位，且官場貪污腐化現象頻傳；與此同時，來台駐守的軍隊軍紀敗壞，屢屢發生欺壓百姓的事件。這種由上而下、全面性的制度性剝奪與文化隔閡，導致台灣社會從知識份子、地方仕紳到普羅大眾，對陳儀政府累積了極度的不滿與絕望。因此，當查緝私菸的偶發暴力事件發生後，長期受到壓抑的民怨瞬間爆發。民間菁英在事件初期迅速組成「二二八事件處理委員會」，其核心訴求並非官方當時宣稱的武裝叛亂或尋求台灣獨立，而是強烈「要求政治改革」、「反對政治壟斷」與「對抗腐敗貪污」。
-                            </p>
-
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                南京決策高層的誤判與國家機器的毀滅性鎮壓</h4>
-                            <p class="indent-8 mb-4">
-                                在探討責任歸屬的嚴肅課題上，歷史研究報告明確指出，當時的國民政府主席蔣中正是事件中必須承擔最大與最終責任的最高決策者。儘管在事件爆發初期，部分台灣民間菁英團體以及某些情報管道曾試圖向南京中央傳達台灣社會的真實訴求與官逼民反的真相，蔣中正最終仍選擇採信台灣省行政長官陳儀、國民黨台灣省黨部主委李翼中等地方軍政首長的偏頗匯報。這些報告刻意將民間的改革訴求扭曲為「奸匪煽動」、「暴民叛亂」以及「日本奴化教育餘毒」的展現。基於這些資訊，蔣中正做出了派遣大軍赴台進行軍事鎮壓的致命決定。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                軍隊於1947年3月8日陸續自基隆與高雄登陸後，隨即在全台各地展開被稱為「綏靖」與「清鄉」的血腥行動。在此過程中，台灣省行政長官兼警備總司令陳儀負有不可推卸的軍政首長責任，而其下屬如警備總部參謀長柯遠芬、高雄要塞司令彭孟緝、基隆要塞司令史宏熹、整編第二十一師師長劉雨卿等人，在執行鎮壓任務時，採取了極度不成比例的武力。軍隊不僅在市區進行無差別的機槍掃射，更配合情治單位展開大規模的濫捕、未經合法審判的密裁與私人處決。
-                            </p>
-                            <p class="indent-8">
-                                這種國家機器的殘酷運作，不僅造成無數無辜平民的傷亡，更針對性地消滅了整整一代的台灣地方菁英。據統計，當時高達八成的各縣市參議員、醫師、律師、作家與媒體人在此次鎮壓中遇害或失蹤，對台灣的司法界、新聞界及校園（教育界）造成了無法彌補的毀滅性衝擊。更甚者，蔣中正在事件後非但沒有懲處濫殺無辜的軍政首長，反而將陳儀升任浙江省主席、將彭孟緝擢升為台灣省警備總司令。此種未經正當法律程序、由國家最高權力核心發動並背書的群體性暴力，確立了二二八事件在現代史學、政治學與法學上作為「國家不法侵害」與「威權國家恐怖主義」的核心定調。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chapter 2 -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(2)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">第二章：傷亡人數之歷史爭辯、人口學推論與官方實證數據</h3>
-                        <span id="report-icon-2"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-2" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">
-                                二二八事件中「究竟有多少人死亡或失蹤」，一直是半個多世紀以來歷史論述中最具爭議、也最容易被各方政治勢力與當代網路認知作戰挪用的議題。從數千人到十數萬人不等，不同政治立場的論述者往往選擇性地採用特定數據來支持其政治議程或抹黑對手。要徹底釐清傷亡數據的真相，必須嚴格區分「歷史文獻估計」、「人口統計學推估」以及「轉型正義補償實證審查」三個截然不同的測量維度與科學方法論。
-                            </p>
-
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                歷史文獻與官方檔案中的數據分歧</h4>
-                            <p class="mb-4">
-                                在事件發生當時及隨後的幾年間，各方人士基於不同的情報來源與政治目的，提出了差異極大的傷亡數據。為了清晰呈現這些歷史估算的複雜性，以下透過結構化資料展示各方宣稱的數字：</p>
-
-                            <!-- Table Section -->
-                            <div class="overflow-x-auto mb-6 bg-[#ebe8e1] rounded border border-gray-400 p-2">
-                                <table class="w-full table-auto text-sm text-left align-middle">
-                                    <thead class="bg-gray-200 text-gray-800">
-                                        <tr>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-400">資料來源 / 提報者身份</th>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-400">提報年份</th>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-400">外省籍宣稱數據</th>
-                                            <th class="px-4 py-3 font-bold border-b border-gray-400">本省籍及整體宣稱數據</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200">
-                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
-                                            <td class="px-4 py-3 font-medium">時任國防部長 白崇禧</td>
-                                            <td class="px-4 py-3">1947年</td>
-                                            <td class="px-4 py-3 text-gray-500">-</td>
-                                            <td class="px-4 py-3">軍警與台籍死傷共 1,860人</td>
-                                        </tr>
-                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
-                                            <td class="px-4 py-3 font-medium">台灣警備總司令部</td>
-                                            <td class="px-4 py-3">1947年</td>
-                                            <td class="px-4 py-3">死傷失蹤共 1,958人</td>
-                                            <td class="px-4 py-3">死傷失蹤共 643人 (另有死3,200人紀錄)</td>
-                                        </tr>
-                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
-                                            <td class="px-4 py-3 font-medium">上海《大公報》/ 警政單位</td>
-                                            <td class="px-4 py-3">1947年</td>
-                                            <td class="px-4 py-3">死432, 傷2126, 蹤85 (共2,643人)</td>
-                                            <td class="px-4 py-3 text-gray-500">未具體對比</td>
-                                        </tr>
-                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
-                                            <td class="px-4 py-3 font-medium">保安處</td>
-                                            <td class="px-4 py-3">1947年</td>
-                                            <td class="px-4 py-3 text-gray-500">-</td>
-                                            <td class="px-4 py-3">死 6,300人</td>
-                                        </tr>
-                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
-                                            <td class="px-4 py-3 font-medium">蘇新 (台共人士)</td>
-                                            <td class="px-4 py-3">1949年</td>
-                                            <td class="px-4 py-3 text-gray-500">-</td>
-                                            <td class="px-4 py-3">死不下 10,000人</td>
-                                        </tr>
-                                        <tr class="hover:bg-[#faf8f5] text-gray-700">
-                                            <td class="px-4 py-3 font-medium">時任美國副領事 葛超智</td>
-                                            <td class="px-4 py-3">1947年</td>
-                                            <td class="px-4 py-3 text-gray-500">-</td>
-                                            <td class="px-4 py-3">死 20,000人</td>
-                                        </tr>
-                                        <tr class="hover:bg-green-50 text-gray-800 bg-green-50/50">
-                                            <td class="px-4 py-3 font-bold text-green-800">二二八紀念基金會 (實證)</td>
-                                            <td class="px-4 py-3 font-bold text-green-800">2006年後</td>
-                                            <td class="px-4 py-3 font-medium text-green-900">死/失蹤 89人, 傷 1,389人</td>
-                                            <td class="px-4 py-3 font-medium text-green-900">總受領賠償 10,280人</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    <!-- Chapter 0: Introduction -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(0)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">導論：數位平台上的歷史記憶重構與資訊操弄挑戰</h3>
+                            <span id="report-icon-0"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-0" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">
+                                    在當代高速發展的數位資訊環境中，歷史事件早已超越了單純的學術考證範疇，轉而成為形塑政治合法性、動員群眾情緒以及進行跨國界認知作戰的核心場域。近期，各大社群平台與影音分享網站上頻繁出現特定網路帳號之協同性攻擊行為，這些帳號大量散布經過特定剪輯與論述包裝的短影音，其核心論述直指當前的執政黨（民主進步黨）刻意「操弄二二八事件」，並指控官方機構透過扭曲史實、放大特定族群之受害程度、掩蓋外省籍人士的死傷數據，藉此獲取政治利益並撕裂台灣社會。此類現象不僅凸顯了二二八事件在台灣社會中仍具備高度的敏感性與政治動員能量，更反映出歷史記憶在缺乏嚴謹脈絡的數位傳播下，極易被碎片化、武器化。
+                                </p>
+                                <p class="indent-8">
+                                    要客觀檢視「操弄歷史」的嚴重指控，並拆解隱藏於短影音背後的政治修辭，必須回歸最嚴謹的史料考證、法理學分析以及人口統計學實證。二二八事件作為二十世紀台灣最為重大的歷史悲劇，其牽涉層面廣泛，涵蓋戰後初期的國家體制暴力、族群利益衝突、制度性統治失能，以及後續長達數十年的威權禁錮與白色恐怖。本報告奠基於官方解密檔案、中央研究院等學術機構之研究、人口學與流行病學統計，以及財團法人二二八事件紀念基金會發布之歷次權威報告，針對事件的政治責任歸屬、本省與外省族群之真實傷亡數據論辯、轉型正義的法律界定標準與個案爭議、中國共產黨在事件中的真實歷史角色，以及當代網路錯假訊息的具體運作機制進行極度深度的剖析。透過爬梳多方史料與實證數據，本報告旨在釐清歷史真相與政治操弄之間的明確界線，提供具備深度、廣度與法理基礎之專業洞見，以回應當代社會對於歷史真相與資訊識讀的迫切需求。
+                                </p>
                             </div>
-
-                            <p class="indent-8 mb-4">
-                                從上述表格可以清晰看出，當時的官方報告（如白崇禧的1,860人）與外國觀察家、民間人士的估算（如葛超智的兩萬人）存在著巨大的鴻溝。國史館學者侯坤宏曾分析，官方報告極度低估數字，是因為其刻意忽略了大量未經正式審判即遭軍隊秘密處決、或直接被拋入海中與掩埋的非正常途徑死亡人數；而民間或海外報告的高估，則可能混雜了當時社會極度恐慌下的道聽塗說與刻意渲染。此外，《二二八事件研究報告》總主筆賴澤涵亦指出，國民黨部隊於3月8日登陸後，單是子彈就消耗了14萬發，造成的死傷絕對遠超官方承認的數千人；但若說死亡人數高達數萬人，在當時的時空背景下，屍體的處理與掩埋在短短數週內亦難以完全不留痕跡，因此雙方極端的數字皆有討論空間。
-                            </p>
-
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                人口統計學推估的極限與流行病學的反證</h4>
-                            <p class="indent-8 mb-4">
-                                為了在缺乏完整屍骨與名單的情況下尋求科學解答，1992年由李登輝總統任內推動、行政院出版的《二二八事件研究報告》中，學者陳寬政採用了「人口學推計」模型進行估算。其研究方法的核心假設在於：由於1946年台灣並無精確的年度死亡統計，故比較1947年與1948年的總死亡人數。數據顯示，1947年（事件發生年）全台總死亡人數為114,192人，而1948年為95,340人；1947年比1948年多出了18,856名死者。陳寬政進一步將1947年15歲至64歲男性死亡人數高於1948年的異常增量，全數歸因於二二八事件的政治鎮壓，進而推估出事件死亡人數約落在18,352人至27,923人之間。另一位學者李喬亦利用線性迴歸模型，推估出18,446人至19,646人的相近數據。這些數字隨後被廣泛引用，甚至寫入部分高中教材中。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                然而，此種純粹依賴人口死亡總數波動的推演方法，在學術界與實務界受到了極為嚴厲的挑戰與批評。前立法委員蔡正元與部分公共衛生專家透過客觀的流行病學證據指出，1947年恰逢戰後台灣公共衛生體系崩潰、島內傳染病（如天花、霍亂、瘧疾等）大規模橫行的時期，年度整體死亡人數必然較其他相對平穩的年度偏高。將因傳染病或其他社會動盪導致的「超額死亡人數」全數算入二二八事件的鎮壓死難者，在科學方法論上犯了嚴重的「過度推論」與「歸因謬誤」。此外，中央研究院院士胡佛作為當年研究報告的審議委員之一，亦曾公開指出，從戰後初期的台灣整體人口波動來換算單一政治事件的死亡人數，存在巨大的盲點。當時台灣社會經歷了劇烈的人口流動，包括大量滯留中國大陸未歸的台灣兵、前往大陸參與國共內戰的老兵，以及事件發生後因恐懼而逃回大陸的外省人士。在戶籍系統紊亂且人口頻繁跨境移動的背景下，單憑戶籍死亡登記數量的差額來斷定數萬人死於屠殺，被認為是缺乏周詳考量的誇大之詞。
-                            </p>
-
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                外省族群傷亡統計：拆解「外省人死傷更多」的資訊戰迷思</h4>
-                            <p class="indent-8 mb-4">
-                                當代網路帳號在攻擊「民進黨操弄二二八」時，最常使用的一項核心論述便是宣稱「外省人死傷數字比本省人還多」，並指控政府與二二八基金會刻意掩蓋外省籍受難者的史實，試圖將二二八事件從「國家對人民的鎮壓」扭曲為單純的「本省人對外省人的族群屠殺」。此一論述的主要依據，多來自當時上海《大公報》駐地記者唐賢龍所著之《台灣事變內幕記》，其引述當時警察單位公布的數字稱：外省人死亡432人、失蹤85人、受傷2,126人，受難總數高達2,643人。攻擊者據此對比二二八基金會早期認定的本省受難人數（約二千餘人），得出外省人受害更深的結論。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                然而，這種刻意擷取單一早期官方文獻的論述，完全禁不起現代歷史檔案學的嚴格檢驗。二二八事件紀念基金會深知此議題的重要性，在其後續擴充出版的《二二八事件真相與轉型正義研究報告》中，特別委託學者新增了〈試論二二八事件中的外省人傷亡〉與〈官方紀錄中二二八事件死難人數探析〉等專文，針對外省人傷亡數據進行了極度細緻的檔案比對與考證。經過嚴謹的實證研究發現，當時政府高層與軍政系統為了向南京中央證明派遣大軍鎮壓的「正當性」與「急迫性」，刻意在公文中使用了極度模糊的「死傷」一詞，將大量的「輕微擦傷」、「財物損失」與「死亡」混為一談，藉此誇大外省人的實際死亡規模。更有甚者，部分官方報告甚至將死於軍隊無差別掃射的本省人數據，或是本省籍公務員的死傷，移花接木並計入外省公務員的死傷數中。
-                            </p>
-                            <p class="indent-8 p-4 bg-red-50/50 border-l-4 border-red-800 rounded">
-                                根據基金會窮盡現有檔案考證後的最終結論：在二二八事件中，外省人的確在初期因群眾失控而遭到波及，但其真實的死亡與失蹤合計總數為
-                                89人；其中因族群衝突被民間群眾毆打致死的外省公務員有 38人，一般外省民眾有 8人。其餘的外省受難者多為受傷（共1,389人）。</p>
-                            <p class="indent-8 mt-4">
-                                這一基於官方檔案比對的鐵證，直接且徹底地反駁了「外省人死亡人數大於本省人」的網路虛假論述。外省族群在事件初期的確面臨了部分台灣民間群眾的暴力相向，這反映了當時社會因語言不通、文化摩擦與對貪腐政權憤怒所導致的群眾失控；然而，將這種長達數天的「群眾盲目暴力（Horizontal
-                                Violence）」，與隨後長達數月的「國家機器體制性軍事鎮壓（Vertical State
-                                Violence）」（使用達姆彈、重機槍掃射、未經審判處決數千菁英與平民）等量齊觀，甚至在數字上進行造假對比，在歷史學、法理學與政治道德上，皆犯了最嚴重的範疇錯誤與邏輯滑坡。
-                            </p>
                         </div>
                     </div>
-                </div>
 
-                <!-- Chapter 3 -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(3)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">第三章：轉型正義的法理邊界與個案爭議之深度檢視</h3>
-                        <span id="report-icon-3"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-3" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">
-                                在當前的數位認知作戰中，除了宏觀數據的爭辯外，攻擊者亦經常透過放大檢視特定歷史個案，藉此質疑《二二八事件處理及賠償條例》的發放標準存在政治偏見與族群歧視。其中，專欄作家張若彤所提出的「劉青山案」與「何鑾旗案」之對比，便是近期網路上被廣泛引用，用以指控官方「淡化歷史」、「選擇性給予正義」的典型案例。要釐清此類指控，必須深入探討轉型正義的法理基礎與法律要件。
-                            </p>
+                    <!-- Chapter 1 -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(1)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">第一章：二二八事件的歷史脈絡、制度性失能與國家責任歸屬</h3>
+                            <span id="report-icon-1"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-1" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">
+                                    探討任何關於二二八事件的歷史論述，首要任務是確立事件爆發的結構性背景與國家機器的責任歸屬。過去在長達數十年的戒嚴與威權統治時期，官方論述掌握了絕對的詮釋權，多將事件單向定調為「共黨分子煽動」、「日本奴化教育遺毒」或單純的「暴民作亂」；然而，隨著台灣民主化進程的推進與大量國家機密檔案的解密，學界與官方的歷史共識已產生了根本性的移轉，將焦點轉向國家體制的失能與公權力的濫用。
+                                </p>
 
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                劉青山命案與何鑾旗冤死案之歷史與法理對照</h4>
-                            <p class="indent-8 mb-2"><strong>劉青山案的歷史還原：</strong>
-                                劉青山為二二八事件期間任職於專賣局台中分局的一名28歲外省籍公務員。1947年3月2日，當憤怒的台中群眾包圍前台中縣長劉存忠官邸進行抗議時，劉青山自屋內衝出並向群眾開槍，導致數名抗議民眾受傷。此舉引發群眾極度憤慨，隨即將其包圍並嚴重毆打。根據部分官方檔案（如專賣局的二二八專刊）及見證者記錄，劉青山被送醫急救後，甚至有暴民在3月3日夜間衝入醫院病房，將其割去耳鼻、挖出雙眼，最終殘忍虐殺致死。然而，近期的部分研究報告與官方紀錄（如保密局檔案）中，僅記載其死因為「因頭部受鈍器重擊導致腦出血」，未詳述醫院內的殘酷虐殺過程。評論者因此強烈抨擊，認為當前的轉型正義論述刻意「淡化」了外省公務員遭暴民殘殺的史實，且劉青山之家屬未能獲得二二八基金會的任何賠償與名譽回復，是極端的不公不義。
-                            </p>
-                            <p class="indent-8 mb-4"><strong>何鑾旗案的曲折歷程：</strong>
-                                形成強烈對比的是本省籍人士何鑾旗。在事件當時，憲兵第四團曾指控何鑾旗「帶領群眾毆打外省人」，甚至具體指控他「親手殺害專賣局官員莊青山（即劉青山之誤植）」。然而，該案經過當時的台灣高等法院審理後，於1948年因「證據不足」判決何鑾旗涉犯內亂罪嫌疑部分無罪。不幸的是，何鑾旗在隔年（1949年）因捲入其他債務糾紛，被警備總部羅織「恐嚇、詐欺、擾亂金融、煽動流氓、圖謀不軌」等罪名，由中部戒嚴司令部判處死刑並於同年8月執行槍決。儘管何鑾旗的死刑執行時間為1949年，且表面罪名與二二八抗爭無直接關聯，但二二八事件紀念基金會於1997年的第21次董事會中，經過嚴密調查，認定其後續遭到羅織罪名與剝奪生命，實為二二八事件後續威權政府秋後算帳與「公權力侵害」的延伸，因此決議認定其為二二八事件受難者並給予賠償；2023年，法務部更進一步公告平復其所受之司法與行政不法。
-                            </p>
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    行政長官公署體制的權力壟斷與社會矛盾激化</h4>
+                                <p class="indent-8 mb-4">
+                                    1947年爆發的二二八事件，其表面上的導火線雖為2月27日台北市大稻埕發生的查緝私菸流血衝突，但促發全島性抗爭的深層結構性原因，實則源於戰後初期台灣特殊的政治與經濟統治架構。依據二二八事件紀念基金會委託多位歷史學者（包含黃秀政、薛化元、陳儀深、張炎憲、李筱峰、陳翠蓮等）共同撰寫，並於2006年出版之《二二八事件責任歸屬研究報告》，當時國民政府在台灣設立的「行政長官公署」制度，是一個高度集權的特殊體制。該體制將行政、立法、司法、人事與軍事大權集於行政長官陳儀一身，形成了一種在民主憲政體制外運作的專制統治架構。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    在經濟資源分配層面，政府實施了極為嚴格的物資管制與專賣制度，將菸、酒、火柴等民生必需品納入政府獨佔，加上戰後初期百廢待舉、物資短缺，以及政府將大量台灣米糧運往中國大陸支援國共內戰，導致台灣本地爆發嚴重的通貨膨脹與大規模失業，民生凋敝至極。在政治權力分配層面，外省籍官員幾乎壟斷了所有政府高層與公營事業的決策職位，且官場貪污腐化現象頻傳；與此同時，來台駐守的軍隊軍紀敗壞，屢屢發生欺壓百姓的事件。這種由上而下、全面性的制度性剝奪與文化隔閡，導致台灣社會從知識份子、地方仕紳到普羅大眾，對陳儀政府累積了極度的不滿與絕望。因此，當查緝私菸的偶發暴力事件發生後，長期受到壓抑的民怨瞬間爆發。民間菁英在事件初期迅速組成「二二八事件處理委員會」，其核心訴求並非官方當時宣稱的武裝叛亂或尋求台灣獨立，而是強烈「要求政治改革」、「反對政治壟斷」與「對抗腐敗貪污」。
+                                </p>
 
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                國家暴力與群眾暴力：轉型正義不可逾越的法理界線</h4>
-                            <p class="indent-8 mb-4">
-                                上述兩個極端案例的強烈對比，在缺乏法學素養的網路論壇中，極易被操弄為「民進黨政府只賠償本省暴民，卻不顧外省被害公務員」的政治煽動素材。然而，若我們回歸《二二八事件處理及賠償條例》的立法精神與法理基礎進行深度剖析，便會發現這種待遇的差異並非出自所謂的族群偏見，而是源於對「權力結構」與「不法主體」的嚴格法律定義。
-                            </p>
-                            <p class="indent-8 mb-4">轉型正義（Transitional
-                                Justice）在國際法與政治學上的核心要旨，在於處理「國家機器濫用公權力」所造成的系統性、大規模人權侵害。國家在現代憲政體制下，合法壟斷了暴力的使用權（包括警察、軍隊、情治單位與司法審判權）。當一個威權國家將這些強大的權力武器化，用以非法逮捕、屠殺、刑求其統治下的人民時，人民在體制內是絕對弱勢且缺乏任何救濟管道的。因此，當國家步入民主化後，後繼的民主政府必須承擔起調查真相、賠償受害者與平反名譽的歷史與法律責任。依據《條例》第七條與第八條之明文規定，受難者得受賠償之範圍雖然廣泛，但其最核心的法理前提在於：受害者的損害必須是「遭受公務員及公權力侵害」所致。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                將此標準套用於劉青山案：劉青山身為執行公務的專賣局官員，其在衝突中遭到民眾毆打甚至殘忍殺害，在法律性質上屬於一般刑法中的「殺人罪」與「群眾暴動罪」。在當時的時空背景下，國民政府作為實質控制台灣的統治實體，依然握有強大的司法調查與武力懲凶的權力。換言之，劉青山雖然是悲劇的受害者，但他面對的是「平民的非法暴力（Horizontal
-                                Violence）」，其受害者身分與家屬權益在當時的國家法律體系下是受到絕對保護與追訴的。</p>
-                            <p class="indent-8 mb-4">
-                                相對地，檢視何鑾旗案：即便何鑾旗在事件初期曾面臨參與暴動的指控，且後來經法院判決無罪，但他最終面臨的是擁有絕對生殺大權、不受制衡的「國家軍事體系與情治機關」。警備總部在缺乏正當法律程序保障的情況下，以莫須有的政治與經濟罪名將其槍決，這正是標準的「由上而下的體制性暴力（Vertical
-                                State Violence）」。何鑾旗在威權時期無處伸冤，其生命權遭國家機器非法剝奪，這正是民主化後的轉型正義機制必須介入、調查並予以賠償的絕對標的。</p>
-                            <p class="indent-8 mb-4">
-                                因此，將「平民對公務員的犯罪行為」與「國家機器對平民的非法屠殺」混為一談，要求轉型正義機構對兩者進行同等賠償，是當代網路資訊戰中最常見、也最具迷惑性的法理滑坡。這並非是對劉青山生命消逝的冷漠，而是法律管轄權限與歷史責任追究主體的根本性差異。忽略此一法理基礎，將紀念基金會的補償名單視為「政黨操弄族群對立」或「大小眼」的證據，實則嚴重偏離了現代法治國家的基本原則。截至2022年1月申請期限屆滿，基金會共核定受理並發放賠償金予
-                                10,280
-                                位受難者，每一件申請案背後皆經過獨立超然的董事會與專家學者依據檔案進行嚴格的交叉比對與認證。這套機制的建立與運作，正是台灣社會以法治手段撫平歷史創傷的具體實踐，絕非特定政黨操弄歷史的工具。
-                            </p>
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    南京決策高層的誤判與國家機器的毀滅性鎮壓</h4>
+                                <p class="indent-8 mb-4">
+                                    在探討責任歸屬的嚴肅課題上，歷史研究報告明確指出，當時的國民政府主席蔣中正是事件中必須承擔最大與最終責任的最高決策者。儘管在事件爆發初期，部分台灣民間菁英團體以及某些情報管道曾試圖向南京中央傳達台灣社會的真實訴求與官逼民反的真相，蔣中正最終仍選擇採信台灣省行政長官陳儀、國民黨台灣省黨部主委李翼中等地方軍政首長的偏頗匯報。這些報告刻意將民間的改革訴求扭曲為「奸匪煽動」、「暴民叛亂」以及「日本奴化教育餘毒」的展現。基於這些資訊，蔣中正做出了派遣大軍赴台進行軍事鎮壓的致命決定。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    軍隊於1947年3月8日陸續自基隆與高雄登陸後，隨即在全台各地展開被稱為「綏靖」與「清鄉」的血腥行動。在此過程中，台灣省行政長官兼警備總司令陳儀負有不可推卸的軍政首長責任，而其下屬如警備總部參謀長柯遠芬、高雄要塞司令彭孟緝、基隆要塞司令史宏熹、整編第二十一師師長劉雨卿等人，在執行鎮壓任務時，採取了極度不成比例的武力。軍隊不僅在市區進行無差別的機槍掃射，更配合情治單位展開大規模的濫捕、未經合法審判的密裁與私人處決。
+                                </p>
+                                <p class="indent-8">
+                                    這種國家機器的殘酷運作，不僅造成無數無辜平民的傷亡，更針對性地消滅了整整一代的台灣地方菁英。據統計，當時高達八成的各縣市參議員、醫師、律師、作家與媒體人在此次鎮壓中遇害或失蹤，對台灣的司法界、新聞界及校園（教育界）造成了無法彌補的毀滅性衝擊。更甚者，蔣中正在事件後非但沒有懲處濫殺無辜的軍政首長，反而將陳儀升任浙江省主席、將彭孟緝擢升為台灣省警備總司令。此種未經正當法律程序、由國家最高權力核心發動並背書的群體性暴力，確立了二二八事件在現代史學、政治學與法學上作為「國家不法侵害」與「威權國家恐怖主義」的核心定調。
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Chapter 4 -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(4)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">第四章：政治史觀的挪用與中國共產黨角色之歷史釐清</h3>
-                        <span id="report-icon-4"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-4" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">
-                                在二二八事件的歷史詮釋權爭奪戰中，不僅台灣內部存在著不同政治光譜的爭辯，中國共產黨（中共）的強力介入與史觀建構，更為當代的數位認知作戰增添了極為複雜的跨國界層次。近年來，中共官方頻繁且高調地舉辦二二八事件紀念活動，其國台辦發言人甚至公開將二二八事件定調為「台灣同彰反抗專制統治、爭取基本權利的正義行動，亦是中國人民解放鬥爭的一部分」，企圖將台灣民間的自發性民主抗爭，強行收編為中共近代共產革命史觀的一環。
-                            </p>
+                    <!-- Chapter 2 -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(2)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">第二章：傷亡人數之歷史爭辯、人口學推論與官方實證數據</h3>
+                            <span id="report-icon-2"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-2" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">
+                                    二二八事件中「究竟有多少人死亡或失蹤」，一直是半個多世紀以來歷史論述中最具爭議、也最容易被各方政治勢力與當代網路認知作戰挪用的議題。從數千人到十數萬人不等，不同政治立場的論述者往往選擇性地採用特定數據來支持其政治議程或抹黑對手。要徹底釐清傷亡數據的真相，必須嚴格區分「歷史文獻估計」、「人口統計學推估」以及「轉型正義補償實證審查」三個截然不同的測量維度與科學方法論。
+                                </p>
 
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                謝雪紅與「二七部隊」的神話建構與史實還原</h4>
-                            <p class="indent-8 mb-4">
-                                在中共高調紀念二二八事件的政治宣傳中，經常被抬上檯面的指標性歷史人物是早期台灣共產黨領導人「謝雪紅」。在中共的論述體系中，謝雪紅甚至曾登上天安門城樓與毛澤東並肩，被塑造成二二八事件的絕對領導核心。史料顯示，謝雪紅早年曾赴中國上海與蘇俄學習左翼思想，於1928年參與成立台灣共產黨，並在戰後於台中組織左翼團體。當二二八事件蔓延至中部時，她確實參與了台中武裝民兵「二七部隊」的運作。然而，權威的歷史學界研究對於中共刻意誇大謝雪紅與共產黨在二二八事件中影響力的行為，提出了極為有力的實證反駁。中央研究院近代史副研究員陳儀深指出，謝雪紅作為台共人士且與中共地下黨有聯繫，其在史料研究上固然具有重要性；但在1947年的歷史時空背景下，台灣共產黨員的人數極為稀少，根本不具備在全台性的大規模抗爭中發揮「領導作用」的組織量能。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                針對被中共奉為武裝革命圭臬的「二七部隊」，前二七部隊部隊長鍾逸人曾以親歷者的身分公開澄清：外界認為是謝雪紅「組織或號召」了二七部隊的說法，是完全錯誤的歷史想像。真實的歷史脈絡是，1947年3月初，台中地區的民眾因不滿政府鎮壓，自發性地包圍公署與警局並接收武器，隨後成立了這支武裝民兵。其首要目的是在「政府體制完全失能的情況下，由民間力量自主維護社會治安與秩序」，並在國軍第21師逼近台中時，承擔起撤退至埔里進行抵抗的防禦任務。謝雪紅之所以加入並參與領導二七部隊，很大程度上是因為她在當時面臨政敵或情治人員的暗殺威脅，必須尋求這支強大民間武裝力量的保護，而非由她單方面創建並指揮該部隊進行共產革命。二二八事件紀念基金會董事長薛化元亦強調，當時地下共產黨的人數極少，對二二八整起事件的影響極其有限，絕未扮演關鍵的轉折角色。
-                            </p>
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    歷史文獻與官方檔案中的數據分歧</h4>
+                                <p class="mb-4">
+                                    在事件發生當時及隨後的幾年間，各方人士基於不同的情報來源與政治目的，提出了差異極大的傷亡數據。為了清晰呈現這些歷史估算的複雜性，以下透過結構化資料展示各方宣稱的數字：
+                                </p>
 
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                國共兩黨在威權史觀上的弔詭匯流與當代認知作戰</h4>
-                            <p class="indent-8 mb-4">
-                                深入探討這段歷史詮釋的演變，可以發現一個極具諷刺意味的政治現象。誠如《二二八事件真相與轉型正義研究報告》第一篇所探討的「應對路線」分析，當時台灣民間在「處理委員會的體制內改革」與「武裝抵抗」之間掙扎，其核心動能始終是基於對貪腐政治的絕望與對民主自治的渴望。然而，在1947年事件當下，威權體制下的國民黨軍政高層（如陳儀等人），為了合理化其調動中央大軍來台進行無差別屠殺的正當性，刻意向蔣中正極力誇大「中共奸匪在台煽動叛亂」的虛假威脅；而到了數十年後的今日，中國共產黨為了統戰台灣的政治需求、形塑「兩岸革命同源、共同反抗國民黨」的歷史論述，竟然同樣選擇極力膨脹共產黨在二二八事件中的影響力。
-                            </p>
-                            <p class="indent-8">
-                                這種「昔日的威權國民黨」與「當代的中國共產黨」在歷史論述上的弔詭匯流，至今仍是網路認知作戰中極具破壞力的一環。藉由將二二八事件與「共產黨武裝叛亂」強行掛鉤，攻擊者不僅能夠在內部稀釋國家機關當年動用軍隊屠殺平民的不正當性（將其合理化為剿共戰爭），亦能作為當代政治鬥爭的武器，指責推動轉型正義的民進黨政府「實則是在為共產黨匪諜平反」。為此，權威研究報告明確剖析了民間自發性的民主抗爭，與隨後在白色恐怖時期真正涉入中共地下黨活動者之間，存在著嚴格的時間斷裂與動機差異，絕不應被粗暴地化約為單一共產叛亂事件。
-                            </p>
+                                <!-- Table Section -->
+                                <div class="overflow-x-auto mb-6 bg-[#ebe8e1] rounded border border-gray-400 p-2">
+                                    <table class="w-full table-auto text-sm text-left align-middle">
+                                        <thead class="bg-gray-200 text-gray-800">
+                                            <tr>
+                                                <th class="px-4 py-3 font-bold border-b border-gray-400">資料來源 / 提報者身份
+                                                </th>
+                                                <th class="px-4 py-3 font-bold border-b border-gray-400">提報年份</th>
+                                                <th class="px-4 py-3 font-bold border-b border-gray-400">外省籍宣稱數據</th>
+                                                <th class="px-4 py-3 font-bold border-b border-gray-400">本省籍及整體宣稱數據</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200">
+                                            <tr class="hover:bg-[#faf8f5] text-gray-700">
+                                                <td class="px-4 py-3 font-medium">時任國防部長 白崇禧</td>
+                                                <td class="px-4 py-3">1947年</td>
+                                                <td class="px-4 py-3 text-gray-500">-</td>
+                                                <td class="px-4 py-3">軍警與台籍死傷共 1,860人</td>
+                                            </tr>
+                                            <tr class="hover:bg-[#faf8f5] text-gray-700">
+                                                <td class="px-4 py-3 font-medium">台灣警備總司令部</td>
+                                                <td class="px-4 py-3">1947年</td>
+                                                <td class="px-4 py-3">死傷失蹤共 1,958人</td>
+                                                <td class="px-4 py-3">死傷失蹤共 643人 (另有死3,200人紀錄)</td>
+                                            </tr>
+                                            <tr class="hover:bg-[#faf8f5] text-gray-700">
+                                                <td class="px-4 py-3 font-medium">上海《大公報》/ 警政單位</td>
+                                                <td class="px-4 py-3">1947年</td>
+                                                <td class="px-4 py-3">死432, 傷2126, 蹤85 (共2,643人)</td>
+                                                <td class="px-4 py-3 text-gray-500">未具體對比</td>
+                                            </tr>
+                                            <tr class="hover:bg-[#faf8f5] text-gray-700">
+                                                <td class="px-4 py-3 font-medium">保安處</td>
+                                                <td class="px-4 py-3">1947年</td>
+                                                <td class="px-4 py-3 text-gray-500">-</td>
+                                                <td class="px-4 py-3">死 6,300人</td>
+                                            </tr>
+                                            <tr class="hover:bg-[#faf8f5] text-gray-700">
+                                                <td class="px-4 py-3 font-medium">蘇新 (台共人士)</td>
+                                                <td class="px-4 py-3">1949年</td>
+                                                <td class="px-4 py-3 text-gray-500">-</td>
+                                                <td class="px-4 py-3">死不下 10,000人</td>
+                                            </tr>
+                                            <tr class="hover:bg-[#faf8f5] text-gray-700">
+                                                <td class="px-4 py-3 font-medium">時任美國副領事 葛超智</td>
+                                                <td class="px-4 py-3">1947年</td>
+                                                <td class="px-4 py-3 text-gray-500">-</td>
+                                                <td class="px-4 py-3">死 20,000人</td>
+                                            </tr>
+                                            <tr class="hover:bg-green-50 text-gray-800 bg-green-50/50">
+                                                <td class="px-4 py-3 font-bold text-green-800">二二八紀念基金會 (實證)</td>
+                                                <td class="px-4 py-3 font-bold text-green-800">2006年後</td>
+                                                <td class="px-4 py-3 font-medium text-green-900">死/失蹤 89人, 傷 1,389人</td>
+                                                <td class="px-4 py-3 font-medium text-green-900">總受領賠償 10,280人</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <p class="indent-8 mb-4">
+                                    從上述表格可以清晰看出，當時的官方報告（如白崇禧的1,860人）與外國觀察家、民間人士的估算（如葛超智的兩萬人）存在著巨大的鴻溝。國史館學者侯坤宏曾分析，官方報告極度低估數字，是因為其刻意忽略了大量未經正式審判即遭軍隊秘密處決、或直接被拋入海中與掩埋的非正常途徑死亡人數；而民間或海外報告的高估，則可能混雜了當時社會極度恐慌下的道聽塗說與刻意渲染。此外，《二二八事件研究報告》總主筆賴澤涵亦指出，國民黨部隊於3月8日登陸後，單是子彈就消耗了14萬發，造成的死傷絕對遠超官方承認的數千人；但若說死亡人數高達數萬人，在當時的時空背景下，屍體的處理與掩埋在短短數週內亦難以完全不留痕跡，因此雙方極端的數字皆有討論空間。
+                                </p>
+
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    人口統計學推估的極限與流行病學的反證</h4>
+                                <p class="indent-8 mb-4">
+                                    為了在缺乏完整屍骨與名單的情況下尋求科學解答，1992年由李登輝總統任內推動、行政院出版的《二二八事件研究報告》中，學者陳寬政採用了「人口學推計」模型進行估算。其研究方法的核心假設在於：由於1946年台灣並無精確的年度死亡統計，故比較1947年與1948年的總死亡人數。數據顯示，1947年（事件發生年）全台總死亡人數為114,192人，而1948年為95,340人；1947年比1948年多出了18,856名死者。陳寬政進一步將1947年15歲至64歲男性死亡人數高於1948年的異常增量，全數歸因於二二八事件的政治鎮壓，進而推估出事件死亡人數約落在18,352人至27,923人之間。另一位學者李喬亦利用線性迴歸模型，推估出18,446人至19,646人的相近數據。這些數字隨後被廣泛引用，甚至寫入部分高中教材中。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    然而，此種純粹依賴人口死亡總數波動的推演方法，在學術界與實務界受到了極為嚴厲的挑戰與批評。前立法委員蔡正元與部分公共衛生專家透過客觀的流行病學證據指出，1947年恰逢戰後台灣公共衛生體系崩潰、島內傳染病（如天花、霍亂、瘧疾等）大規模橫行的時期，年度整體死亡人數必然較其他相對平穩的年度偏高。將因傳染病或其他社會動盪導致的「超額死亡人數」全數算入二二八事件的鎮壓死難者，在科學方法論上犯了嚴重的「過度推論」與「歸因謬誤」。此外，中央研究院院士胡佛作為當年研究報告的審議委員之一，亦曾公開指出，從戰後初期的台灣整體人口波動來換算單一政治事件的死亡人數，存在巨大的盲點。當時台灣社會經歷了劇烈的人口流動，包括大量滯留中國大陸未歸的台灣兵、前往大陸參與國共內戰的老兵，以及事件發生後因恐懼而逃回大陸的外省人士。在戶籍系統紊亂且人口頻繁跨境移動的背景下，單憑戶籍死亡登記數量的差額來斷定數萬人死於屠殺，被認為是缺乏周詳考量的誇大之詞。
+                                </p>
+
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    外省族群傷亡統計：拆解「外省人死傷更多」的資訊戰迷思</h4>
+                                <p class="indent-8 mb-4">
+                                    當代網路帳號在攻擊「民進黨操弄二二八」時，最常使用的一項核心論述便是宣稱「外省人死傷數字比本省人還多」，並指控政府與二二八基金會刻意掩蓋外省籍受難者的史實，試圖將二二八事件從「國家對人民的鎮壓」扭曲為單純的「本省人對外省人的族群屠殺」。此一論述的主要依據，多來自當時上海《大公報》駐地記者唐賢龍所著之《台灣事變內幕記》，其引述當時警察單位公布的數字稱：外省人死亡432人、失蹤85人、受傷2,126人，受難總數高達2,643人。攻擊者據此對比二二八基金會早期認定的本省受難人數（約二千餘人），得出外省人受害更深的結論。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    然而，這種刻意擷取單一早期官方文獻的論述，完全禁不起現代歷史檔案學的嚴格檢驗。二二八事件紀念基金會深知此議題的重要性，在其後續擴充出版的《二二八事件真相與轉型正義研究報告》中，特別委託學者新增了〈試論二二八事件中的外省人傷亡〉與〈官方紀錄中二二八事件死難人數探析〉等專文，針對外省人傷亡數據進行了極度細緻的檔案比對與考證。經過嚴謹的實證研究發現，當時政府高層與軍政系統為了向南京中央證明派遣大軍鎮壓的「正當性」與「急迫性」，刻意在公文中使用了極度模糊的「死傷」一詞，將大量的「輕微擦傷」、「財物損失」與「死亡」混為一談，藉此誇大外省人的實際死亡規模。更有甚者，部分官方報告甚至將死於軍隊無差別掃射的本省人數據，或是本省籍公務員的死傷，移花接木並計入外省公務員的死傷數中。
+                                </p>
+                                <p class="indent-8 p-4 bg-red-50/50 border-l-4 border-red-800 rounded">
+                                    根據基金會窮盡現有檔案考證後的最終結論：在二二八事件中，外省人的確在初期因群眾失控而遭到波及，但其真實的死亡與失蹤合計總數為
+                                    89人；其中因族群衝突被民間群眾毆打致死的外省公務員有 38人，一般外省民眾有 8人。其餘的外省受難者多為受傷（共1,389人）。</p>
+                                <p class="indent-8 mt-4">
+                                    這一基於官方檔案比對的鐵證，直接且徹底地反駁了「外省人死亡人數大於本省人」的網路虛假論述。外省族群在事件初期的確面臨了部分台灣民間群眾的暴力相向，這反映了當時社會因語言不通、文化摩擦與對貪腐政權憤怒所導致的群眾失控；然而，將這種長達數天的「群眾盲目暴力（Horizontal
+                                    Violence）」，與隨後長達數月的「國家機器體制性軍事鎮壓（Vertical State
+                                    Violence）」（使用達姆彈、重機槍掃射、未經審判處決數千菁英與平民）等量齊觀，甚至在數字上進行造假對比，在歷史學、法理學與政治道德上，皆犯了最嚴重的範疇錯誤與邏輯滑坡。
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Chapter 5 -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(5)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">第五章：網路錯假訊息的解構與認知作戰之戰略目的</h3>
-                        <span id="report-icon-5"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-5" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">
-                                回歸本報告之初所面臨的核心命題：「近期網路帳號不斷發送影片，攻擊民進黨在操弄二二八」，我們必須將這種現象置於當代數位資訊戰、演算法擴散與假訊息傳播的框架下進行嚴肅檢視。這類攻擊的典型特徵在於：巧妙地將部分真實的歷史細節或個人背景，與大量虛構的數據、扭曲的法理概念進行縫合，藉由煽動群眾的情緒與剝奪感，來徹底摧毀官方轉型正義機構的公信力。
-                            </p>
+                    <!-- Chapter 3 -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(3)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">第三章：轉型正義的法理邊界與個案爭議之深度檢視</h3>
+                            <span id="report-icon-3"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-3" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">
+                                    在當前的數位認知作戰中，除了宏觀數據的爭辯外，攻擊者亦經常透過放大檢視特定歷史個案，藉此質疑《二二八事件處理及賠償條例》的發放標準存在政治偏見與族群歧視。其中，專欄作家張若彤所提出的「劉青山案」與「何鑾旗案」之對比，便是近期網路上被廣泛引用，用以指控官方「淡化歷史」、「選擇性給予正義」的典型案例。要釐清此類指控，必須深入探討轉型正義的法理基礎與法律要件。
+                                </p>
 
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                台灣事實查核中心的實證查核案例：楊振隆案</h4>
-                            <p class="indent-8 mb-4">
-                                「台灣事實查核中心」近期針對網路流傳甚廣的一則典型二二八相關假訊息發布了詳細的查核報告。該網路傳言將矛頭指向二二八國家紀念館前館長楊振隆，指稱：「楊振隆曾因殺人案服刑，後由蔡英文、蘇貞昌共同提名擔任館長，坐領月薪30萬元，並享有政務官退休18%的優惠存款福利」。經過查核中心向相關單位調閱資料並進行實地查證，發現這則訊息運用了資訊戰中最經典的「七分真、三分假」與「張冠李戴」操弄手法。傳言中關於楊振隆過去在年輕時期曾犯下案件並入獄服刑的背景，確實「符合事實」；然而，傳言後半段所有用以激起民眾相對剝奪感與仇恨情緒的財務與制度指控，包括「由總統府或行政院直接提名制度（實則由基金會董事會聘任）」、「月薪高達30萬」、「享有政務官18%優存福利」等內容，皆被證實為完全「不符合事實」的惡意捏造。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                此外，部分媒體或網路帳號亦會利用基金會內部對於統計數據的精進過程進行見縫插針。例如，首任館長廖繼斌曾對官方死難人數統計提出不同見解與挑戰，這本屬於學術與機構內部正常的討論範疇，基金會亦公開回應將持續進行校正與通盤整理。然而，這類正常的學術辯證，在有心人士的剪輯與渲染下，往往被扭曲為「官方承認數據造假」、「民進黨長期欺騙人民」的聳動標題，在社群網路上瘋狂轉載。
-                            </p>
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    劉青山命案與何鑾旗冤死案之歷史與法理對照</h4>
+                                <p class="indent-8 mb-2"><strong>劉青山案的歷史還原：</strong>
+                                    劉青山為二二八事件期間任職於專賣局台中分局的一名28歲外省籍公務員。1947年3月2日，當憤怒的台中群眾包圍前台中縣長劉存忠官邸進行抗議時，劉青山自屋內衝出並向群眾開槍，導致數名抗議民眾受傷。此舉引發群眾極度憤慨，隨即將其包圍並嚴重毆打。根據部分官方檔案（如專賣局的二二八專刊）及見證者記錄，劉青山被送醫急救後，甚至有暴民在3月3日夜間衝入醫院病房，將其割去耳鼻、挖出雙眼，最終殘忍虐殺致死。然而，近期的部分研究報告與官方紀錄（如保密局檔案）中，僅記載其死因為「因頭部受鈍器重擊導致腦出血」，未詳述醫院內的殘酷虐殺過程。評論者因此強烈抨擊，認為當前的轉型正義論述刻意「淡化」了外省公務員遭暴民殘殺的史實，且劉青山之家屬未能獲得二二八基金會的任何賠償與名譽回復，是極端的不公不義。
+                                </p>
+                                <p class="indent-8 mb-4"><strong>何鑾旗案的曲折歷程：</strong>
+                                    形成強烈對比的是本省籍人士何鑾旗。在事件當時，憲兵第四團曾指控何鑾旗「帶領群眾毆打外省人」，甚至具體指控他「親手殺害專賣局官員莊青山（即劉青山之誤植）」。然而，該案經過當時的台灣高等法院審理後，於1948年因「證據不足」判決何鑾旗涉犯內亂罪嫌疑部分無罪。不幸的是，何鑾旗在隔年（1949年）因捲入其他債務糾紛，被警備總部羅織「恐嚇、詐欺、擾亂金融、煽動流氓、圖謀不軌」等罪名，由中部戒嚴司令部判處死刑並於同年8月執行槍決。儘管何鑾旗的死刑執行時間為1949年，且表面罪名與二二八抗爭無直接關聯，但二二八事件紀念基金會於1997年的第21次董事會中，經過嚴密調查，認定其後續遭到羅織罪名與剝奪生命，實為二二八事件後續威權政府秋後算帳與「公權力侵害」的延伸，因此決議認定其為二二八事件受難者並給予賠償；2023年，法務部更進一步公告平復其所受之司法與行政不法。
+                                </p>
 
-                            <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
-                                數位資訊戰的深層運作邏輯與政治目標</h4>
-                            <p class="mb-2">
-                                這類將深刻的歷史悲劇轉化為「當代政治提款機」與「仇恨動員工具」的數位手段，其根本目的從來就不是為了追求或還原歷史真相，而是為了達成三個高度戰略性的政治效應：</p>
-                            <ol class="list-decimal pl-10 space-y-3 mb-4">
-                                <li><strong>去合法化 (Delegitimization) 與道德剝奪：</strong>
-                                    透過捏造極端誇張的薪資結構、特權福利（如30萬月薪、18%優存）或是刻意羅織受難者的犯罪背景，將推動與執行轉型正義的機構、學者與家屬，塑造成一群「掠奪國家資源的貪腐利益集團」。一旦社會大眾接受了這種設定，二二八紀念基金會所發布的任何嚴謹歷史真相與報告，便會自動喪失其道德制高點與公信力。
-                                </li>
-                                <li><strong>戰略性轉移焦點 (Whataboutism)：</strong>
-                                    面對國家暴力鐵證如山、無法辯駁的歷史事實，攻擊者往往採取「你也一樣」的防禦性反擊。透過無限放大個別外省籍受難者（如劉青山）在群眾衝突中的悲慘遭遇，或是指控本省受難者「其實都是共產黨同路人」，將一場由國家機器發動的體制性大屠殺，降格為單純的「族群互鬥」、「暴民作亂」或是「國共內戰的延伸」。這種策略成功地轉移了追究國家與獨裁者責任的焦點。
-                                </li>
-                                <li><strong>極化社會結構 (Polarization)：</strong>
-                                    透過在TikTok、YouTube、Line群組等平台上，散播情緒化、高度簡化、去脈絡化且帶有強烈對立色彩的短影音，刻意激化台灣社會中不同省籍、不同世代或不同政黨支持者之間的深層仇恨與猜忌。演算法的推波助瀾使得同溫層日益厚實，徹底阻斷了社會大眾進行理性歷史對話、甚至閱讀數百頁嚴謹歷史報告的空間。
-                                </li>
-                            </ol>
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    國家暴力與群眾暴力：轉型正義不可逾越的法理界線</h4>
+                                <p class="indent-8 mb-4">
+                                    上述兩個極端案例的強烈對比，在缺乏法學素養的網路論壇中，極易被操弄為「民進黨政府只賠償本省暴民，卻不顧外省被害公務員」的政治煽動素材。然而，若我們回歸《二二八事件處理及賠償條例》的立法精神與法理基礎進行深度剖析，便會發現這種待遇的差異並非出自所謂的族群偏見，而是源於對「權力結構」與「不法主體」的嚴格法律定義。
+                                </p>
+                                <p class="indent-8 mb-4">轉型正義（Transitional
+                                    Justice）在國際法與政治學上的核心要旨，在於處理「國家機器濫用公權力」所造成的系統性、大規模人權侵害。國家在現代憲政體制下，合法壟斷了暴力的使用權（包括警察、軍隊、情治單位與司法審判權）。當一個威權國家將這些強大的權力武器化，用以非法逮捕、屠殺、刑求其統治下的人民時，人民在體制內是絕對弱勢且缺乏任何救濟管道的。因此，當國家步入民主化後，後繼的民主政府必須承擔起調查真相、賠償受害者與平反名譽的歷史與法律責任。依據《條例》第七條與第八條之明文規定，受難者得受賠償之範圍雖然廣泛，但其最核心的法理前提在於：受害者的損害必須是「遭受公務員及公權力侵害」所致。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    將此標準套用於劉青山案：劉青山身為執行公務的專賣局官員，其在衝突中遭到民眾毆打甚至殘忍殺害，在法律性質上屬於一般刑法中的「殺人罪」與「群眾暴動罪」。在當時的時空背景下，國民政府作為實質控制台灣的統治實體，依然握有強大的司法調查與武力懲凶的權力。換言之，劉青山雖然是悲劇的受害者，但他面對的是「平民的非法暴力（Horizontal
+                                    Violence）」，其受害者身分與家屬權益在當時的國家法律體系下是受到絕對保護與追訴的。</p>
+                                <p class="indent-8 mb-4">
+                                    相對地，檢視何鑾旗案：即便何鑾旗在事件初期曾面臨參與暴動的指控，且後來經法院判決無罪，但他最終面臨的是擁有絕對生殺大權、不受制衡的「國家軍事體系與情治機關」。警備總部在缺乏正當法律程序保障的情況下，以莫須有的政治與經濟罪名將其槍決，這正是標準的「由上而下的體制性暴力（Vertical
+                                    State Violence）」。何鑾旗在威權時期無處伸冤，其生命權遭國家機器非法剝奪，這正是民主化後的轉型正義機制必須介入、調查並予以賠償的絕對標的。</p>
+                                <p class="indent-8 mb-4">
+                                    因此，將「平民對公務員的犯罪行為」與「國家機器對平民的非法屠殺」混為一談，要求轉型正義機構對兩者進行同等賠償，是當代網路資訊戰中最常見、也最具迷惑性的法理滑坡。這並非是對劉青山生命消逝的冷漠，而是法律管轄權限與歷史責任追究主體的根本性差異。忽略此一法理基礎，將紀念基金會的補償名單視為「政黨操弄族群對立」或「大小眼」的證據，實則嚴重偏離了現代法治國家的基本原則。截至2022年1月申請期限屆滿，基金會共核定受理並發放賠償金予
+                                    10,280
+                                    位受難者，每一件申請案背後皆經過獨立超然的董事會與專家學者依據檔案進行嚴格的交叉比對與認證。這套機制的建立與運作，正是台灣社會以法治手段撫平歷史創傷的具體實踐，絕非特定政黨操弄歷史的工具。
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Conclusion -->
-                <div
-                    class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
-                    <button onclick="toggleReport(6)"
-                        class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">結論：捍衛歷史真相與深化轉型正義之展望</h3>
-                        <span id="report-icon-6"
-                            class="text-gray-400 text-2xl transition-transform duration-300">+</span>
-                    </button>
-                    <div id="report-content-6" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
-                        <div class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
-                            <p class="indent-8 mb-4">綜合上述針對二二八事件歷史論述、傷亡數據實證、轉型正義法理基礎以及當代資訊戰運作機制的全面性探討，本報告得出以下具體結論：</p>
-                            <p class="indent-8 mb-4">
-                                關於網路上頻繁指控「特定政黨或團體刻意操弄二二八事件、捏造數據」的論述，絕大多數是建立在對歷史事實的斷章取義、對法學概念的張冠李戴，乃至於蓄意的數位認知作戰之上。在最受爭議的傷亡數據方面，儘管歷史學界與人口學界對於「宏觀人口推估」的理論模型（如一萬八千人至兩萬八千人之說）確實存在基於流行病學與人口流動變數的學術探討空間；但財團法人二二八事件紀念基金會實際運作的核心，始終是奠基於最嚴格的檔案證據審理。其所核發的
-                                10,280
-                                位受難者賠償名單，是台灣社會法治精神的展現。反觀網路論述刻意引用早期誇大的警政報表，宣稱「外省人死傷遠高於本省人」，已被基金會嚴謹的檔案考據徹底證偽（實證確認外省籍死亡與失蹤人數為89人）。
-                            </p>
-                            <p class="indent-8 mb-4">
-                                在法理層面上，轉型正義機制的核心使命是處理「不對等的國家體制暴力」，而非調解「民間群眾的橫向暴力衝突」。將在執行公務過程中不幸命喪群眾盲目暴力的官員案件，與成千上萬未經任何合法審判、即遭國家武裝部隊以重武器屠殺或情治機關秘密處決的平民相提並論，甚至據此指責國家轉型正義工程「偏袒本省人」，是極度缺乏現代法治國家觀念的混淆視聽。在政治史觀層面，中國共產黨在1947年二二八事件中的實際影響力與參與度極為邊緣與微弱。抗爭的主體力量，始終是尋求政治改革、反抗貪腐威權的台灣本土知識菁英與一般平民。國共兩黨基於各自在不同歷史階段的政治利益，不約而同地誇大了共產黨在事件中的角色，這類被扭曲的威權史觀，至今仍被有心人士用作抹黑二二八受難者、合理化當年鎮壓暴行的素材。
-                            </p>
-                            <p class="indent-8">
-                                歷史的真相從不畏懼任何嚴格的科學與法理檢驗，但必須建立在完整的檔案證據、客觀的學術方法與清晰的法理邏輯之上。面對數位時代下層出不窮、手法日益精緻的歷史錯假訊息與認知作戰，社會大眾亟需提升資訊識讀能力，辨識「學術考證」與「政治宣傳」之間的巨大鴻溝。唯有持續正視過去國家暴力的歷史責任，堅定支持基於檔案實證的轉型正義工程，並在法治的基礎上還原歷史全貌，台灣社會方能真正超越歷史遺留的族群與黨派撕裂，抵禦外部與內部的認知操弄，達成實質意義上的歷史和解與民主鞏固。
-                            </p>
+                    <!-- Chapter 4 -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(4)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">第四章：政治史觀的挪用與中國共產黨角色之歷史釐清</h3>
+                            <span id="report-icon-4"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-4" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">
+                                    在二二八事件的歷史詮釋權爭奪戰中，不僅台灣內部存在著不同政治光譜的爭辯，中國共產黨（中共）的強力介入與史觀建構，更為當代的數位認知作戰增添了極為複雜的跨國界層次。近年來，中共官方頻繁且高調地舉辦二二八事件紀念活動，其國台辦發言人甚至公開將二二八事件定調為「台灣同彰反抗專制統治、爭取基本權利的正義行動，亦是中國人民解放鬥爭的一部分」，企圖將台灣民間的自發性民主抗爭，強行收編為中共近代共產革命史觀的一環。
+                                </p>
+
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    謝雪紅與「二七部隊」的神話建構與史實還原</h4>
+                                <p class="indent-8 mb-4">
+                                    在中共高調紀念二二八事件的政治宣傳中，經常被抬上檯面的指標性歷史人物是早期台灣共產黨領導人「謝雪紅」。在中共的論述體系中，謝雪紅甚至曾登上天安門城樓與毛澤東並肩，被塑造成二二八事件的絕對領導核心。史料顯示，謝雪紅早年曾赴中國上海與蘇俄學習左翼思想，於1928年參與成立台灣共產黨，並在戰後於台中組織左翼團體。當二二八事件蔓延至中部時，她確實參與了台中武裝民兵「二七部隊」的運作。然而，權威的歷史學界研究對於中共刻意誇大謝雪紅與共產黨在二二八事件中影響力的行為，提出了極為有力的實證反駁。中央研究院近代史副研究員陳儀深指出，謝雪紅作為台共人士且與中共地下黨有聯繫，其在史料研究上固然具有重要性；但在1947年的歷史時空背景下，台灣共產黨員的人數極為稀少，根本不具備在全台性的大規模抗爭中發揮「領導作用」的組織量能。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    針對被中共奉為武裝革命圭臬的「二七部隊」，前二七部隊部隊長鍾逸人曾以親歷者的身分公開澄清：外界認為是謝雪紅「組織或號召」了二七部隊的說法，是完全錯誤的歷史想像。真實的歷史脈絡是，1947年3月初，台中地區的民眾因不滿政府鎮壓，自發性地包圍公署與警局並接收武器，隨後成立了這支武裝民兵。其首要目的是在「政府體制完全失能的情況下，由民間力量自主維護社會治安與秩序」，並在國軍第21師逼近台中時，承擔起撤退至埔里進行抵抗的防禦任務。謝雪紅之所以加入並參與領導二七部隊，很大程度上是因為她在當時面臨政敵或情治人員的暗殺威脅，必須尋求這支強大民間武裝力量的保護，而非由她單方面創建並指揮該部隊進行共產革命。二二八事件紀念基金會董事長薛化元亦強調，當時地下共產黨的人數極少，對二二八整起事件的影響極其有限，絕未扮演關鍵的轉折角色。
+                                </p>
+
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    國共兩黨在威權史觀上的弔詭匯流與當代認知作戰</h4>
+                                <p class="indent-8 mb-4">
+                                    深入探討這段歷史詮釋的演變，可以發現一個極具諷刺意味的政治現象。誠如《二二八事件真相與轉型正義研究報告》第一篇所探討的「應對路線」分析，當時台灣民間在「處理委員會的體制內改革」與「武裝抵抗」之間掙扎，其核心動能始終是基於對貪腐政治的絕望與對民主自治的渴望。然而，在1947年事件當下，威權體制下的國民黨軍政高層（如陳儀等人），為了合理化其調動中央大軍來台進行無差別屠殺的正當性，刻意向蔣中正極力誇大「中共奸匪在台煽動叛亂」的虛假威脅；而到了數十年後的今日，中國共產黨為了統戰台灣的政治需求、形塑「兩岸革命同源、共同反抗國民黨」的歷史論述，竟然同樣選擇極力膨脹共產黨在二二八事件中的影響力。
+                                </p>
+                                <p class="indent-8">
+                                    這種「昔日的威權國民黨」與「當代的中國共產黨」在歷史論述上的弔詭匯流，至今仍是網路認知作戰中極具破壞力的一環。藉由將二二八事件與「共產黨武裝叛亂」強行掛鉤，攻擊者不僅能夠在內部稀釋國家機關當年動用軍隊屠殺平民的不正當性（將其合理化為剿共戰爭），亦能作為當代政治鬥爭的武器，指責推動轉型正義的民進黨政府「實則是在為共產黨匪諜平反」。為此，權威研究報告明確剖析了民間自發性的民主抗爭，與隨後在白色恐怖時期真正涉入中共地下黨活動者之間，存在著嚴格的時間斷裂與動機差異，絕不應被粗暴地化約為單一共產叛亂事件。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 5 -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(5)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">第五章：網路錯假訊息的解構與認知作戰之戰略目的</h3>
+                            <span id="report-icon-5"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-5" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">
+                                    回歸本報告之初所面臨的核心命題：「近期網路帳號不斷發送影片，攻擊民進黨在操弄二二八」，我們必須將這種現象置於當代數位資訊戰、演算法擴散與假訊息傳播的框架下進行嚴肅檢視。這類攻擊的典型特徵在於：巧妙地將部分真實的歷史細節或個人背景，與大量虛構的數據、扭曲的法理概念進行縫合，藉由煽動群眾的情緒與剝奪感，來徹底摧毀官方轉型正義機構的公信力。
+                                </p>
+
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    台灣事實查核中心的實證查核案例：楊振隆案</h4>
+                                <p class="indent-8 mb-4">
+                                    「台灣事實查核中心」近期針對網路流傳甚廣的一則典型二二八相關假訊息發布了詳細的查核報告。該網路傳言將矛頭指向二二八國家紀念館前館長楊振隆，指稱：「楊振隆曾因殺人案服刑，後由蔡英文、蘇貞昌共同提名擔任館長，坐領月薪30萬元，並享有政務官退休18%的優惠存款福利」。經過查核中心向相關單位調閱資料並進行實地查證，發現這則訊息運用了資訊戰中最經典的「七分真、三分假」與「張冠李戴」操弄手法。傳言中關於楊振隆過去在年輕時期曾犯下案件並入獄服刑的背景，確實「符合事實」；然而，傳言後半段所有用以激起民眾相對剝奪感與仇恨情緒的財務與制度指控，包括「由總統府或行政院直接提名制度（實則由基金會董事會聘任）」、「月薪高達30萬」、「享有政務官18%優存福利」等內容，皆被證實為完全「不符合事實」的惡意捏造。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    此外，部分媒體或網路帳號亦會利用基金會內部對於統計數據的精進過程進行見縫插針。例如，首任館長廖繼斌曾對官方死難人數統計提出不同見解與挑戰，這本屬於學術與機構內部正常的討論範疇，基金會亦公開回應將持續進行校正與通盤整理。然而，這類正常的學術辯證，在有心人士的剪輯與渲染下，往往被扭曲為「官方承認數據造假」、「民進黨長期欺騙人民」的聳動標題，在社群網路上瘋狂轉載。
+                                </p>
+
+                                <h4 class="font-bold text-gray-900 text-lg mt-6 mb-3 border-l-4 border-gray-400 pl-3">
+                                    數位資訊戰的深層運作邏輯與政治目標</h4>
+                                <p class="mb-2">
+                                    這類將深刻的歷史悲劇轉化為「當代政治提款機」與「仇恨動員工具」的數位手段，其根本目的從來就不是為了追求或還原歷史真相，而是為了達成三個高度戰略性的政治效應：</p>
+                                <ol class="list-decimal pl-10 space-y-3 mb-4">
+                                    <li><strong>去合法化 (Delegitimization) 與道德剝奪：</strong>
+                                        透過捏造極端誇張的薪資結構、特權福利（如30萬月薪、18%優存）或是刻意羅織受難者的犯罪背景，將推動與執行轉型正義的機構、學者與家屬，塑造成一群「掠奪國家資源的貪腐利益集團」。一旦社會大眾接受了這種設定，二二八紀念基金會所發布的任何嚴謹歷史真相與報告，便會自動喪失其道德制高點與公信力。
+                                    </li>
+                                    <li><strong>戰略性轉移焦點 (Whataboutism)：</strong>
+                                        面對國家暴力鐵證如山、無法辯駁的歷史事實，攻擊者往往採取「你也一樣」的防禦性反擊。透過無限放大個別外省籍受難者（如劉青山）在群眾衝突中的悲慘遭遇，或是指控本省受難者「其實都是共產黨同路人」，將一場由國家機器發動的體制性大屠殺，降格為單純的「族群互鬥」、「暴民作亂」或是「國共內戰的延伸」。這種策略成功地轉移了追究國家與獨裁者責任的焦點。
+                                    </li>
+                                    <li><strong>極化社會結構 (Polarization)：</strong>
+                                        透過在TikTok、YouTube、Line群組等平台上，散播情緒化、高度簡化、去脈絡化且帶有強烈對立色彩的短影音，刻意激化台灣社會中不同省籍、不同世代或不同政黨支持者之間的深層仇恨與猜忌。演算法的推波助瀾使得同溫層日益厚實，徹底阻斷了社會大眾進行理性歷史對話、甚至閱讀數百頁嚴謹歷史報告的空間。
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conclusion -->
+                    <div
+                        class="report-card border border-gray-400 rounded-sm bg-[#faf8f5] overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+                        <button onclick="toggleReport(6)"
+                            class="w-full text-left px-6 py-5 flex items-center justify-between bg-[#faf8f5] hover:bg-[#ebe8e1] transition">
+                            <h3 class="font-serif font-bold text-xl text-gray-900">結論：捍衛歷史真相與深化轉型正義之展望</h3>
+                            <span id="report-icon-6"
+                                class="text-gray-400 text-2xl transition-transform duration-300">+</span>
+                        </button>
+                        <div id="report-content-6" class="hidden px-6 pb-6 pt-2 border-t border-gray-400 bg-[#faf8f5]">
+                            <div
+                                class="prose prose-gray max-w-none text-gray-700 leading-loose text-justify font-medium">
+                                <p class="indent-8 mb-4">綜合上述針對二二八事件歷史論述、傷亡數據實證、轉型正義法理基礎以及當代資訊戰運作機制的全面性探討，本報告得出以下具體結論：
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    關於網路上頻繁指控「特定政黨或團體刻意操弄二二八事件、捏造數據」的論述，絕大多數是建立在對歷史事實的斷章取義、對法學概念的張冠李戴，乃至於蓄意的數位認知作戰之上。在最受爭議的傷亡數據方面，儘管歷史學界與人口學界對於「宏觀人口推估」的理論模型（如一萬八千人至兩萬八千人之說）確實存在基於流行病學與人口流動變數的學術探討空間；但財團法人二二八事件紀念基金會實際運作的核心，始終是奠基於最嚴格的檔案證據審理。其所核發的
+                                    10,280
+                                    位受難者賠償名單，是台灣社會法治精神的展現。反觀網路論述刻意引用早期誇大的警政報表，宣稱「外省人死傷遠高於本省人」，已被基金會嚴謹的檔案考據徹底證偽（實證確認外省籍死亡與失蹤人數為89人）。
+                                </p>
+                                <p class="indent-8 mb-4">
+                                    在法理層面上，轉型正義機制的核心使命是處理「不對等的國家體制暴力」，而非調解「民間群眾的橫向暴力衝突」。將在執行公務過程中不幸命喪群眾盲目暴力的官員案件，與成千上萬未經任何合法審判、即遭國家武裝部隊以重武器屠殺或情治機關秘密處決的平民相提並論，甚至據此指責國家轉型正義工程「偏袒本省人」，是極度缺乏現代法治國家觀念的混淆視聽。在政治史觀層面，中國共產黨在1947年二二八事件中的實際影響力與參與度極為邊緣與微弱。抗爭的主體力量，始終是尋求政治改革、反抗貪腐威權的台灣本土知識菁英與一般平民。國共兩黨基於各自在不同歷史階段的政治利益，不約而同地誇大了共產黨在事件中的角色，這類被扭曲的威權史觀，至今仍被有心人士用作抹黑二二八受難者、合理化當年鎮壓暴行的素材。
+                                </p>
+                                <p class="indent-8">
+                                    歷史的真相從不畏懼任何嚴格的科學與法理檢驗，但必須建立在完整的檔案證據、客觀的學術方法與清晰的法理邏輯之上。面對數位時代下層出不窮、手法日益精緻的歷史錯假訊息與認知作戰，社會大眾亟需提升資訊識讀能力，辨識「學術考證」與「政治宣傳」之間的巨大鴻溝。唯有持續正視過去國家暴力的歷史責任，堅定支持基於檔案實證的轉型正義工程，並在法治的基礎上還原歷史全貌，台灣社會方能真正超越歷史遺留的族群與黨派撕裂，抵禦外部與內部的認知操弄，達成實質意義上的歷史和解與民主鞏固。
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>        </section>
+        </section>
+        </section>
 
         <!-- Fact Check Module -->
         <section id="factcheck" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
