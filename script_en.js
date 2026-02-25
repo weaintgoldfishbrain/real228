@@ -3,12 +3,12 @@ const ctx = canvas.getContext('2d');
 
 let width, height;
 let particles = [];
-let mouse = { x: -1000, y: -1000 }; // 初始游標移到畫面外
+let mouse = { x: -1000, y: -1000 }; // Move cursor off-screen initially
 let bloodTrails = [];
 let animationId;
 let isIntroActive = true;
 
-// 初始化 Canvas 大小
+// Initialize Canvas size
 function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
@@ -16,38 +16,38 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-// 監聽滑鼠移動
+// Listen for mouse movement
 window.addEventListener('mousemove', (e) => {
     if (!isIntroActive) return;
     mouse.x = e.clientX;
     mouse.y = e.clientY;
 
-    // 當滑鼠移動時，產生少許紅色暈染拖曳痕跡 (血跡)
+    // When mouse moves, generate slight red smudges (blood trails)
     if (Math.random() > 0.5) {
         bloodTrails.push(new BloodTrail(mouse.x, mouse.y));
     }
 });
 
-// ==== 灰燼/粒子實體 (Ash Particle) ====
+// ==== Ash/Particle Entity (Ash Particle) ====
 class Particle {
     constructor() {
         this.reset();
-        this.y = Math.random() * height; // 初始時隨機分佈在整個畫面
+        this.y = Math.random() * height; // Initially distribute randomly across the entire screen
     }
 
     reset() {
         this.x = Math.random() * width;
-        this.y = -10; // 從最頂端掉落
-        // 大小與重量感不同：有的細如灰塵，有的大如碎紙片
+        this.y = -10; // Falling from the top
+        // Different size and sense of weight: some fine as dust, others large as confetti
         this.size = Math.random() * 3 + 0.5;
-        // 緩慢下墜
+        // Falling slowly
         this.speedY = Math.random() * 1 + 0.2;
-        // 左右微幅擺動
+        // Slight swinging left and right
         this.vx = (Math.random() - 0.5) * 0.5;
         this.swingAngle = Math.random() * Math.PI * 2;
         this.swingSpeed = Math.random() * 0.02 + 0.01;
 
-        // 大多數是灰色灰燼，極少數帶有暗紅色（像滴落的血）
+        // Mostly gray ash, very few dark red (like dripping blood)
         this.isBlood = Math.random() > 0.95;
         this.opacity = Math.random() * 0.6 + 0.2;
     }
@@ -55,11 +55,11 @@ class Particle {
     update() {
         this.y += this.speedY;
 
-        // 製造飄落的擺動感 (如落葉或灰燼)
+        // Create a falling swing (like dead leaves or ash)
         this.swingAngle += this.swingSpeed;
         this.x += Math.sin(this.swingAngle) * 1 + this.vx;
 
-        // 當粒子掉出畫面時重置
+        // Reset when particle falls out of screen
         if (this.y > height + 10) {
             this.reset();
         }
@@ -70,12 +70,12 @@ class Particle {
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 
         if (this.isBlood) {
-            ctx.fillStyle = `rgba(139, 0, 0, ${this.opacity})`; // 暗紅色
-            // 血色帶有發光感
+            ctx.fillStyle = `rgba(139, 0, 0, ${this.opacity})`; // Dark red
+            // Blood color has a glowing effect
             ctx.shadowBlur = 5;
             ctx.shadowColor = 'red';
         } else {
-            ctx.fillStyle = `rgba(100, 100, 100, ${this.opacity})`; // 暗灰色
+            ctx.fillStyle = `rgba(100, 100, 100, ${this.opacity})`; // Dark gray
             ctx.shadowBlur = 0;
         }
 
@@ -83,14 +83,14 @@ class Particle {
     }
 }
 
-// ==== 血跡拖曳實體 (Blood Trail) ====
+// ==== Blood Trail Entity (Blood Trail) ====
 class BloodTrail {
     constructor(x, y) {
         this.x = x + (Math.random() * 20 - 10);
         this.y = y + (Math.random() * 20 - 10);
         this.size = Math.random() * 15 + 5;
         this.opacity = 0.5;
-        this.decay = Math.random() * 0.01 + 0.005; // 慢慢消散
+        this.decay = Math.random() * 0.01 + 0.005; // Slowly dissipating
     }
 
     update() {
@@ -100,7 +100,7 @@ class BloodTrail {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        // 柔和的紅色光暈邊緣
+        // Soft red halo edge
         const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
         gradient.addColorStop(0, `rgba(139, 0, 0, ${this.opacity})`);
         gradient.addColorStop(1, 'rgba(139, 0, 0, 0)');
@@ -110,20 +110,20 @@ class BloodTrail {
     }
 }
 
-// 建立粒子群
+// Create particle swarm
 const particleCount = 150;
 for (let i = 0; i < particleCount; i++) {
     particles.push(new Particle());
 }
 
-// 動畫主迴圈
+// Main animation loop
 function animate() {
     if (!isIntroActive) return;
-    // 使用帶有透明度的黑色填滿整個 Canvas，以產生微微的拖影效果 (Motion Blur)
+    // Fill whole canvas with transparent black to create a slight motion blur effect (Motion Blur)
     ctx.fillStyle = 'rgba(5, 5, 5, 0.2)';
     ctx.fillRect(0, 0, width, height);
 
-    // 更新並繪製血跡拖曳 (由舊到新遍歷，方便刪除)
+    // Update and redraw blood trails
     for (let i = bloodTrails.length - 1; i >= 0; i--) {
         let t = bloodTrails[i];
         t.update();
@@ -134,7 +134,7 @@ function animate() {
         }
     }
 
-    // 更新並繪製灰燼粒子
+    // Update and redraw ash particles
     particles.forEach(p => {
         p.update();
         p.draw();
@@ -143,33 +143,33 @@ function animate() {
     animationId = requestAnimationFrame(animate);
 }
 
-// 啟動動畫
+// Start animation
 animate();
 
 
 // ==========================================
-// [轉場] Intro Screen 到 舊版內容
+// [Transition from Intro Screen to Legacy Content
 // ==========================================
 document.getElementById('enter-site-btn').addEventListener('click', () => {
-    // 1. 淡出 Intro 畫面
+    // 1. Fade out Intro screen
     const introScreen = document.getElementById('intro-screen');
     introScreen.classList.add('hidden-intro');
 
-    // 2. 停止 Canvas 動畫以釋放資源
+    // 2. Stop Canvas animation to free resources
     isIntroActive = false;
     cancelAnimationFrame(animationId);
 
-    // 3. 顯示舊版主內容
+    // 3. Show legacy main content
     const mainContent = document.getElementById('main-content');
     mainContent.style.pointerEvents = 'auto';
     mainContent.style.opacity = '1';
 
-    // 4. 初始化 Charts (需等 mainContent 有大小才能正確繪製)
+    // 4. Init Charts
     setTimeout(initCharts, 500);
 });
 
 // ==========================================
-// [舊版] 網站主要互動邏輯 
+// [Legacy website main interaction logic 
 // ==========================================
 // --- Hero Carousel Logic ---
 function initHeroCarousel() {
@@ -185,49 +185,49 @@ function initHeroCarousel() {
 
         slides[currentSlide].classList.remove('opacity-0', 'z-0');
         slides[currentSlide].classList.add('opacity-100', 'z-10');
-    }, 5000); // 5秒輪播一次
+    }, 5000); // 5seconds per slide
 }
 
 // --- Empathy Scenarios Data (Expanded for Randomization) ---
 const scenariosData = {
     "doctor": {
-        role: "你是一位在地方深受敬重的醫師",
-        context: "1947年3月初，市區爆發警民衝突，死傷慘重。地方仕紳與Students組成了「處理委員會」希望維持治安。市長親自拜託你，希望你利用聲望出面代表市民與軍方談判，要求軍隊停止開槍。",
+        role: "You are a highly respected local doctor",
+        context: "In early March 1947, police-citizen conflicts erupted downtown with heavy casualties. Local gentry and students formed a 'Settlement Committee' hoping to maintain public order. The mayor personally requested you to use your prestige to negotiate with the military on behalf of citizens, demanding the troops stop firing.",
         choices: [
-            { text: "A. 挺身而出：為了保護無辜市民與Students，同意前往水上機場與軍方談判。", nextId: "doctor_a" },
-            { text: "B. 婉拒躲避：深感局勢危險，為了家中年幼的孩子，決定連夜躲回鄉下老家。", nextId: "doctor_b" }
+            { text: "A. Step Forward: To protect innocent citizens and students, agree to go to the Shueishang Airport to negotiate with the military.", nextId: "doctor_a" },
+            { text: "B. Decline and Hide: Sensing extreme danger, for the sake of your young children at home, decide to flee back to your hometown overnight.", nextId: "doctor_b" }
         ]
     },
-    "doctor_a": { isResult: true, title: "史實見證：和平的代價", content: "在真實歷史中，許多如嘉義的潘木枝醫師、畫家陳澄波等人選擇了這條路。他們帶著和平的訴求前往軍營談判，卻立刻被扣押，綁上鐵絲，在未經任何法庭審判的情況下，被押至火車站前當眾槍決。<br><br><span class='text-red-400 font-bold'>「他們沒有暴動，他們是去求和的。」</span>這戳破了網路謠言稱死者皆為暴民的謊言。", prototype: "原型人物：潘木枝、陳澄波等和平談判代表" },
-    "doctor_b": { isResult: true, title: "史實見證：躲不過的清鄉", content: "即便選擇躲避，在3月中旬展開的「清鄉」運動中，軍警特務按名冊抓人。許多未參與衝突的知識份子、律師（如林連宗）、台大教授（如Lin Mao-sheng）半夜在家中被強行帶走，從此「Missing」。<br><br><span class='text-red-400 font-bold'>國家暴力的肅清，針對的是台灣菁英階層，而非單純的治安維護。</span>", prototype: "原型人物：無數在清鄉中Missing的知識份子" },
+    "doctor_a": { isResult: true, title: "Historical Witness: The Price of Peace", content: `In real history, many like Dr. Pan Mu-chih and painter Chen Cheng-po chose this path. They went to the military camp with peaceful demands, only to be immediately detained, bound with wire, and publicly executed in front of the train station without any trial.<br><br><span class='text-red-400 font-bold'>"They did not riot; they went to sue for peace."</span> This pierces the online rumor claiming all deceased were rioters.`, prototype: "Archetypes: Pan Mu-chih, Chen Cheng-po, and other peace negotiators" },
+    "doctor_b": { isResult: true, title: "Historical Witness: Escaping the 'Village Cleansing' was Impossible", content: "Even if choosing to hide, during the 'village cleansing' campaign in mid-March, military and secret police arrested people based on rosters. Many intellectuals, lawyers (like Lin Lien-tsung), and NTU professors (like Lin Mao-sheng) who did not participate in conflicts were forcibly taken away from home at midnight, thereafter missing.<br><br><span class='text-red-400 font-bold'>The state's purge targeted the Taiwanese elite class, not just maintaining public order.</span>", prototype: "Archetypes: Countless intellectuals who went missing during the village cleansing" },
 
     "reporter": {
-        role: "你是一家本土報社的主筆",
-        context: "二二八事件爆發後，長官公署試圖封鎖消息。你掌握了軍警在街頭無差別開槍的真實傷亡名單與照片。此時，報社外已經有特務在徘徊監視。",
+        role: "You are the chief editorial writer of a local newspaper",
+        context: "After the 228 Incident broke out, the Chief Executive's Office tried to block news. You have the real casualty list and photos of military and police shooting indiscriminately on the streets. At this time, secret police are already loitering and surveilling outside the newspaper office.",
         choices: [
-            { text: "A. 堅持報導：身為新聞人必須揭露真相，決定連夜排版將真實傷亡印製出刊。", nextId: "reporter_a" },
-            { text: "B. 妥協自保：為了報社員工與家人的安全，決定配合官方說法，發布「暴民滋事」的報導。", nextId: "reporter_b" }
+            { text: "A. Insist on Reporting: As a journalist, you must expose the truth. Decide to typeset overnight and print the true casualties.", nextId: "reporter_a" },
+            { text: "B. Compromise for Self-Preservation: For the safety of the staff and your family, decide to cooperate with the official narrative and publish a report on 'rioters causing trouble'.", nextId: "reporter_b" }
         ]
     },
-    "reporter_a": { isResult: true, title: "史實見證：被噤聲的第四權", content: "如《台灣新生報》總經理阮朝日、《人民導報》社長宋斐如等人，因堅持報導真相或批評時政，在清鄉期間遭特務以「叛亂」罪名帶走，從此下落不明，連屍骨都無處尋覓。<br><br><span class='text-red-400 font-bold'>國家暴力不僅抹殺了生命，也抹殺了真相的傳播。</span>", prototype: "原型人物：阮朝日、宋斐如、Wang Tian-deng等報人" },
-    "reporter_b": { isResult: true, title: "史實見證：株連與文字獄", content: "在戒嚴與清鄉的肅殺氛圍下，妥協並不能保證絕對的安全。許多報社被迫停刊或改組，即便配合官方，只要過去曾發表過批評言論，仍可能在後續的「白色恐怖」中被羅織罪名入獄。<br><br><span class='text-red-400 font-bold'>極權統治下的審查是溯及既往且毫無標準的。</span>", prototype: "原型人物：當時被迫停刊或受審查的台灣新聞界" },
+    "reporter_a": { isResult: true, title: "Historical Witness: The Silenced Fourth Estate", content: "Such as Juan Chao-jih (General Manager of Taiwan Hsin Sheng Daily News) and Sung Fei-ju (President of People's Herald), for insisting on reporting the truth or criticizing politics, they were taken away by secret agents during the village cleansing on charges of 'rebellion,' never to be seen again.<br><br><span class='text-red-400 font-bold'>State violence wiped out not only lives but also the dissemination of truth.</span>", prototype: "Archetypes: Juan Chao-jih, Sung Fei-ju, Wang Tian-deng and other journalists" },
+    "reporter_b": { isResult: true, title: "Historical Witness: Guilt by Association and Literary Inquisition", content: "Under the chilling atmosphere of martial law and village cleansing, compromise did not guarantee absolute safety. Many newspapers were forced to suspend or reorganize. Even if they cooperated, as long as they had previously published critical remarks, they could still be framed and imprisoned in the subsequent White Terror.<br><br><span class='text-red-400 font-bold'>Censorship under totalitarian rule is retroactive and lacks standard.</span>", prototype: "Archetypes: The Taiwanese press forced to suspend or subjected to censorship at the time" },
 
     "student": {
-        role: "你是一名滿腔熱血的大Students",
-        context: "社會陷入混亂，警察大多逃避或躲藏。你與同學決定組織「Students治安服務隊」，在街頭指揮交通、保護外省籍教師與商人的安全，試圖讓社會恢復秩序。",
+        role: "You are a passionate university student",
+        context: "Society is in chaos, and most police are evading or hiding. You and your classmates decide to organize a 'Student Public Security Service Squad,' directing traffic on the streets, protecting the safety of Mainlander teachers and businessmen, and trying to restore social order.",
         choices: [
-            { text: "A. 堅守崗位：即使聽說軍隊即將登陸，仍相信自己是在「協助維持治安」，繼續穿著Students制服在街頭執勤。", nextId: "student_a" },
-            { text: "B. 解散撤退：察覺政府態度有異，聽從長輩勸告，立刻解散服務隊，銷毀名冊並躲藏起來。", nextId: "student_b" }
+            { text: "A. Stick to Your Post: Even hearing that the army is about to land, still believe you are 'assisting in maintaining public order,' and continue to perform duties on the streets in student uniforms.", nextId: "student_a" },
+            { text: "B. Disband and Retreat: Sensing a change in the government's attitude and listening to elders' advice, immediately disband the service squad, destroy the roster, and hide.", nextId: "student_b" }
         ]
     },
-    "student_a": { isResult: true, title: "史實見證：青春的鮮血", content: "3月8日軍隊登陸後，展開無差別掃射。許多穿著制服、在街頭維持治安的Students首當其衝，被軍隊視為「暴徒」直接射殺或逮捕。如基隆中學、台北市區的大Students皆有慘重傷亡。<br><br><span class='text-red-400 font-bold'>軍事鎮壓不分青紅皂白，連試圖恢復秩序的青年也成為槍下亡魂。</span>", prototype: "原型人物：參與治安維持而受難的各地青年Students" },
-    "student_b": { isResult: true, title: "史實見證：黑名單與逃亡", content: "雖然暫時保住性命，但在隨後的清鄉行動中，特務四處搜捕曾參與「處理委員會」或「治安隊」的青年。許多人被迫流亡海外，或在提心吊膽中度過餘生，甚至在後續的白色恐怖中仍被抓捕。<br><br><span class='text-red-400 font-bold'>「凡走過必留下痕跡」，在威權眼裡，組織起來的青年就是威脅。</span>", prototype: "原型人物：流亡海外或隱姓埋名的台灣青年" }
+    "student_a": { isResult: true, title: "Historical Witness: Youthful Blood", content: "After landing on March 8, the army launched indiscriminate shootings. Many students in uniforms maintaining public order on the streets bore the brunt, seen as 'rioters' by the military and immediately shot or arrested. University students in downtown Taipei and Keelung High School suffered heavy casualties.<br><br><span class='text-red-400 font-bold'>The military suppression was indiscriminate; even youths trying to restore order became victims under the gun.</span>", prototype: "Archetypes: Youth students nationwide who suffered for participating in maintaining public order" },
+    "student_b": { isResult: true, title: "Historical Witness: Blacklists and Exile", content: "Though saving your life temporarily, in the subsequent village cleansing, secret police blindly hunted down youths who participated in the Settlement Committee or Security Squad. Many were forced into exile overseas, lived the rest of their lives in fear, or were still arrested in the later White Terror.<br><br><span class='text-red-400 font-bold'>'Everything leaves a trace.' In the eyes of authoritarianism, organized youth are a threat.</span>", prototype: "Archetypes: Taiwanese youths exiled overseas or living incognito" }
 };
 
 const scenarioRootKeys = ["doctor", "reporter", "student"];
 
 function startRandomScenario() {
-    // 隨機選取一個情境原型
+    // Randomly select a scenario archetype
     const randomKey = scenarioRootKeys[Math.floor(Math.random() * scenarioRootKeys.length)];
     renderScenario(randomKey);
 }
@@ -256,12 +256,12 @@ function renderScenario(scenarioId) {
         // Render Truth Result
         container.innerHTML = `
                     <div class="text-center">
-                        <span class="inline-block px-3 py-1 bg-red-900/50 text-red-400 border border-red-800 text-xs font-bold rounded mb-4">歷史的真相</span>
+                        <span class="inline-block px-3 py-1 bg-red-900/50 text-red-400 border border-red-800 text-xs font-bold rounded mb-4">The Truth of History</span>
                         <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-6">${data.title}</h3>
                         <p class="text-gray-300 text-lg mb-8 leading-relaxed max-w-2xl mx-auto">${data.content}</p>
                         <p class="text-sm text-gray-500 mb-8 italic">${data.prototype}</p>
                         <button onclick="startRandomScenario()" class="px-6 py-3 border border-gray-600 text-gray-400 font-bold rounded-lg hover:text-white hover:border-white hover:bg-white/10 transition flex items-center justify-center gap-2 mx-auto">
-                            <span>↻ 重新見證 (隨機人物)</span>
+                            <span>↻ Witness Again (Random Character)</span>
                         </button>
                     </div>
                 `;
@@ -271,69 +271,69 @@ function renderScenario(scenarioId) {
 // --- Timeline Data with Images (Enriched Knowledge) ---
 const timelineData = [
     {
-        date: '1947年 2月27日', title: '導火線：緝菸血案與誤殺',
-        desc: '專賣局查緝員在台北市天馬茶房前，暴力取締私菸販賣者Lin Jiang-mai，並以槍托擊破其頭部。群眾包圍查緝員理論時，查緝員開槍誤殺旁觀市民Chen Wen-xi。',
-        details: '事件發生在傍晚的延平北路，當時正值下班與民眾聚集時間。目擊警察與憲兵未能有效處置，民眾的怒火迅速蔓延。隔日Chen Wen-xi延醫不治，引發了全台北市的大罷工與遊行。這並不僅是一場衝突，而是長期以來民間對「專賣制度」貪腐與物價飛漲的怒火引爆點。',
-        keyFigures: ['Lin Jiang-mai (私菸攤商)', 'Chen Wen-xi (無辜遇難市民)', '傅學通 (開槍查緝員)'],
-        quote: '查緝員不分青紅皂白，將小販的火柴、香菸、以及身上的錢全部沒收... 查緝員竟以槍柄擊中林婦頭部，頓時血流如注，昏迷倒地。',
-        quoteSource: '《台灣新生報》1947年現場報導',
-        fact: '📝 檔案顯示，查緝員的不當執法與驚慌開槍是引爆點。這完全是一起查緝過當引發的治安事件，戳破了「共產黨預謀武裝暴動」的謠言。',
-        archive: '出處：行政院《二二八事件研究報告》',
-        imageSrc: 'images/228_by_Li_Jun.jpg',
-        imageAlt: '恐怖的檢查 - 黃榮燦版畫',
-        caption: '《恐怖的檢查》：黃榮燦所繪，真實呈現查緝私菸爆發射殺平民的一刻'
+        date: `Feb 27, 1947`, title: `The Trigger: Contraband Cigarette Bloodshed and Manslaughter`,
+        desc: `Investigators from the Monopoly Bureau violently cracked down on contraband cigarette vendor Lin Jiang-mai in front of Tianma Tea House in Taipei, striking her head with a gun butt. While the crowd surrounded the investigators to argue, an investigator fired a shot, accidentally killing bystander Chen Wen-xi.`,
+        details: `The incident occurred on Yanping North Road in the evening, during rush hour with crowds gathering. The police and military police present failed to handle it effectively, and public anger quickly spread. The next day, Chen Wen-xi died, triggering a general strike and parade throughout Taipei. This wasn't merely a conflict; it was the ignition point of long-standing public fury over the corruption of the 'monopoly system' and soaring inflation.`,
+        keyFigures: [`Lin Jiang-mai (私菸攤商)`, `Chen Wen-xi (無辜遇難市民)`, `傅學通 (開槍查緝員)`],
+        quote: `The investigators indiscriminately confiscated all the matches, cigarettes, and money on the vendor... The investigator even struck Lin's head with a gun butt, immediately causing her to bleed profusely and fall unconscious.`,
+        quoteSource: `1947 On-Site Report by Taiwan Hsin Sheng Daily News`,
+        fact: `📝 Archives show that improper law enforcement and panicked shooting by investigators were the trigger. This was entirely a public security incident caused by excessive enforcement, debunking the rumor of a 'premeditated armed riot by the Communist Party.'`,
+        archive: `Source: Executive Yuan's 'Research Report on the 228 Incident'`,
+        imageSrc: `images/228_by_Li_Jun.jpg`,
+        imageAlt: `Terrifying Inspection - Huang Rong-tsan's Woodcut`,
+        caption: `«Terrifying Inspection»: Painted by Huang Rong-tsan, authentically portraying the moment a civilian was shot during a contraband cigarette sweep.`
     },
     {
-        date: '1947年 2月28日', title: '長官公署開槍與佔領放送局',
-        desc: '憤怒民眾遊行至長官公署（今行政院）請願要求懲兇，遭公署屋頂的衛兵用機關槍掃射。隨後群眾佔領臺北放送局，透過廣播將事件傳遍全台，各地爆發反抗行動。',
-        details: '群眾最初是前往專賣局抗議，找不到局長後才轉往長官公署。衛兵未經警告直接對和平請願的群眾開槍，這項致命錯誤徹底激怒了市民。隨後民眾佔領新公園內的「臺灣廣播電臺（原臺北放送局）」，向全臺灣廣播原委，悲憤的控訴透過電波迅速擴散，成為事件從單一城市衝突演變為全島性反抗的關鍵轉捩點。',
-        keyFigures: ['向全台廣播的無名Students與青年', 'Chen Yi (台灣省行政長官)'],
-        quote: '我們並沒有帶武器，只是要請願要求處理昨天的兇手，沒想到上面就開槍了... 現在我們已經佔領廣播局，請全台灣的同胞站出來！',
-        quoteSource: '事發當天臺北放送局放送的證言',
-        fact: '📝 佔領廣播電台是群眾運動擴散的標準模式。當時廣播的訴求是要求「政治改革」與「懲治貪污」，而非宣佈獨立或共產革命。史料證明這是一場自發性的反抗威權運動。',
-        archive: '出處：國史館二二八檔案、口述歷史研究',
-        imageSrc: 'images/PIC_0210a5d7de02c6f46866.jpg',
-        imageAlt: '原臺北放送局 (臺灣廣播電臺)',
-        caption: '史料：原臺北放送局（臺灣廣播電臺）。民眾在此向全台播音，引爆全島響應。'
+        date: `Feb 28, 1947`, title: `Chief Executive's Office Opens Fire & Occupation of Broadcasting Station`,
+        desc: `Angry citizens marched to the Chief Executive's Office (now the Executive Yuan) to petition for punishing the culprits, but were machine-gunned by guards on the roof. Afterwards, the crowd occupied the Taipei Broadcasting Station, broadcasting the incident all over Taiwan, and resistance erupted everywhere.`,
+        details: `The crowd initially went to the Monopoly Bureau to protest, and after failing to find the director, moved to the Chief Executive's Office. Guards fired directly at the peacefully petitioning crowd without warning; this fatal mistake completely enraged the citizens. The public then occupied the 'Taiwan Broadcasting Station' inside the New Park, broadcasting the cause to the whole island. The sorrowful and angry accusations quickly spread via radio waves, becoming the key turning point from a single-city conflict to an island-wide resistance.`,
+        keyFigures: [`Nameless students and youths who broadcasted to all of Taiwan`, `Chen Yi (Chief Executive of Taiwan)`],
+        quote: `We brought no weapons; we just wanted to petition to handle yesterday's murderer, never expecting them to open fire from above... Now we have occupied the broadcasting station, please, compatriots all over Taiwan, stand up!`,
+        quoteSource: `Testimonies broadcasted from the Taipei Broadcasting Station on the day of the incident`,
+        fact: `📝 Occupying the broadcasting station is a standard model for mass movement diffusion. The broadcasts' appeals at the time were for 'political reform' and 'punishing corruption,' rather than declaring independence or a communist revolution. Historical materials prove this was spontaneous movement resisting authoritarianism.`,
+        archive: `Source: Academia Historica 228 Archives, Oral History Research`,
+        imageSrc: `images/PIC_0210a5d7de02c6f46866.jpg`,
+        imageAlt: `Former Taipei Broadcasting Station (Taiwan Broadcasting Station)`,
+        caption: `Archive: Former Taipei Broadcasting Station. Citizens broadcasted to the whole island here, igniting a nationwide response.`
     },
     {
-        date: '1947年 3月1日-5日', title: '處理委員會與政治改革訴求',
-        desc: '為了平息事態，各地仕紳、民意代表與Students組成「二二八事件處理委員會」，代替失能的政府維持治安，並提出《三十二條處理大綱》要求高度自治。',
-        details: '處理委員會在台北市中山堂成立，成員涵蓋了當時台灣社會最頂尖的菁英階層。他們不僅組織Students維持市區治安，也向政府提出了要求縣市長民選、廢除長官公署等政治改革訴求。然而，Chen Yi表面上假意答應談判、安撫民心，私下卻急電Chiang Kai-shek指稱台灣發生「叛亂」，要求立刻派兵鎮壓。',
-        keyFigures: ['Wang Tian-deng (省參議員)', '林連宗 (制憲國代)', 'Jiang Wei-chuan'],
-        quote: '本省人要求改革政治，並非叛亂... 不要用武力鎮壓，這是我們切望的。',
-        quoteSource: '處理委員會透過廣播台的公開呼籲',
-        fact: '📝 史料與會議紀錄證明，處理委員會的目標始終是「和平解決」與「體制內改革」，從未主張台灣獨立或推翻政府。Chen Yi的「叛亂」指控純屬羅織罪名。',
-        archive: '出處：大溪檔案（Chiang Kai-shek總統文物）、Chen Yi請兵電報',
-        imageSrc: 'images/images (9).jpg',
-        imageAlt: '基隆要塞司令部前的廣場或市區群眾',
-        caption: '歷史事件發生期間的市區群眾聚集（圖為當時歷史影像一隅）'
+        date: `Mar 1 - 5, 1947`, title: `The Settlement Committee and Political Reform Appeals`,
+        desc: `To calm the situation, local gentry, public representatives, and students formed the '228 Incident Settlement Committee' to substitute the dysfunctional government in maintaining order, proposing the '32-Point Demands' seeking a high degree of autonomy.`,
+        details: `The Settlement Committee was established in Taipei Zhongshan Hall, comprising the top elite echelon of Taiwanese society at the time. They not only organized students to maintain urban security but also proposed political reform demands to the government. However, Chen Yi ostensibly agreed to negotiate to pacify the public, while secretly dispatching urgent telegrams to Chiang Kai-shek claiming a 'rebellion' had occurred, requesting immediate troop dispatch for suppression.`,
+        keyFigures: [`Wang Tian-deng (Provincial Councilor)`, `Lin Lien-tsung (National Assembly Delegate)`, `Jiang Wei-chuan`],
+        quote: `The Taiwanese demand political reform; it is not a rebellion... Please do not use military force to suppress; this is our earnest hope.`,
+        quoteSource: `Public appeal by the Settlement Committee via the broadcasting station`,
+        fact: `📝 Historical archives and meeting minutes prove that the Settlement Committee's goal was always a 'peaceful resolution' and 'intra-system reform,' never advocating Taiwan independence or overthrowing the government. Chen Yi's 'rebellion' accusation was a fabricated charge.`,
+        archive: `Source: Daxi Archives (Chiang Kai-shek Presidential Artifacts), Chen Yi's telegram requesting troops`,
+        imageSrc: `images/images (9).jpg`,
+        imageAlt: `Crowds in front of the Keelung Fortress Command or downtown`,
+        caption: `Downtown crowds gathering during the historical incident (image shows a corner of historical footage)`
     },
     {
-        date: '1947年 3月8日', title: '軍隊登陸基隆與無差別鎮壓',
-        desc: '收到Chen Yi請兵電報後，國民政府整編第二十一師等部隊抵達基隆與高雄。部隊一登陸即展開無差別掃射，市區陷入血腥的軍事鎮壓。',
-        details: '在基隆港，軍隊登陸前即向岸上擁擠的民眾開槍。在南部，高雄要塞司令Peng Meng-ji更是下令軍隊無差別掃射高雄火車站地下道、市政府及高雄中學。軍隊以「掃蕩暴徒」為名，對平民、甚至正在街頭指揮交通的Students服務隊進行屠殺，並伴隨大規模的洗劫與搜刮。',
-        keyFigures: ['劉雨卿 (21師師長)', 'Peng Meng-ji (高雄要塞司令)'],
-        quote: '軍隊一上岸就隨便開槍... 街上到處都是屍體，連淡水河裡也佈滿了浮屍，河水都被染紅了。',
-        quoteSource: '美國駐台副領事葛超智 (George H. Kerr) 報告',
-        fact: '📝 國內外檔案（含美方機密報告）皆明確記載了軍隊無差別攻擊平民的慘況。這是一場國家軍隊對本國未武裝人民的血腥鎮壓，並非正當的「平亂」。',
-        archive: '出處：National Development Council Archives、美國國家檔案館',
-        imageSrc: 'images/228_Incident_k_(cropped).jpg',
-        imageAlt: '事件中受難的遺體',
-        caption: '軍事鎮壓展開後，街頭隨處可見無差別開槍下的受難者'
+        date: `Mar 8, 1947`, title: `Troops Land in Keelung & Indiscriminate Suppression`,
+        desc: `After receiving Chen Yi's telegram, the Nationalist Government's reorganized 21st Division and other troops arrived in Keelung and Kaohsiung. Upon landing, the troops immediately launched indiscriminate shootings; the cities plunged into bloody military suppression.`,
+        details: `At Keelung Port, the military fired at the crowded civilians on shore even before landing. In the south, Kaohsiung Fortress Commander Peng Meng-ji directly ordered troops to indiscriminately sweep the Kaohsiung Train Station underpass, City Hall, and Kaohsiung High School. Under the name of 'mopping up rioters,' the army massacred civilians and even the student service squads directing traffic on the streets.`,
+        keyFigures: [`Liu Yu-ching (Commander of the 21st Division)`, `Peng Meng-ji (Kaohsiung Fortress Commander)`],
+        quote: `The troops just indiscriminately fired upon landing... There were corpses everywhere on the streets; even the Tamsui River was filled with floating bodies, dyeing the water red.`,
+        quoteSource: `Report by U.S. Vice Consul in Taiwan George H. Kerr`,
+        fact: `📝 Domestic and foreign archives (including classified U.S. reports) clearly document the tragic indiscriminate military attacks on civilians. This was a bloody suppression by the state's military against its own unarmed people, not a legitimate 'quelling of a riot.'`,
+        archive: `Source: National Development Council Archives, U.S. National Archives`,
+        imageSrc: `images/228_Incident_k_(cropped).jpg`,
+        imageAlt: `Victims' bodies in the incident`,
+        caption: `After the military crackdown began, victims of indiscriminate shootings could be seen everywhere on the streets.`
     },
     {
-        date: '1947年 3月中旬以後', title: '全島清鄉與濫捕知識菁英',
-        desc: '軍隊控制局勢後，政府宣佈戒嚴並展開「清鄉」。以逮捕「暴徒」為名，未經審判大肆暗殺與處決台籍知識份子與社會菁英。',
-        details: '警備總部實質上是依照事先草擬的「黑名單」，針對曾The Settlement Committee、報社記者、律師、醫師與大學教授進行政治清算。許多菁英在半夜被特務帶走後即下落不明，連屍骨都無處尋覓。這場針對性的捕殺，造成台灣社會領導階層嚴重的斷層，也開啟了後續近四十年的白色恐怖時期。',
-        keyFigures: ['陳澄波 (畫家)', '潘木枝 (醫師)', 'Lin Mao-sheng (台大教授)', '阮朝日 (新生報總經理)'],
-        quote: '我死了，你們要堅強，不要忘記我是為了台灣人而死的。好好讀書，為台灣貢獻。',
-        quoteSource: '多位受難者臨終前留給家屬的遺言概念',
-        fact: '📝 清鄉階段的逮捕與處決幾乎皆無合法審判紀錄。這不僅是為了「解除武裝」，更是國家機器為了消滅台灣本土異議聲音的系統性剷除。',
-        archive: '出處：國防部保密局台灣站檔案、受難者家屬口述',
-        imageSrc: 'images/WI01-001.jpg',
-        imageAlt: '受難者遺書',
-        caption: '受難菁英的最後告別：在未經審判的清鄉中，無數菁英留下絕筆'
+        date: `Mid-March 1947 Onwards`, title: `Island-Wide Village Cleansing & Indiscriminate Arrest of Intellectual Elites`,
+        desc: `After the military controlled the situation, the government declared martial law and launched 'village cleansing.' Under the guise of arresting 'rioters,' Taiwanese intellectuals and social elites were extensively assassinated and executed without trial.`,
+        details: `The Garrison Command essentially conducted political purges based on pre-drafted 'blacklists,' targeting the Settlement Committee, reporters, lawyers, doctors, and NTU professors. Many elites disappeared after being taken by secret police at midnight, with no bones to be found. This targeted hunting caused a severe gap in Taiwan's social leadership and ushered in the subsequent nearly 40 years of White Terror.`,
+        keyFigures: [`Chen Cheng-po (Painter)`, `Pan Mu-chih (Doctor)`, `Lin Mao-sheng (NTU Professor)`, `Juan Chao-jih (Hsin Sheng Daily News GM)`],
+        quote: `I'm dying, you must be strong, do not forget I die for the Taiwanese people. Study hard, and contribute to Taiwan.`,
+        quoteSource: `Concept of dying words left to families by several victims`,
+        fact: `📝 Arrests and executions during the village cleansing phase almost totally lacked legal trial records. This was not just to 'disarm' but a systematic eradication by the state apparatus to extinguish Taiwanese dissenting voices.`,
+        archive: `Source: Ministry of National Defense Secrecy Bureau Taiwan Station Archives, Oral histories from victims' families`,
+        imageSrc: `images/WI01-001.jpg`,
+        imageAlt: `Victims' Suicide Notes`,
+        caption: `The final farewell of martyred elites: During the trial-less village cleansing, countless elites left their final words.`
     }
 ];
 
@@ -372,7 +372,7 @@ function renderTimelineMobile() {
                             <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-inner mt-4">
                                 <span class="text-xs font-bold text-red-800 block mb-2 tracking-wider flex items-center gap-1">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    Fact Check與破除迷思
+                                    Fact Check & Dispelling Myths
                                 </span>
                                 <p class="text-sm text-gray-800 font-medium leading-relaxed mb-2">${item.fact}</p>
                                 <span class="inline-block text-[11px] text-gray-600 bg-gray-200 px-2.5 py-1 rounded font-medium border border-gray-300">${item.archive}</span>
@@ -400,7 +400,7 @@ function toggleTimelineMobile(index) {
     if (content.classList.contains('hidden')) {
         content.classList.remove('hidden');
         icon.classList.add('rotate-180');
-        // 平滑捲動至該卡片，加上延遲以確保 DOM 更新後正確對齊
+        // Smooth scroll to the card, adding delay to ensure correct alignment after DOM update
         setTimeout(() => {
             card.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
