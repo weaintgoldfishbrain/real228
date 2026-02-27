@@ -72,11 +72,11 @@ class Particle {
         if (this.isBlood) {
             ctx.fillStyle = `rgba(139, 0, 0, ${this.opacity})`; // Dark red
             // Blood color has a glowing effect
-            ctx.shadowBlur = 5;
-            ctx.shadowColor = 'red';
+            // ctx.shadowBlur = 5;
+            // ctx.shadowColor = 'red';
         } else {
             ctx.fillStyle = `rgba(100, 100, 100, ${this.opacity})`; // Dark gray
-            ctx.shadowBlur = 0;
+            // ctx.shadowBlur = 0;
         }
 
         ctx.fill();

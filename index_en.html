@@ -33,7 +33,7 @@
 
     <!-- Import external scripts covering Tailwind and charting tools -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
     <!-- Load new 228 effects styles and legacy styles -->
     <link rel="stylesheet" href="style.css">
@@ -106,12 +106,12 @@
                         <div class="hidden md:flex space-x-8" aria-label="Main Menu">
                             <button onclick="scrollToSection('hero')"
                                 class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Home</button>
-                            <button onclick="scrollToSection('empathy')"
-                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Historical
-                                Witness</button>
                             <button onclick="scrollToSection('timeline')"
                                 class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Timeline
                                 & Archives</button>
+                            <button onclick="scrollToSection('empathy')"
+                                class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Historical
+                                Witness</button>
                             <button onclick="scrollToSection('full-report')"
                                 class="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Full
                                 Report</button>
@@ -145,12 +145,12 @@
                 role="menu">
                 <button onclick="scrollToSection('hero'); toggleMobileMenu()"
                     class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">Home</button>
-                <button onclick="scrollToSection('empathy'); toggleMobileMenu()"
-                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">Historical
-                    Witness</button>
                 <button onclick="scrollToSection('timeline'); toggleMobileMenu()"
                     class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">Timeline &
                     Archives</button>
+                <button onclick="scrollToSection('empathy'); toggleMobileMenu()"
+                    class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">Historical
+                    Witness</button>
                 <button onclick="scrollToSection('full-report'); toggleMobileMenu()"
                     class="block w-full text-left py-2 px-4 hover:bg-[#ebe8e1] text-gray-800 font-medium">Full
                     Report</button>
@@ -207,7 +207,7 @@
                     class="relative w-full aspect-[4/3] rounded-sm overflow-hidden shadow-2xl bg-[#d1ccc0] group">
                     <!-- Slide 1 -->
                     <div class="carousel-slide absolute inset-0 opacity-100 z-10">
-                        <img src="images/228_Incident_h.jpg" alt="228 Incident Protesters"
+                        <img src="images/228_Incident_h.webp" alt="228 Incident Protesters"
                             class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
                         <div
@@ -218,8 +218,8 @@
                     </div>
                     <!-- Slide 2 -->
                     <div class="carousel-slide absolute inset-0 opacity-0 z-0">
-                        <img src="images/jpg_00_06_00_34_cca100031-hp-22_13_1-0001-w.jpg" alt="Monopoly Bureau Building"
-                            class="w-full h-full object-cover">
+                        <img src="images/jpg_00_06_00_34_cca100031-hp-22_13_1-0001-w.webp"
+                            alt="Monopoly Bureau Building" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
                         <div
                             class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#faf8f5]/90 backdrop-blur text-gray-800 text-xs px-3 py-2 rounded shadow-lg border-l-4 border-red-800">
@@ -229,7 +229,7 @@
                     </div>
                     <!-- Slide 3 -->
                     <div class="carousel-slide absolute inset-0 opacity-0 z-0">
-                        <img src="images/white_visit.jpg" alt="Bai Chongxi Visits Taiwan"
+                        <img src="images/white_visit.webp" alt="Bai Chongxi Visits Taiwan"
                             class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gray-900/30 mix-blend-multiply"></div>
                         <div
@@ -1262,7 +1262,7 @@
     </div>
 
     <!-- Import JavaScript interactive logic -->
-    <script src="script_en.js"></script>
+    <script src="script_en.js" defer></script>
 </body>
 
 </html>

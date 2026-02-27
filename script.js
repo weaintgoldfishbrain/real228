@@ -72,11 +72,11 @@ class Particle {
         if (this.isBlood) {
             ctx.fillStyle = `rgba(139, 0, 0, ${this.opacity})`; // 暗紅色
             // 血色帶有發光感
-            ctx.shadowBlur = 5;
-            ctx.shadowColor = 'red';
+            // ctx.shadowBlur = 5;
+            // ctx.shadowColor = 'red';
         } else {
             ctx.fillStyle = `rgba(100, 100, 100, ${this.opacity})`; // 暗灰色
-            ctx.shadowBlur = 0;
+            // ctx.shadowBlur = 0;
         }
 
         ctx.fill();
